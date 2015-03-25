@@ -7,9 +7,47 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/custom.css">
     <script src="js/respond.js"></script>
+    <script>
+        var bmf = 0;
+        function showBMF(){
+            bmf = bmf + 1;
+            var target = document.getElementById('beMemberForm');
+            if(bmf%2 == 0){
+                //show
+                target.classList.remove("hidden");
+            }
+            else{
+                //don't show
+                target.classList.add("hidden");
+            }
+        }
+    </script>
 </head>
 
 <body>
+    <header class="row">
+        <div class="col-lg-12">
+            <p>HEADER</p>
+        </div>
+    </header>
+
+    <div class="row" id="main" onclick="showBMF();">
+        <div class="col-lg-12">
+            <a><em>Click to HIDE/SHOW BMF!</em></a>
+        </div>
+    </div>
+
+    <div class="row" id="beMemberForm">
+        <div class="col-lg-12">
+            <p>BMF</p>
+        </div>
+    </div>
+
+    <footer class="row">
+        <div class="col-lg-12">
+            <p>FOOTER</p>
+        </div>
+    </footer>
 
     <!-- javascript -->
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
