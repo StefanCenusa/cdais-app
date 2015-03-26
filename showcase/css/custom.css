@@ -1,0 +1,59 @@
+/* GENERAL */
+body{
+    text-align: center;
+    font-size: 2.5em;
+}
+p {
+    margin: 0 auto;
+}
+
+/* HEADER */
+#logo{
+    background-color: #AAA;
+    margin: 0 auto;
+}
+#menu{
+    background-color: #DDD;
+    margin: 0 auto;
+}
+#login{
+    background-color: #AAA;
+    margin: 0 auto;
+}
+
+/* MAIN */
+#main{
+    background-color: #EEE;
+    margin: 0 auto;
+}
+/* CALENDAR */
+#calendar{
+    background-color: #999;
+    margin: 0 auto;
+}
+/* SOCIAL MEDIA */
+#social{
+    background-color: #DDD;
+    margin: 0 auto;
+}
+
+/* BUTTON */
+#bmf-button{
+    background-color: #7D9;
+    margin: 0 auto;
+    border-color: #7D9;
+}
+
+/* FORM */
+#bmf{
+    background-color: #CCFFCC;
+    margin: 0 auto;
+    font-size: 0.5em;
+}
+
+footer{
+    background-color: #777;
+    margin: 0 auto;
+}
+
+
