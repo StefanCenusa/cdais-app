@@ -6,21 +6,6 @@
     <title>My Website</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/custom.css">
-    <script src="js/respond.js"></script>
-    <script>
-        var bmf = false;
-        function showBMF(fieldID){
-            var target = document.getElementById(fieldID);
-            if(bmf){
-                bmf = false;
-                target.classList.add("hidden"); // hide
-            }
-            else{
-                bmf = true;
-                target.classList.remove("hidden"); //show
-            }
-        }
-    </script>
 </head>
 
 <body>
@@ -85,7 +70,11 @@
     </div>
 
     <!-- javascript -->
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="js/jquery-1.11.2.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/respond.js"></script>
+    <script src="js/custom.js"></script>
 </body>
+
 </html>
