@@ -1,56 +1,125 @@
 /* GENERAL */
 body{
     text-align: center;
-    font-size: 2.5em;
+    font-size: 2em;
 }
 p {
     margin: 0 auto;
 }
 
 /* HEADER */
-#logo{
-    background-color: #AAA;
-    margin: 0 auto;
+header{
+    height: 64px;
 }
-#menu{
-    background-color: #DDD;
-    margin: 0 auto;
-}
-#login{
-    background-color: #AAA;
-    margin: 0 auto;
-}
+    #logo{
+        background-color: #CCC;
+        margin: 0 auto;
+        height: 100%;
+        padding: 11px 0;
+    }
+    #menu{
+        background-color: #DDD;
+        margin: 0 auto;
+        height: 100%;
+        padding: 0;
+    }
+         nav{
+            height: 100%;
+        }
+        .navbar{
+            position: relative;
+            margin: 0 auto;
+        }
+        .navbar-fixed-top{
+            border-width: 0;
+        }
+        .navbar-toggle{
+            float: none;
+            border-color: #888;
+        }
+        .navbar .nav {
+            float:none;
+            display:inline-block;
+            *display:inline; /* ie7 fix */
+            *zoom:1; /* hasLayout ie7 trigger */
+            vertical-align: top;
+            width: 100%;
+            padding: 0;
+        }
+        .navbar .nav>li{
+            width: 16.66666%;
+            /*height: 64px;*/
+        }
+        .navbar .nav>li>a{
+            text-align: center;
+            font-size: x-large;
+            padding: 22px 0;
+        }
+    #login{
+        /*background-color: #AAA;*/
+        margin: 0 auto;
+        height: 100%;
+        padding: 0;
+    }
+        #login-button .btn-lg{
+            padding: 19px 16px;
+            border-radius: 0;
+        }
+        .btn-default{
+            background-color: #CCC;
+        }
 
 /* MAIN */
 #main{
     background-color: #EEE;
-    margin: 0 auto;
 }
-/* CALENDAR */
-#calendar{
-    background-color: #999;
-    margin: 0 auto;
-}
-/* SOCIAL MEDIA */
-#social{
-    background-color: #DDD;
-    margin: 0 auto;
-}
+    /* CONTENT */
+    #content{
+        background-color: #EEE;
+        margin: 0 auto;
+        padding-bottom: 30px; /*no button collision*/
+    }
+    /* CALENDAR */
+    #calendar{
+        background-color: #999;
+        margin: 0 auto;
+        padding-bottom: 15px; /*no button collision*/
+    }
+    /* SOCIAL MEDIA */
+    #social{
+        background-color: #DDD;
+        margin: 0 auto;
+        padding-bottom: 15px; /*no button collision*/
+    }
+        #social [class*=col-xs]{
+            padding-bottom: 30px;
+        }
 
-/* BUTTON */
-#bmf-button{
-    background-color: #7D9;
-    margin: 0 auto;
-    border-color: #7D9;
-}
-
-/* FORM */
+/* BMF */
 #bmf{
-    background-color: #CCFFCC;
-    margin: 0 auto;
-    font-size: 0.5em;
 }
+    /*BUTTON*/
+    #bmf-button{
+        float: left;
+        position: relative;
+        left: 50%;
+    }
+        #bmf-button > button{
+        float: left;
+        position: relative;
+        left: -50%;
+        margin-top: -27.5px;
+            font-size: 1em;
+            font-weight: bold;
+    }
+        button{
+            color: #ffffff;
+        }
+    /* FORM */
+    #bmf-form{
+    }
 
+/* FOOTER */
 footer{
     background-color: #777;
     margin: 0 auto;
