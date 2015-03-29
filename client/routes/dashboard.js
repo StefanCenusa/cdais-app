@@ -4,7 +4,7 @@ var router = express.Router();
 var data = require("../data.js")
 
 /* GET dashboard home page. */
-router.get('/:user', function (req, res, next) {
+router.get('/', function (req, res, next) {
     res.render('dashboard', data);
 });
 

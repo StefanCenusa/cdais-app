@@ -1,13 +1,13 @@
 doctype html
 html
-    head
-        title= username + "'s Profile"
-        link(href="/bower_components/bootstrap/dist/css/bootstrap.min.css", rel="stylesheet")
-        link(rel='stylesheet', href='/bower_components/font-awesome/css/font-awesome.min.css')
-        link(rel='stylesheet', href='/bower_components/metisMenu/dist/metisMenu.min.css"')
-        link(rel='stylesheet', href='/stylesheets/style.css')
-        script(src="/bower_components/jquery/dist/jquery.min.js")
-        script(src="/bower_components/bootstrap/dist/js/bootstrap.min.js")
-        script(src="/bower_components/metisMenu/dist/metisMenu.min.js")
+    block head
+        head
+        block scripts
+            script(src="/bower_components/jquery/dist/jquery.min.js")
+            script(src="/bower_components/bootstrap/dist/js/bootstrap.min.js")
+        block css
+            link(href="/bower_components/bootstrap/dist/css/bootstrap.min.css", rel="stylesheet")
+            link(rel='stylesheet', href='/stylesheets/style.css')
     body
+        block framecontent
         block content

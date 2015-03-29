@@ -1,5 +1,12 @@
 extends layout
-block content
+block append scripts
+    script(src="/bower_components/metisMenu/dist/metisMenu.min.js")
+
+block append css
+    link(rel='stylesheet', href='/bower_components/font-awesome/css/font-awesome.min.css')
+    link(rel='stylesheet', href='/bower_components/metisMenu/dist/metisMenu.min.css')
+
+block framecontent
     mixin messageDropdownElement(href, name, when, summary)
         li
             a(href=href)
@@ -101,7 +108,6 @@ block content
                             a#login(href="#")
                                 i.fa.fa-sign-in.fa-fw
                                 | Login
-
             .navbar-default.sidebar(role="navigation")
                 .sidebar-nav.navbar-collapse
                     ul#side-menu.nav
@@ -127,6 +133,8 @@ block content
                             a(href="#")
                                 i.fa.fa-edit.fa-fw
                                 | Trainings
+
+block content
     #page-wrapper
         .row
             .col-lg-12
