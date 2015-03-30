@@ -48,6 +48,7 @@ header{
         }
         .navbar .nav>li{
             width: 16.66666%;
+            min-width: 95px;
             /*height: 64px;*/
         }
         .navbar .nav>li>a{
