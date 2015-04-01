@@ -10,15 +10,14 @@ p {
 /* HEADER */
 header{
     height: 64px;
+    background-color: #333;
 }
     #logo{
-        background-color: #CCC;
         margin: 0 auto;
         height: 100%;
         padding: 11px 0;
     }
     #menu{
-        background-color: #DDD;
         margin: 0 auto;
         height: 100%;
         padding: 0;
@@ -56,18 +55,25 @@ header{
             font-size: x-large;
             padding: 22px 0;
         }
-    #login{
-        /*background-color: #AAA;*/
-        margin: 0 auto;
-        height: 100%;
-        padding: 0;
+    #login-search{
+        margin: 0px auto;
     }
-        #login-button .btn-lg{
-            padding: 19px 16px;
-            border-radius: 0;
+        #search-button .btn-lg{
+            margin-top: 10px;
+            border-radius: 20px;
+            background-color: #2e6da4;
+            width: 45%;
+            position: relative;
+            float: left;
         }
-        .btn-default{
-            background-color: #CCC;
+        #login-button .btn-lg{
+            margin-top: 10px;
+            border-radius: 20px;
+            background-color: #2e6da4;
+            width: 45%;
+            position: relative;
+            float: left;
+            left: 5%;
         }
 
 /* MAIN */
@@ -78,18 +84,24 @@ header{
     #content{
         background-color: #EEE;
         margin: 0 auto;
-        padding-bottom: 30px; /*no button collision*/
+        padding-bottom: 150px; /*no button collision*/
+        padding-top: 40px;
+    }
+
+    #content img{
+        height: 300px;
+        margin: 0 auto;
     }
     /* CALENDAR */
     #calendar{
         background-color: #999;
-        margin: 0 auto;
+        margin: 40px auto;
         padding-bottom: 15px; /*no button collision*/
     }
     /* SOCIAL MEDIA */
     #social{
         background-color: #DDD;
-        margin: 0 auto;
+        margin: 40px auto;
         padding-bottom: 15px; /*no button collision*/
     }
         #social [class*=col-xs]{
@@ -114,7 +126,7 @@ header{
             font-weight: bold;
     }
         button{
-            color: #ffffff;
+            /*color: #ffffff;*/
         }
     /* FORM */
     #bmf-form{
