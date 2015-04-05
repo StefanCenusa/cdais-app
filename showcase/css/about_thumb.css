@@ -1,0 +1,27 @@
+#about_thumb{
+    margin-top: 20px;
+}
+
+#about_thumb div{
+    padding: 20px auto;
+}
+
+#about_thumb img{
+    height: 100px;
+}
+
+#about_thumb p{
+    font-size: 0.6em;
+}
+
+#about_thumb .thumbnail{
+    width: 80%;
+    background-color: #fff;
+}
+
+@media (max-width: 768px){
+    #bmf{
+        display: none;
+    }
+}
+
