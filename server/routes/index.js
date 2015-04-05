@@ -1,45 +1,47 @@
 var express = require('express');
-var passport = require('passport');
-var Account = require('../auth/account-model');
 var router = express.Router();
+var jwt = require('jsonwebtoken');
 
+var isAuthenticated = function (req, res, next) {
+	// if user is authenticated in the session, call the next() to call the next request handler 
+	// Passport adds this method to request object. A middleware is allowed to add properties to
+	// request and response objects
+	if (req.isAuthenticated())
+		return next();
+	// if the user is not authenticated then redirect him to the login page
+	res.redirect('/');
+}
 
-//router.get('/', function (req, res) {
-//  res.render('index', { user : req.user });
-//});
+module.exports = function(passport){
 
-//router.get('/register', function(req, res) {
-//  res.render('register', { });
-//});
-
-router.post('/register', function(req, res) {
-  Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
-    if (err) {
-      return res.render("register", {info: "Sorry. That username already exists. Try again."});
-    }
-
-    passport.authenticate('local')(req, res, function () {
-      res.redirect('/');
+	/* Handle Login POST */
+	router.post('/login', function(req, res){
+        passport.authenticate('login', {
+            successRedirect: res.status(200).send('logged in!'),
+            failureRedirect: '/',
+            failureFlash : true
+        })
     });
-  });
-});
+
+	/* Handle Registration POST */
+	router.post('/signup', function(req, res){
+        passport.authenticate('signup', {
+            successRedirect: res.status(200).send('siggned up!'),
+            failureRedirect: res.status(500).send('fail to signup in!'),
+            failureFlash : true
+        })
+    });
+
+	/* Handle Logout */
+	router.get('/signout', function(req, res) {
+		req.logout();
+        res.status(200).send('logged out!');
+	});
+
+	return router;
+}
 
 
-//router.get('/login', function(req, res) {
-//  res.render('login', { user : req.user });
-//});
 
-router.post('/login', passport.authenticate('local'), function(req, res) {
-    res.status(200).send("logged in!");
-});
 
-router.get('/logout', function(req, res) {
-  req.logout();
-    res.status(200).send("logged out!");
-});
 
-router.get('/ping', function(req, res){
-  res.status(200).send("pong!");
-});
-
-module.exports = router;
