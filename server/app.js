@@ -1,9 +1,16 @@
+global.env={};
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var passport = require('passport');
+var passport_local = require('passport-local');
+var config = require('./config');
+var LocalStrategy = passport_local.Strategy;
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -20,6 +27,10 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
@@ -32,6 +43,15 @@ app.use(function(req, res, next) {
   next(err);
 });
 
+// passport config
+var Account = require('./auth/account-model');
+passport.use(new LocalStrategy(Account.authenticate()));
+passport.serializeUser(Account.serializeUser());
+passport.deserializeUser(Account.deserializeUser());
+
+//mongoose
+mongoose.connect(config.mongo.host);
+env.mongodb = mongoose;
 // error handlers
 
 // development error handler
