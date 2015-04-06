@@ -1,22 +1,56 @@
-module.exports.login = function(req, res){
-    env.passport.authenticate('login', function(err, user, info){
-        if (err) return res.send(err);
+var jwt = require('jsonwebtoken');
+var superSecret = 'MarianPresedinte';
+
+module.exports.login = function (req, res) {
+    env.passport.authenticate('login', function (err, user, info) {
+        if (err) return res.json({
+            success: false,
+            message: err
+        });
         if (!user)
-            return res.send(info);
-        return res.send('OK!');
+            return res.json({
+                success: false,
+                message: info
+            });
+
+        var token = jwt.sign({
+            name: user.name,
+            username: user.username
+        }, superSecret, {
+            expiresInMinutes: 1440 // expires in 24 hours
+        });
+
+        // return the information including token as JSON
+        return res.json({
+            success: true,
+            message: 'Enjoy your token!',
+            token: token
+        });
     })(req, res);
 };
 
-module.exports.signup = function(req, res) {
+module.exports.signup = function (req, res) {
     passport.authenticate('signup', function (err, user, info) {
-        if (err) return res.send(err);
+        if (err) return  res.json({
+            success: false,
+            message: err
+        });
         if (!user)
-            return res.send(info);
-        return res.send('OK!');
+            return  res.json({
+                success: false,
+                message: info
+            });
+        return  res.json({
+            success: true,
+            message: 'User created'
+        });
     })(req, res);
 };
 
 module.exports.logout = function (req, res) {
     req.logout();
-    res.redirect('/');
+    res.json({
+        success: true,
+        message: 'User logged out'
+    });
 };

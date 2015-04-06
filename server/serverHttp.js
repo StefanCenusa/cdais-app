@@ -32,7 +32,7 @@ var init = function (serverPort, serverAddress, postHandler, callback) {
     app.post('/login', require('./paths/login').login);
     app.post('/signup', require('./paths/login').signup);
     app.post('/logout', require('./paths/login').logout);
-    app.post('/user/getDebaterInfo', requestHandlerWraper);
+    app.post('/user', requestHandlerWraper);
 
     app.listen(serverPort, serverAddress);
 

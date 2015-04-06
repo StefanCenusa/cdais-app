@@ -12,10 +12,10 @@ var Passport = require('./passport/init');
 var rpcContext = {};
 //_____________________________________________________
 
-rpcContext['/login'] = {
-    'login': {
-        'handler': require('./paths/login').login,
-        'description': "Get login token"
+rpcContext['/user'] = {
+    'hello': {
+        'handler': require('./paths/getData').hello,
+        'description': "Hello debater!"
     }
 };
 //_____________________________________________________
