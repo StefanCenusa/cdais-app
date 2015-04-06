@@ -1,65 +1,96 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('static-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+console.log("Init express...");
+global.env = {};
 
-var dbConfig = require('./db');
+var async = require('async');
 var mongoose = require('mongoose');
-// Connect to DB
-mongoose.connect(dbConfig.url);
-
-var app = express();
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-
-app.use(favicon());
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Configuring Passport
 var passport = require('passport');
-var expressSession = require('express-session');
-// TODO - Why Do we need this key ?
-app.use(expressSession({secret: 'mySecretKey'}));
-app.use(passport.initialize());
-app.use(passport.session());
 
- // Using the flash middleware provided by connect-flash to store messages in session
- // and displaying in templates
-var flash = require('connect-flash');
-app.use(flash());
+var config = require('./config');
+var httpServer = require('./serverHttp.js');
+var Passport = require('./passport/init');
 
-// Initialize Passport
-var initPassport = require('./passport/init');
-initPassport(passport);
+var rpcContext = {};
+//_____________________________________________________
 
-var routes = require('./routes/index')(passport);
-app.use('/', routes);
+rpcContext['/login'] = {
+    'login': {
+        'handler': require('./paths/login').login,
+        'description': "Get login token"
+    }
+};
+//_____________________________________________________
+var handleJsonRpcCall = function (input, callback) {
+    if (rpcContext.hasOwnProperty(input.originalUrl)) {
+        var rpcFunction = rpcContext[input.originalUrl][input.method].handler;
+        var handlerReady = function (err, result) {
+            callback(err, result);
+        };
+        //input.params.push(handlerReady);
+        rpcFunction(input.params, handlerReady);
+    }
+    else {
+        var err = "Invalid method";
+        var result = null;
+        callback(err, result);
+    }
+};
 
-/// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-});
+var POST_requestHandler = function (request, response) {
+    var jsonRpcObject = request.body;
 
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
+    var rpcCallHanddler = function (error, result) {
+        var resultObjet = {
+            "id": 1,
+            "error": error,
+            "result": result
+        };
+        var headers = {};
+        headers["Access-Control-Allow-Origin"] = "*";
+        headers["Access-Control-Allow-Methods"] = "POST";
+        headers["Access-Control-Allow-Credentials"] = true;
+        headers["Access-Control-Max-Age"] = '86400'; // 24 hours
+        headers["Access-Control-Allow-Headers"] = "X-Requested-With, Access-Control-Allow-Origin, X-HTTP-Method-Override, Content-Type, Authorization, Accept";
+        headers["Content-Type"] = "application/json";
+        // respond to the request
+        response.writeHead(200, headers);
+        response.end(JSON.stringify(resultObjet));
+    };
+
+    handleJsonRpcCall(jsonRpcObject, rpcCallHanddler);
+};
+
+var initHttp = function (callback) {
+    console.log('Init http');
+    httpServer(config.http.port, config.http.host, POST_requestHandler, function (httpServer) {
+        env.express = httpServer;
+        callback();
     });
-}
+};
 
-module.exports = app;
+var initMongo = function (callback) {
+    console.log('Init mongo');
+    mongoose.connect(config.mongo.host);
+    callback();
+};
+
+var initPassport = function(callback){
+    console.log('Init passport');
+    env.express.use(passport.initialize());
+    env.express.use(passport.session());
+
+    Passport(passport);
+    env.passport = passport;
+    callback();
+};
+
+var initApp = function () {
+    async.series([initMongo, initHttp, initPassport], function (err) {
+        if (!err)
+            console.log('Init app done!\n--------------------------');
+        else
+            console.log(err.message);
+    });
+};
+
+initApp();
+
