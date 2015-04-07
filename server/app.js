@@ -9,9 +9,9 @@ var config = require('./config');
 var httpServer = require('./serverHttp.js');
 var Passport = require('./passport/init');
 
-var rpcContext = {};
 //_____________________________________________________
-
+var httpMethodMap;
+var rpcContext = {};
 rpcContext['/user'] = {
     'hello': {
         'handler': require('./paths/user').hello,
@@ -36,6 +36,7 @@ var handleJsonRpcCall = function (input, callback) {
 };
 
 var POST_requestHandler = function (request, response) {
+    request.body.originalUrl = request.originalUrl;
     var jsonRpcObject = request.body;
 
     var rpcCallHanddler = function (error, result) {
@@ -59,10 +60,35 @@ var POST_requestHandler = function (request, response) {
     handleJsonRpcCall(jsonRpcObject, rpcCallHanddler);
 };
 
+var requestHandlerWraper = function (request, response) {
+    if (request.url == "/favicon.ico") {
+        return;
+    }
+    console.log(request.method + " - " + request.url);
+    if (httpMethodMap.hasOwnProperty(request.method))
+        var requestHandler = httpMethodMap[request.method];
+    else
+        return;
+    requestHandler(request, response);
+};
+
+var initExpress = function (app) {
+
+    app.post('/login', require('./paths/login').login);
+    app.post('/signup', require('./paths/login').signup);
+    app.post('/logout', require('./paths/login').logout);
+    app.post('/user', requestHandlerWraper);
+
+    httpMethodMap = {
+        "POST": POST_requestHandler
+    };
+};
+
 var initHttp = function (callback) {
     console.log('Init http');
     httpServer(config.http.port, config.http.host, POST_requestHandler, function (httpServer) {
         env.express = httpServer;
+        initExpress(env.express);
         callback();
     });
 };
