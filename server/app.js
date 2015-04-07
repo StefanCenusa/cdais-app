@@ -14,7 +14,7 @@ var rpcContext = {};
 
 rpcContext['/user'] = {
     'hello': {
-        'handler': require('./paths/getData').hello,
+        'handler': require('./paths/user').hello,
         'description': "Hello debater!"
     }
 };

@@ -1,5 +1,5 @@
 var jwt = require('jsonwebtoken');
-var superSecret = 'MarianPresedinte';
+env.superSecret = 'MarianPresedinte';
 
 module.exports.login = function (req, res) {
     env.passport.authenticate('login', function (err, user, info) {
@@ -16,7 +16,7 @@ module.exports.login = function (req, res) {
         var token = jwt.sign({
             name: user.name,
             username: user.username
-        }, superSecret, {
+        }, env.superSecret, {
             expiresInMinutes: 1440 // expires in 24 hours
         });
 
