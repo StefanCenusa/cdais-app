@@ -26,7 +26,13 @@ var handleJsonRpcCall = function (input, callback) {
             callback(err, result);
         };
         //input.params.push(handlerReady);
-        rpcFunction(input.params, handlerReady);
+        if (Array.isArray(input))
+            rpcFunction(input.params, handlerReady);
+        else {
+            var err = "Invalid type for params.Array expected";
+            var result = null;
+            callback(err, result);
+        }
     }
     else {
         var err = "Invalid method";
