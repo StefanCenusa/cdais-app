@@ -16,6 +16,10 @@ rpcContext['/user'] = {
     'hello': {
         'handler': require('./paths/user').hello,
         'description': "Hello debater!"
+    },
+    'getNotifications' : {
+        'handler': require('./paths/user').getNotifications,
+        'description': "gets a specific user's notifications"
     }
 };
 //_____________________________________________________
