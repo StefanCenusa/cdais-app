@@ -1,7 +1,7 @@
 var tokenAuth = require('.././tokenAuth');
 
-module.exports.hello = function (req, callback) {
-    tokenAuth(req, function(err, result){
+module.exports.hello = function (paramas, callback) {
+    tokenAuth(paramas, function(err, result){
         if (err){
             callback(err, result);
         }

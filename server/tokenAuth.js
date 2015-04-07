@@ -10,9 +10,8 @@ module.exports = function (req, callback) {
             } else {
                 // if everything is good, save to request for use in other routes
                 req.decoded = decoded;
-                console.log(req.decoded);
                 //next(res); // make sure we go to the next routes and don't stop here
-                callback(null, "Acces granted");
+                callback(null, req);
             }
         });
     }
