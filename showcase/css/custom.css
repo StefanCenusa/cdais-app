@@ -2,7 +2,7 @@
     body{
         text-align: center;
         font-size: 2em;
-        background-color: #f8f8f8;
+        background-color: #fff;
     }
     p {
         margin: 0 auto;
@@ -10,9 +10,10 @@
 
 /* HEADER */
     header{
-        background-color: #f8f8f8;
+        background-color: #fff;
         margin: 0;
         max-height: 70px;
+        border-bottom: 1px solid rgba(3, 3, 3, 0.08);
     }
 
     @media (min-width: 768px){
@@ -30,7 +31,7 @@
         padding: 0;
     }
 
-    /* SEARCH IS IN search.css */
+    /* SEARCH IS IN search.css: #4875B4 */
 
     /* LOGIN IS IN login.css */
 
@@ -65,10 +66,10 @@ ol.breadcrumbs{
         border-top: 1px solid #000;
         border-bottom: 1px solid #000;
         padding: 10px;
-    background-color: #777;
-    color: #fff;
-    font-size: small;
-}
+        background-color: #777;
+        color: #fff;
+        font-size: small;
+    }
 
     footer a{
         color: #fff;

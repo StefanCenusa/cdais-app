@@ -18,7 +18,7 @@
 
 .wrapper {
     max-width: 1020px;
-    width: 60%;
+    width: 66.66667%;
     position: relative;
     overflow: hidden;
     margin: 0 auto;
@@ -43,7 +43,7 @@
 .carousel {
     width: 100%;
     position: relative;
-    margin: 5px 0;
+    margin: 0;
 }
 
 .carousel .carousel__content {
@@ -55,7 +55,7 @@
 }
 
 .carousel .carousel__content img{
-    max-height: 440px;
+    max-height: 480px;
 }
 
 .carousel .carousel__content .item {

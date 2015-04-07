@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CDAIS</title>
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/logo.css">
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/login.css">
-    <link rel="stylesheet" href="css/search.css">
+    <link rel="stylesheet" href="css/search_component.css" />
     <link rel="stylesheet" href="css/content_home.css">
     <link rel="stylesheet" href="css/about_thumb.css">
     <link rel="stylesheet" href="css/bmf.css">
@@ -22,76 +23,41 @@
         <!-- Header -->
         <header class="row">
             <div class="col-lg-2 col-sm-4 col-xs-4">
-                <a href="#">
-                    <img id="logo" src="img/logoCDAIS1.png" class="img-responsive"/>
+                <a href="#" >
+                    <img data-toggle="tooltip" data-placement="right" title="Clubul de Dezbateri Academice Iaşi" id="logo" src="img/logoCDAIS.png" class="img-responsive"/>
                 </a>
             </div>
             <div class="col-lg-2 col-lg-push-8 col-sm-4 col-sm-push-4 col-xs-8" id="login-search">
-                <div class="row" style="margin: 0">
-                    <!-- Login Button-->
-                    <div id="login-button" class="col-sm-4 col-sm-push-8 col-xs-6">
+                    <!-- Search -->
+                    <div id="sb-search" class="sb-search">
+                        <form>
+                            <input class="sb-search-input" placeholder="Search term..." type="search" value="" name="search" id="search">
+                            <input class="sb-search-submit" type="submit" value="">
+                            <span data-toggle="tooltip" data-placement="right" title="Search" class="sb-icon-search"></span>
+                        </form>
+                    </div>
+                    <!-- Login -->
+                    <div id="login-button" class="">
                         <button type="button" class="btn btn-primary btn-block btn-lg" data-toggle="modal" data-target="#login-form" id="lgn-btn">
-                            <img src="img/loginButton_blue_black.png" class="img-responsive">
+                            <img data-toggle="tooltip" data-placement="right" title="Login" src="img/loginButton_black_blue.png" class="img-responsive">
                         </button>
                         <!-- Login Form -->
                         <div class="modal fade " id="login-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <!--div class="modal-header">
-                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                 <span aria-hidden="true">&times;</span>
-                                             </button>
-                                             <h4 class="modal-title" id="myModalLogin">SIGN IN</h4>
-                                         </div-->
                                     <div class="modal-body">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                         <form class="form-signin" data-ember-action="2">
-                                            <!--h2 class="form-signin-heading">Sign in</h2>
-                                            <small class="text-muted">Connect [your service] with your favorite social network</small>
-                                            <br>
-                                            <br-->
                                             <p>
                                                 <a class="btn btn-primary social-login-btn social-facebook" href="/auth/facebook">
                                                     <i class="fa fa-facebook"></i>
                                                 </a>
-                                                <!--a class="btn btn-primary social-login-btn social-twitter" href="/auth/twitter">
-                                                    <i class="fa fa-twitter"></i>
-                                                </a-->
-                                                <!--/p-->
-                                                <!--p-->
-                                                <!--a class="btn btn-primary social-login-btn social-linkedin" href="/auth/linkedin">
-                                                    <i class="fa fa-linkedin"></i>
-                                                </a-->
                                                 <a class="btn btn-primary social-login-btn social-google" href="/auth/google">
                                                     <i class="fa fa-google-plus"></i>
                                                 </a>
                                             </p>
-                                            <br>
-                                            <div class="btn-group social-login-more">
-                                                <button type="button" class="btn btn-default dropdown-toggle btn-block" data-toggle="dropdown">More...</button>
-                                                <ul class="dropdown-menu text-left " role="menu">
-                                                    <li><a href="#"><i class="fa fa-twiter-sign"></i>   Twiter</a></li>
-                                                    <li><a href="#"><i class="fa fa-linkedin-alt"></i>   LinkedIn</a></li>
-                                                    <li><a href="#"><i class="fa fa-tumblr-sign"></i>   Tumblr</a></li>
-                                                    <li><a href="#"><i class="fa fa-github-alt"></i>   Github</a></li>
-                                                    <li><a href="#"><i class="fa fa-dropbox"></i>   Dropbox</a></li>
-                                                    <li><a href="/auth/amazon"><span class="zocial-amazon"></span>   Amazon</a></li>
-                                                    <li><a href="#"><span class="zocial-bitbucket"></span>   Bitbucket</a></li>
-                                                    <li><a href="#"><span class="zocial-evernote"></span>   Evernote</a></li>
-                                                    <li><a href="#"><span class="zocial-meetup"></span>   Meetup</a></li>
-                                                    <li><a href="#"><i class="fa fa-windows"></i>   Windows Live</a></li>
-                                                    <li><a href="#"><i class="fa fa-weibo"></i>   Weibo</a></li>
-                                                    <li><a href="#"><i class="fa fa-foursquare"></i>   Foursquare</a></li>
-                                                    <li><a href="#"><i class="fa fa-stackexchange"></i>   Stack Exchange</a></li>
-                                                    <li><a href="#"><i class="fa fa-trello"></i>   Trello</a></li>
-                                                    <li><a href="#"><span class="zocial-wordpress"></span>   Wordpress</a></li>
-                                                </ul>
-                                            </div>
-                                            <br><br>
-                                            <!--small class="text-muted">Or sign in with [your service]</small>
-                                            <br><br-->
                                             <input id="ember360" class="ember-view ember-text-field form-control login-input" placeholder="Email Address" type="text">
                                             <input id="ember361" class="ember-view ember-text-field form-control login-input-pass" placeholder="Password" type="password">
 
@@ -101,24 +67,12 @@
                                             <span><input type="checkbox" name="rememberButton" value="Remember me"/><small style="font-family: inherit;"> Remember me </small></span>
                                             <br>
                                             <button class="btn btn-lg btn-primary btn-block btn-center" type="submit" data-bindattr-3="3" id="sign-in-btn">Sign in</button>
-                                            <!--small class="create-account text-muted">Dont have a [your service] or social network account?
-                                                <button id="ember363" class="ember-view btn btn-sm btn-default"> Sign Up </button>
-                                            </small-->
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Search Button-->
-                    <div id="sb-search"    class="col-sm-8 col-sm-pull-4 col-xs-6 sb-search">
-                        <form style="display: inline;">
-                            <input class="sb-search-input" placeholder="    Search..." type="text" value="" name="search" id="search">
-                            <input class="sb-search-submit" type="submit" value="">
-                            <span class="sb-icon-search"></span>
-                        </form>
-                    </div>
-                </div>
             </div>
             <div class="col-lg-8 col-lg-pull-2 col-sm-4 col-sm-pull-4" id="menu">
                 <nav class="navbar navbar-default navbar-fixed-top col-xs-12">
@@ -130,31 +84,27 @@
                     </div>
                     <div class="navbar-collapse collapse" id="collapse">
                         <ul class="nav navbar-nav nav-tabs ">
-                            <li class="active"><a href="#"><p>Home</p></a></li>
-                            <li><a href="#"><p>About</p></a></li>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#about_thumb">About</a></li>
                             <li class="dropdown">
-                                <a href="#" data-toggle="dropdown"><p>Learn <span class="caret"></span></p></a>
+                                <a href="#" data-toggle="dropdown">Learn <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#"><p>Public Speaking</p></a></li>
-                                    <li><a href="#"><p>World Schools</p></a></li>
-                                    <li><a href="#"><p>British Parliamentary</p></a></li>
+                                    <li><a href="#">Public Speaking</a></li>
+                                    <li><a href="#">World Schools</a></li>
+                                    <li><a href="#">British Parliamentary</a></li>
                                 </ul>
                             </li>
-                            <li><a href="#"><p>Blog</p></a></li>
-                            <li><a href="#"><p>Compete</p></a></li>
-                            <li><a href="#"><p>Contact</p></a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Compete</a></li>
+                            <li><a href="#">Contact</a></li>
                         </ul>
                     </div>
                 </nav>
             </div>
         </header>
 
-        <ol class="breadcrumb hidden">
-            <li>Home</li>
-        </ol>
-
         <!-- Main -->
-        <div class="row" id="main" style="margin-top: 10px;">
+        <div class="row" id="main">
             <div class="wrapper wrapper--demo">
                 <div class="carousel" style="max-height: inherit">
                         <div class="carousel__content" style="max-height: inherit;">
@@ -177,7 +127,7 @@
         </div>
 
         <!-- BMF -->
-        <div class=""id="bmf">
+        <div id="bmf">
             <!-- BMF Button-->
             <div id="bmf-button">
                 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#bmf-form">
@@ -212,46 +162,52 @@
 
         <!-- About Thumbnails -->
         <div class="row">
-            <div class="col-xs-1"></div>
-            <div class="col-xs-10" id="about_thumb" style="margin-top: 20px;">
-                <div class="col-sm-6 col-md-4">
+            <div class="col-sm-2 col-xs-2"></div>
+            <div class="col-sm-9 col-xs-8" id="about_thumb" style="margin-top: 20px;">
+                <div class="col-sm-6 col-md-4 col-xs-12">
                     <div class="thumbnail">
-                        <img class="img-responsive" src="img/public.jpg" data-holder-rendered="true">
+                        <img class="img-responsive" src="img/publicspeaking2.png" data-holder-rendered="true">
                         <div class="caption">
-                            <h3 id="thumbnail-label1">Thumbnail label<a class="anchorjs-link" href="#thumbnail-label"><span class="anchorjs-icon"></span></a></h3>
+                            <h3 id="thumbnail-label1">Public Speaking<a class="anchorjs-link" href="#thumbnail-label1"><span class="anchorjs-icon"></span></a></h3>
                             <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                            <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                            <!--p><a href="#" class="btn btn-primary" role="button">More..</a></p-->
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-4">
+                <div class="col-sm-6 col-md-4  col-xs-12">
                     <div class="thumbnail">
-                        <img class="img-responsive" src="img/learn.jpg" data-holder-rendered="true">
+                        <img class="img-responsive" src="img/ideas2.png" data-holder-rendered="true">
                         <div class="caption">
-                            <h3 id="thumbnail-label2">Thumbnail label<a class="anchorjs-link" href="#thumbnail-label"><span class="anchorjs-icon"></span></a></h3>
+                            <h3 id="thumbnail-label2">Ideas<a class="anchorjs-link" href="#thumbnail-label2"><span class="anchorjs-icon"></span></a></h3>
                             <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                            <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-4">
+                <div class="col-sm-6 col-md-4  col-xs-12">
                     <div class="thumbnail">
-                        <img class="img-responsive" src="img/team.jpg" data-holder-rendered="true">
+                        <img class="img-responsive" src="img/teamwork2.png" data-holder-rendered="true">
                         <div class="caption">
-                            <h3 id="thumbnail-label3">Thumbnail label<a class="anchorjs-link" href="#thumbnail-label"><span class="anchorjs-icon"></span></a></h3>
+                            <h3 id="thumbnail-label3">Team-work<a class="anchorjs-link" href="#thumbnail-label3"><span class="anchorjs-icon"></span></a></h3>
                             <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                            <p><a href="#" class="btn btn-primary" role="button">Button</a> </p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-xs-1"></div>
+            <div class="col-sm-1 col-xs-2"></div>
         </div>
 
         <!-- Footer -->
         <footer class="row" style="min-height: 50px;">
             <div class="col-xs-12">
-                <div><a href="#"><strong>CDAIS</strong></a> (c) Copyright 2015 <a href="#"><strong>CDAIS-Developers</strong></a></div>
+                <div>
+                    <a href="#">
+                        <strong>CDAIS</strong>
+                    </a>
+                    (c) Copyright 2015
+                    <a href="#">
+                        <strong data-toggle="tooltip" data-placement="right" title="Andrei C, Cezar M, Marian M, Ştefan C, Ştefana P"> CDAIS-Developers</strong>
+                    </a>
+                </div>
                 <div>The only debating Web 2.0 platform</div>
                 Server time:
                 <span id="spanDate">
@@ -264,148 +220,23 @@
         </footer>
     </div>
 
-    <!-- javascript -->
+    <!--<jQuery>-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="js/jquery-1.11.2.min.js"></script>
+    <script src="js/jquery.transit.min.js"></script>
+    <!--<Bootstrap>-->
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/respond.js"></script>
-    <script src="js/custom.js"></script>
-
-    <!-- carousel-->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.9/jquery.transit.min.js">
-
-    </script>
-    <script>
-        (function() {
-        var carouselContent, carouselIndex, carouselLength, firstClone, firstItem, isAnimating, itemWidth, lastClone, lastItem;
-
-        carouselContent = $(".carousel__content");
-
-        carouselIndex = 1;
-
-        carouselLength = carouselContent.children().length;
-
-        isAnimating = false;
-
-        itemWidth = 100 / carouselLength;
-
-        firstItem = $(carouselContent.children()[0]);
-
-        lastItem = $(carouselContent.children()[carouselLength - 1]);
-
-        firstClone = null;
-
-        lastClone = null;
-
-        carouselContent.css("width", carouselLength * 100 + "%");
-
-        carouselContent.transition({
-            x: "" + (carouselIndex * -itemWidth) + "%"
-        }, 0);
-
-        $.each(carouselContent.children(), function() {
-            return $(this).css("width", itemWidth + "%");
-        });
-
-        $(".nav--left").on("click", function() {
-            if (isAnimating) {
-                return;
-            }
-            isAnimating = true;
-            carouselIndex--;
-            if (carouselIndex === -1) {
-                lastItem.prependTo(carouselContent);
-                carouselContent.transition({
-                    x: "" + ((carouselIndex + 2) * -itemWidth) + "%"
-                }, 0);
-                return carouselContent.transition({
-                    x: "" + ((carouselIndex + 1) * -itemWidth) + "%"
-                }, 1000, "easeInOutExpo", function() {
-                    /* modified "-2" instead of "-1" b/c of bug
-                    * .. to be revisited !!
-                    * */
-                    carouselIndex = carouselLength - 2;
-                    lastItem.appendTo(carouselContent);
-                    carouselContent.transition({
-                        x: "" + (carouselIndex * -itemWidth) + "%"
-                    }, 0);
-                    return isAnimating = false;
-                });
-            } else {
-                return carouselContent.transition({
-                    x: "" + (carouselIndex * -itemWidth) + "%"
-                }, 1000, "easeInOutExpo", function() {
-                    return isAnimating = false;
-                });
-            }
-        });
-
-        $(".nav--right").on("click", function() {
-            if (isAnimating) {
-                return;
-            }
-            isAnimating = true;
-            carouselIndex++;
-            return carouselContent.transition({
-                x: "" + (carouselIndex * -itemWidth) + "%"
-            }, 1000, "easeInOutExpo", function() {
-                isAnimating = false;
-                if (firstClone) {
-                    carouselIndex = 0;
-                    carouselContent.transition({
-                        x: "" + (carouselIndex * -itemWidth) + "%"
-                    }, 0);
-                    firstClone.remove();
-                    firstClone = null;
-                    carouselLength = carouselContent.children().length;
-                    itemWidth = 100 / carouselLength;
-                    carouselContent.css("width", carouselLength * 100 + "%");
-                    $.each(carouselContent.children(), function() {
-                        return $(this).css("width", itemWidth + "%");
-                    });
-                    return;
-                }
-                if (carouselIndex === carouselLength - 1) {
-                    carouselLength++;
-                    itemWidth = 100 / carouselLength;
-                    firstClone = firstItem.clone();
-                    firstClone.addClass("clone");
-                    firstClone.appendTo(carouselContent);
-                    carouselContent.css("width", carouselLength * 100 + "%");
-                    $.each(carouselContent.children(), function() {
-                        return $(this).css("width", itemWidth + "%");
-                    });
-                    return carouselContent.transition({
-                        x: "" + (carouselIndex * -itemWidth) + "%"
-                    }, 0);
-                }
-            });
-        });
-
-    }).call(this);
-    </script>
-    <script type="text/javascript">
-
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-36251023-1']);
-        _gaq.push(['_setDomainName', 'jqueryscript.net']);
-        _gaq.push(['_trackPageview']);
-
-        (function() {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
-
-    </script>
-
-    <!-- search -->
+    <!--<search>-->
+    <script src="js/modernizr.custom.js"></script>
     <script src="js/classie.js"></script>
     <script src="js/uisearch.js"></script>
-    <!--script>
-        new UISearch( document.getElementById( 'sb-search' ));
-    </script-->
-    <script id="metamorph-1-start" type="text/x-placeholder"></script>
-    <script id="metamorph-21-start" type="text/x-placeholder"></script>
+    <script>
+        new UISearch( document.getElementById( 'sb-search' ) );
+    </script>
+    <!--<carousel>-->
+    <script src="js/carousel.js"></script>
+    <script src="js/respond.js"></script>
+    <!--<custom>-->
+    <script src="js/custom.js"></script>
 </body>
 </html>

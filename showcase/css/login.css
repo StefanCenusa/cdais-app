@@ -1,18 +1,22 @@
 #login-button{
     padding: 0;
     position: relative;
-    float: left;
+    float: right;
 }
 
-#login-button>button{
+#login-button>button {
     background-color: transparent;
     min-height: 30px;
     min-width: 30px;
     max-height: 50px;
     max-width: 50px;
-    margin: 5px auto;
-    padding: 5px;
+    margin: 15px 0 0 0;
+    padding: 7px;
     border: 0;
+}
+
+#login-button>button:hover{
+    padding: 10px;
 }
 
 .form-signin{

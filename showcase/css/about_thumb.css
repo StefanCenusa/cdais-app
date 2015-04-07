@@ -1,9 +1,10 @@
 #about_thumb{
-    margin-top: 20px;
+    margin: 20px 0;
+    padding: 0;
 }
 
-#about_thumb div{
-    padding: 20px auto;
+#about_thumb > div{
+    padding: 0;
 }
 
 #about_thumb img{
@@ -15,13 +16,26 @@
 }
 
 #about_thumb .thumbnail{
-    width: 80%;
     background-color: #fff;
+    width: 66.6666667%;
 }
 
 @media (max-width: 768px){
     #bmf{
         display: none;
+    }
+    #about_thumb .thumbnail{
+        background-color: #fff;
+        padding: 0 15px;
+        width: 100%;
+        border: 0;
+        font-size: 14px;
+    }
+    #about_thumb h3{
+        font-size: small;
+    }
+    #about_thumb img{
+        height: 50px;
     }
 }
 
