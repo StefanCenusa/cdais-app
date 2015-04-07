@@ -16,6 +16,10 @@ rpcContext['/user'] = {
     'hello': {
         'handler': require('./paths/user').hello,
         'description': "Hello debater!"
+    },
+    'getNotifications' : {
+        'handler': require('./paths/user').getNotifications,
+        'description': "gets a specific user's notifications"
     }
 };
 //_____________________________________________________
@@ -26,7 +30,7 @@ var handleJsonRpcCall = function (input, callback) {
             callback(err, result);
         };
         //input.params.push(handlerReady);
-        if (Array.isArray(input))
+        if (Array.isArray(input.params))
             rpcFunction(input.params, handlerReady);
         else {
             var err = "Invalid type for params.Array expected";

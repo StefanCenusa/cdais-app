@@ -30,7 +30,7 @@ module.exports.login = function (req, res) {
 };
 
 module.exports.signup = function (req, res) {
-    passport.authenticate('signup', function (err, user, info) {
+    env.passport.authenticate('signup', function (err, user, info) {
         if (err) return  res.json({
             success: false,
             message: err
