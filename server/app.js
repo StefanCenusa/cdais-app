@@ -1,60 +1,122 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+console.log("Init express...");
+global.env = {};
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+var async = require('async');
+var mongoose = require('mongoose');
+var passport = require('passport');
 
-var app = express();
+var config = require('./config');
+var httpServer = require('./serverHttp.js');
+var Passport = require('./passport/init');
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+//_____________________________________________________
+var httpMethodMap;
+var rpcContext = {};
+rpcContext['/user'] = {
+    'hello': {
+        'handler': require('./paths/user').hello,
+        'description': "Hello debater!"
+    }
+};
+//_____________________________________________________
+var handleJsonRpcCall = function (input, callback) {
+    if (rpcContext.hasOwnProperty(input.originalUrl)) {
+        var rpcFunction = rpcContext[input.originalUrl][input.method].handler;
+        var handlerReady = function (err, result) {
+            callback(err, result);
+        };
+        //input.params.push(handlerReady);
+        rpcFunction(input.params, handlerReady);
+    }
+    else {
+        var err = "Invalid method";
+        var result = null;
+        callback(err, result);
+    }
+};
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+var POST_requestHandler = function (request, response) {
+    request.body.originalUrl = request.originalUrl;
+    var jsonRpcObject = request.body;
 
-app.use('/', routes);
-app.use('/users', users);
+    var rpcCallHanddler = function (error, result) {
+        var resultObjet = {
+            "id": 1,
+            "error": error,
+            "result": result
+        };
+        var headers = {};
+        headers["Access-Control-Allow-Origin"] = "*";
+        headers["Access-Control-Allow-Methods"] = "POST";
+        headers["Access-Control-Allow-Credentials"] = true;
+        headers["Access-Control-Max-Age"] = '86400'; // 24 hours
+        headers["Access-Control-Allow-Headers"] = "X-Requested-With, Access-Control-Allow-Origin, X-HTTP-Method-Override, Content-Type, Authorization, Accept";
+        headers["Content-Type"] = "application/json";
+        // respond to the request
+        response.writeHead(200, headers);
+        response.end(JSON.stringify(resultObjet));
+    };
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
+    handleJsonRpcCall(jsonRpcObject, rpcCallHanddler);
+};
 
-// error handlers
+var requestHandlerWraper = function (request, response) {
+    if (request.url == "/favicon.ico") {
+        return;
+    }
+    console.log(request.method + " - " + request.url);
+    if (httpMethodMap.hasOwnProperty(request.method))
+        var requestHandler = httpMethodMap[request.method];
+    else
+        return;
+    requestHandler(request, response);
+};
 
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
+var initExpress = function (app) {
+
+    app.post('/login', require('./paths/login').login);
+    app.post('/signup', require('./paths/login').signup);
+    app.post('/logout', require('./paths/login').logout);
+    app.post('/user', requestHandlerWraper);
+
+    httpMethodMap = {
+        "POST": POST_requestHandler
+    };
+};
+
+var initHttp = function (callback) {
+    console.log('Init http');
+    httpServer(config.http.port, config.http.host, POST_requestHandler, function (httpServer) {
+        env.express = httpServer;
+        initExpress(env.express);
+        callback();
     });
-  });
-}
+};
 
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
-});
+var initMongo = function (callback) {
+    console.log('Init mongo');
+    mongoose.connect(config.mongo.host);
+    callback();
+};
 
+var initPassport = function(callback){
+    console.log('Init passport');
+    env.express.use(passport.initialize());
+    env.express.use(passport.session());
 
-module.exports = app;
+    Passport(passport);
+    env.passport = passport;
+    callback();
+};
+
+var initApp = function () {
+    async.series([initMongo, initHttp, initPassport], function (err) {
+        if (!err)
+            console.log('Init app done!\n--------------------------');
+        else
+            console.log(err.message);
+    });
+};
+
+initApp();
+
