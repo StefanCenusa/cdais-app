@@ -1,0 +1,41 @@
+#about_thumb{
+    margin: 20px 0;
+    padding: 0;
+}
+
+#about_thumb > div{
+    padding: 0;
+}
+
+#about_thumb img{
+    height: 100px;
+}
+
+#about_thumb p{
+    font-size: 0.6em;
+}
+
+#about_thumb .thumbnail{
+    background-color: #fff;
+    width: 66.6666667%;
+}
+
+@media (max-width: 768px){
+    #bmf{
+        display: none;
+    }
+    #about_thumb .thumbnail{
+        background-color: #fff;
+        padding: 0 15px;
+        width: 100%;
+        border: 0;
+        font-size: 14px;
+    }
+    #about_thumb h3{
+        font-size: small;
+    }
+    #about_thumb img{
+        height: 50px;
+    }
+}
+

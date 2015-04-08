@@ -1,0 +1,28 @@
+#logo{
+    margin: 0 auto;
+    padding: 5px;
+    max-height: 60px;
+    min-height: 40px;
+    width: 80%;
+    max-width: 150px;
+    min-width: 80px;
+}
+
+@media (max-width: 768px) AND (min-width: 501px){
+    #logo{
+        margin-top: 10px;
+        padding: 5px;
+        max-height: 60px;
+        max-width: 150px;
+    }
+}
+
+@media (max-width: 500px){
+    #logo{
+        margin-top: 20px;
+        padding: 5px;
+        max-height: 60px;
+        max-width: 150px;
+    }
+}
+

@@ -26,3 +26,12 @@ node_modules
 
 # Users Environment Variables
 .lock-wscript
+
+showcase/readMe.txt
+showcase/.idea
+showcase/css/bootstrap.css
+showcase/css/bootstrap-theme.css.map
+showcase/css/bootstrap-theme.css
+showcase/css/bootstrap.css.map
+showcase/bootstrap-3.3.2
+showcase/Notes.txt
