@@ -87,6 +87,8 @@ var initExpress = function (app) {
     app.post('/login', require('./paths/login').login);
     app.post('/signup', require('./paths/login').signup);
     app.post('/logout', require('./paths/login').logout);
+    app.get('/facebookLogin', require('./paths/login').facebookLogin);
+    app.get('/auth/facebook/callback', require('./paths/login').facebookLogin);
     app.post('/user', requestHandlerWraper);
 
     httpMethodMap = {
