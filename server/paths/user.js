@@ -1,8 +1,8 @@
 var tokenAuth = require('.././tokenAuth');
 var User = require('../models/user');
 
-module.exports.hello = function (paramas, callback) {
-    tokenAuth(paramas, function(err, result){
+module.exports.hello = function (params, callback) {
+    tokenAuth(params, function(err, result){
         if (err){
             callback(err, result);
         }
@@ -10,7 +10,7 @@ module.exports.hello = function (paramas, callback) {
             //do your job
             var r={ "text": "r is the result of process data"};
             // r is the result of process data
-            callback(null, r);
+            callback(null, params[0]);
         }
 
     });

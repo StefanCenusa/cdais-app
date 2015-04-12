@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- FOR ANGULAR ROUTING -->
+    <base href="/">
+
+    <!--Bootstrap paper theme-->
+    <link rel="stylesheet" href="../../assets/libs/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <!--Animate-->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css">
+    <!--My styles-->
+    <link rel="stylesheet" href="assets/css/showcase_style.css">
+
+
+    <!-- JS -->
+    <!--bootstrap-->
+    <script src="assets/libs/jquery.min.js"></script>
+    <script src="assets/libs/bootstrap.min.js"></script>
+    <!--angular-->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular-route.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular-animate.js"></script>
+
+    <!-- controllers -->
+    <script src="app/controllers/mainCtrl.js"></script>
+
+    <!-- services -->
+    <script src="app/services/authService.js"></script>
+
+    <!-- main Angular app files -->
+    <script src="app/app.routes.js"></script>
+    <script src="app/app.js"></script>
+
+    <title>CDAIS App</title>
+
+
+</head>
+<body ng-app="DebateApp" ng-controller="mainController as main">
+
+<main ng-view>
+
+</main>
+
+</body>
+</html>
