@@ -8,16 +8,26 @@ var passport = require('passport');
 var config = require('./config');
 var httpServer = require('./serverHttp.js');
 var Passport = require('./passport/init');
+var tokenAuth = require('./tokenAuth');
 
-//_____________________________________________________
+//___________________________________________s__________
 var httpMethodMap;
 var rpcContext = {};
+var headers = {};
+
+headers["Access-Control-Allow-Origin"] = "*";
+headers["Access-Control-Allow-Methods"] = "POST, GET";
+headers["Access-Control-Allow-Credentials"] = true;
+headers["Access-Control-Max-Age"] = '86400'; // 24 hours
+headers["Access-Control-Allow-Headers"] = "X-Requested-With, Access-Control-Allow-Origin, X-HTTP-Method-Override, Content-Type, Authorization, Accept";
+headers["Content-Type"] = "application/json";
+
 rpcContext['/user'] = {
     'hello': {
         'handler': require('./paths/user').hello,
         'description': "Hello debater!"
     },
-    'getNotifications' : {
+    'getNotifications': {
         'handler': require('./paths/user').getNotifications,
         'description': "gets a specific user's notifications"
     }
@@ -54,14 +64,6 @@ var POST_requestHandler = function (request, response) {
             "error": error,
             "result": result
         };
-        var headers = {};
-
-        headers["Access-Control-Allow-Origin"] = "*";
-        headers["Access-Control-Allow-Methods"] = "POST";
-        headers["Access-Control-Allow-Credentials"] = true;
-        headers["Access-Control-Max-Age"] = '86400'; // 24 hours
-        headers["Access-Control-Allow-Headers"] = "X-Requested-With, Access-Control-Allow-Origin, X-HTTP-Method-Override, Content-Type, Authorization, Accept";
-        headers["Content-Type"] = "application/json";
 
         response.writeHead(200, headers);
         response.end(JSON.stringify(resultObjet));
@@ -82,6 +84,24 @@ var requestHandlerWraper = function (request, response) {
     requestHandler(request, response);
 };
 
+var checkAuth = function (req, res) {
+    tokenAuth(req.body.params[0], function (err, result) {
+        if (err) {
+            var resultObjet = {
+                "id": 1,
+                "error": err,
+                "result": result
+            };
+            res.writeHead(200, headers);
+            res.end(JSON.stringify(resultObjet));
+        }
+        else {
+            req.body.params[0] = result.username;
+            requestHandlerWraper(req, res);
+        }
+    });
+};
+
 var initExpress = function (app) {
 
     app.post('/login', require('./paths/login').login);
@@ -91,7 +111,7 @@ var initExpress = function (app) {
     app.get('/auth/facebook/callback', require('./paths/login').facebookLogin);
     app.get('/auth/google', require('./paths/login').googleLogin);
     app.get('/auth/google/return', require('./paths/login').googleLogin);
-    app.post('/user', requestHandlerWraper);
+    app.post('/user', checkAuth);
 
     httpMethodMap = {
         "POST": POST_requestHandler
@@ -113,7 +133,7 @@ var initMongo = function (callback) {
     callback();
 };
 
-var initPassport = function(callback){
+var initPassport = function (callback) {
     console.log('Init passport');
     env.express.use(passport.initialize());
     env.express.use(passport.session());
