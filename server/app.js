@@ -1,18 +1,17 @@
 console.log("Init express...");
 global.env = {};
 
-var async = require('async');
-var mongoose = require('mongoose');
-var passport = require('passport');
-
-var config = require('./config');
-var httpServer = require('./serverHttp.js');
-var Passport = require('./passport/init');
-var tokenAuth = require('./tokenAuth');
+var async = require('async'),
+    mongoose = require('mongoose'),
+    passport = require('passport'),
+    config = require('./config'),
+    httpServer = require('./serverHttp.js'),
+    Passport = require('./passport/init'),
+    tokenAuth = require('./tokenAuth');
 
 //_____________________________________________________
-var httpMethodMap;
-var rpcContext = {};
+var httpMethodMap,
+    rpcContext = {};
 
 rpcContext['/user'] = {
     'hello': {

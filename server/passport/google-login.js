@@ -1,5 +1,5 @@
-var GoogleStrategy = require('passport-google').Strategy;
-var User = require('../models/user');
+var GoogleStrategy = require('passport-google').Strategy,
+    User = require('../models/user');
 
 module.exports = function (passport) {
     passport.use(new GoogleStrategy({

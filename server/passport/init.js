@@ -1,8 +1,8 @@
-var login = require('./login');
-var signup = require('./signup');
-var facebook = require('./facebook-login');
-var User = require('../models/user');
-var google = require('./google-login');
+var login = require('./login'),
+    signup = require('./signup'),
+    facebook = require('./facebook-login'),
+    User = require('../models/user'),
+    google = require('./google-login');
 
 module.exports = function(passport){
 

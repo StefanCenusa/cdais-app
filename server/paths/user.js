@@ -1,9 +1,9 @@
 var User = require('../models/user');
 
-module.exports.hello = function (paramas, callback) {
+module.exports.hello = function (params, callback) {
     var r = {"text": "r is the result of process data"};
     // r is the result of process data
-    callback(null, r);
+    callback(null, params[0]);
 
 };
 
