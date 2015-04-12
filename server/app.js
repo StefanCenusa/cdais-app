@@ -29,11 +29,10 @@ var handleJsonRpcCall = function (input, callback) {
         var handlerReady = function (err, result) {
             callback(err, result);
         };
-        //input.params.push(handlerReady);
         if (Array.isArray(input.params))
             rpcFunction(input.params, handlerReady);
         else {
-            var err = "Invalid type for params.Array expected";
+            var err = "Invalid type for params. Array expected";
             var result = null;
             callback(err, result);
         }
@@ -56,13 +55,14 @@ var POST_requestHandler = function (request, response) {
             "result": result
         };
         var headers = {};
+
         headers["Access-Control-Allow-Origin"] = "*";
         headers["Access-Control-Allow-Methods"] = "POST";
         headers["Access-Control-Allow-Credentials"] = true;
         headers["Access-Control-Max-Age"] = '86400'; // 24 hours
         headers["Access-Control-Allow-Headers"] = "X-Requested-With, Access-Control-Allow-Origin, X-HTTP-Method-Override, Content-Type, Authorization, Accept";
         headers["Content-Type"] = "application/json";
-        // respond to the request
+
         response.writeHead(200, headers);
         response.end(JSON.stringify(resultObjet));
     };
@@ -87,8 +87,10 @@ var initExpress = function (app) {
     app.post('/login', require('./paths/login').login);
     app.post('/signup', require('./paths/login').signup);
     app.post('/logout', require('./paths/login').logout);
-    app.get('/facebookLogin', require('./paths/login').facebookLogin);
+    app.get('/auth/facebook', require('./paths/login').facebookLogin);
     app.get('/auth/facebook/callback', require('./paths/login').facebookLogin);
+    app.get('/auth/google', require('./paths/login').googleLogin);
+    app.get('/auth/google/return', require('./paths/login').googleLogin);
     app.post('/user', requestHandlerWraper);
 
     httpMethodMap = {

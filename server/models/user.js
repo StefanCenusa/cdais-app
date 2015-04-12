@@ -16,6 +16,8 @@ module.exports = mongoose.model('User',{
                 timestamp: Date,
                 read: Boolean
             }
-        ]
+        ],
+        facebookId: String,
+        googleId: String
     }
 });

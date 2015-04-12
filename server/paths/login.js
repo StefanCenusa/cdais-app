@@ -19,8 +19,6 @@ module.exports.login = function (req, res) {
         }, env.superSecret, {
             expiresInMinutes: 1440 // expires in 24 hours
         });
-
-        // return the information including token as JSON
         return res.json({
             success: true,
             message: 'Enjoy your token!',
@@ -31,16 +29,16 @@ module.exports.login = function (req, res) {
 
 module.exports.signup = function (req, res) {
     env.passport.authenticate('signup', function (err, user, info) {
-        if (err) return  res.json({
+        if (err) return res.json({
             success: false,
             message: err
         });
         if (!user)
-            return  res.json({
+            return res.json({
                 success: false,
                 message: info
             });
-        return  res.json({
+        return res.json({
             success: true,
             message: 'User created'
         });
@@ -55,8 +53,8 @@ module.exports.logout = function (req, res) {
     });
 };
 
-module.exports.facebookLogin = function(req, res){
-    env.passport.authenticate('facebook', function(err, user, info){
+module.exports.facebookLogin = function (req, res) {
+    env.passport.authenticate('facebook', function (err, user, info) {
         if (err) return res.json({
             success: false,
             message: err
@@ -73,12 +71,36 @@ module.exports.facebookLogin = function(req, res){
         }, env.superSecret, {
             expiresInMinutes: 1440 // expires in 24 hours
         });
-
-        // return the information including token as JSON
         return res.json({
             success: true,
             message: 'Enjoy your token!',
             token: token
         });
     })(req, res);
-}
+};
+
+module.exports.googleLogin = function (req, res) {
+    env.passport.authenticate('google', function (err, user, info) {
+        if (err) return res.json({
+            success: false,
+            message: err
+        });
+        if (!user)
+            return res.json({
+                success: false,
+                message: info
+            });
+
+        var token = jwt.sign({
+            name: user.name,
+            username: user.username
+        }, env.superSecret, {
+            expiresInMinutes: 1440 // expires in 24 hours
+        });
+        return res.json({
+            success: true,
+            message: 'Enjoy your token!',
+            token: token
+        });
+    })(req, res);
+};
