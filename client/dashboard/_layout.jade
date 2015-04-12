@@ -1,5 +1,5 @@
 doctype
-html
+html(ng-app="DashboardApp")
     head
         link(rel="stylesheet" href="../css/bootstrap.min.css")
         link(rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css")
@@ -27,6 +27,15 @@ html
                     ul.nav.navbar-top-links.navbar-right
                         li.dropdown
                             a.dropdown-toggle(data-toggle="dropdown", href="#")
+                                i.fa.fa-bell.fa-fw
+                                i.fa.fa-caret-down
+                                span.badge.badge-default 1
+                            ul.dropdown-menu.dropdown-alerts
+                                li
+                                    a.text-center(href="#")
+                                        strong See All Alerts
+                        li.dropdown
+                            a.dropdown-toggle(data-toggle="dropdown", href="#")
                                 i.fa.fa-envelope.fa-fw
                                 i.fa.fa-caret-down
                                 span.badge.badge-default 1
@@ -44,17 +53,6 @@ html
                                 li
                                     a.text-center(href="#")
                                         strong See All Tasks
-
-
-                        li.dropdown
-                            a.dropdown-toggle(data-toggle="dropdown", href="#")
-                                i.fa.fa-bell.fa-fw
-                                i.fa.fa-caret-down
-                                span.badge.badge-default 1
-                            ul.dropdown-menu.dropdown-alerts
-                                li
-                                    a.text-center(href="#")
-                                        strong See All Alerts
 
                         li.dropdown
                             a.dropdown-toggle(data-toggle="dropdown", href="#")

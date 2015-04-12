@@ -4,7 +4,7 @@
 
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
-    padding-top: 50px;
+    padding-top: 64px;
 }
 
 
@@ -21,6 +21,7 @@ body {
  * Top navigation
  * Hide default border to remove 1px line.
  */
+
 .navbar-fixed-top {
     border: 0;
 }
@@ -40,8 +41,8 @@ body {
 }
 
 .navbar-top-links li a {
-    padding: 15px;
-    min-height: 50px;
+    padding: 20px;
+    min-height: 64px;
 }
 
 .navbar-top-links .dropdown-menu li {
@@ -74,10 +75,6 @@ body {
 
 .navbar-top-links .dropdown-tasks {
     margin-left: -59px;
-}
-
-.navbar-top-links .dropdown-alerts {
-    margin-left: -123px;
 }
 
 .navbar-top-links .dropdown-user {
