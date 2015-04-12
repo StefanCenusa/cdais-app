@@ -13,14 +13,6 @@ var tokenAuth = require('./tokenAuth');
 //___________________________________________s__________
 var httpMethodMap;
 var rpcContext = {};
-var headers = {};
-
-headers["Access-Control-Allow-Origin"] = "*";
-headers["Access-Control-Allow-Methods"] = "POST, GET";
-headers["Access-Control-Allow-Credentials"] = true;
-headers["Access-Control-Max-Age"] = '86400'; // 24 hours
-headers["Access-Control-Allow-Headers"] = "X-Requested-With, Access-Control-Allow-Origin, X-HTTP-Method-Override, Content-Type, Authorization, Accept";
-headers["Content-Type"] = "application/json";
 
 rpcContext['/user'] = {
     'hello': {
@@ -33,7 +25,17 @@ rpcContext['/user'] = {
     }
 };
 //_____________________________________________________
+var writeHeaders = function(response){
+    response.header("Access-Control-Allow-Origin", "*");
+    response.header("Access-Control-Allow-Methods", "POST");
+    response.header("Access-Control-Allow-Credentials", true);
+    response.header("Access-Control-Max-Age", '86400');
+    response.header("Access-Control-Allow-Headers", "X-Requested-With, Access-Control-Allow-Origin, X-HTTP-Method-Override, Content-Type, Authorization, Accept");
+    response.header("Content-Type", "application/json");
+};
+
 var handleJsonRpcCall = function (input, callback) {
+    var err, result;
     if (rpcContext.hasOwnProperty(input.originalUrl)) {
         var rpcFunction = rpcContext[input.originalUrl][input.method].handler;
         var handlerReady = function (err, result) {
@@ -42,14 +44,14 @@ var handleJsonRpcCall = function (input, callback) {
         if (Array.isArray(input.params))
             rpcFunction(input.params, handlerReady);
         else {
-            var err = "Invalid type for params. Array expected";
-            var result = null;
+            err = "Invalid type for params. Array expected";
+            result = null;
             callback(err, result);
         }
     }
     else {
-        var err = "Invalid method";
-        var result = null;
+        err = "Invalid method";
+        result = null;
         callback(err, result);
     }
 };
@@ -65,7 +67,7 @@ var POST_requestHandler = function (request, response) {
             "result": result
         };
 
-        response.writeHead(200, headers);
+        writeHeaders(response);
         response.end(JSON.stringify(resultObjet));
     };
 
@@ -92,7 +94,7 @@ var checkAuth = function (req, res) {
                 "error": err,
                 "result": result
             };
-            res.writeHead(200, headers);
+            writeHeaders(res);
             res.end(JSON.stringify(resultObjet));
         }
         else {

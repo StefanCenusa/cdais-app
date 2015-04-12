@@ -8,7 +8,7 @@ module.exports = function (passport) {
             callbackURL: "http://localhost:3000/auth/facebook/callback"
         },
         function (accessToken, refreshToken, profile, done) {
-            var profile = profile._json;
+            profile = profile._json;
             User.findOne({'meta.facebookId': profile.id}, function (err, user) {
                 if (err) {
                     return done(err);
@@ -35,4 +35,4 @@ module.exports = function (passport) {
             });
         }
     ));
-}
+};

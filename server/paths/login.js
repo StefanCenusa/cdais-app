@@ -14,7 +14,6 @@ module.exports.login = function (req, res) {
             });
 
         var token = jwt.sign({
-            name: user.name,
             username: user.username
         }, env.superSecret, {
             expiresInMinutes: 1440 // expires in 24 hours
