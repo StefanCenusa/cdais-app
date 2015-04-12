@@ -42,7 +42,7 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li ng-if="!main.loggedIn">
-                        <button type="button" class="btn btn-default navbar-btn btn-sm" data-toggle="modal" data-target="#login-modal">Login <i class="fa fa-sign-in"></i></button>
+                        <button type="button" class="btn btn-default navbar-btn btn-sm" ng-click="main.open()"> Login </button>
                     </li>
                     <li ng-if="main.loggedIn" class="navbar-text">Hello {{ main.user.name }}!</li>
                     <li ng-if="main.loggedIn"><a href="#" ng-click="main.doLogout()">Logout</a></li>
@@ -181,32 +181,3 @@
     <p class="pull-right"><a href="#">Back to top</a></p>
     <p>&copy; 2015 Clubul de Dezbateri Academice Iasi &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
 </footer>
-
-<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal-label" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            </div>
-            <div class="modal-body">
-                <form class="form-signin center-block" id="form-body" ng-submit="main.doLogin()">
-                    <h2 class="form-signin-heading">Please sign in</h2>
-                    <label class="sr-only">Username</label>
-                    <input type="text" class="form-control" placeholder="Username" required autofocus ng-model="main.loginData.username">
-                    <label for="inputPassword" class="sr-only">Password</label>
-                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required ng-model="main.loginData.password">
-
-                    <div class="alert alert-danger" ng-if="main.error">
-                        {{ main.error }}
-                    </div>
-
-                    <button type="submit" class="btn btn-lg btn-block btn-primary">
-                        <span ng-if="!main.processing">Login</span>
-                        <span ng-if="main.processing" class="spinner"><i class="fa fa-circle-o-notch"></i></span>
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-

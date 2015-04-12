@@ -15,7 +15,7 @@ angular.module('authService', [])
         authFactory.login = function(username, password) {
 
             // return the promise object and its data
-            return $http.post('http://localhost:3000/login', {
+            return $http.post('http://localhost:3000/auth/login', {
                 username: username,
                 password: password
             })
@@ -43,7 +43,7 @@ angular.module('authService', [])
         // get the logged in user
         authFactory.getUser = function() {
             if (AuthToken.getToken())
-                return $http.post('http://localhost:3000/user', {
+                return $http.post('http://localhost:3001/user', {
                     "id": 1,
                     "jsonrpc": "2.0",
                     "method": "hello",

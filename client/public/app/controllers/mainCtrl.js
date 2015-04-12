@@ -1,6 +1,6 @@
-angular.module('mainCtrl', [])
+angular.module('mainCtrl', ['ui.bootstrap.modal'])
 
-    .controller('mainController', function($rootScope, $location, Auth) {
+    .controller('mainController', function($rootScope, $location, Auth, $modal) {
 
         var vm = this;
 
@@ -17,6 +17,26 @@ angular.module('mainCtrl', [])
                     vm.user = data.data;
                 });
         });
+
+        // function to handle logging out
+        vm.doLogout = function() {
+            Auth.logout();
+            vm.user = '';
+
+            $location.path('/');
+        };
+
+        vm.open = function (){
+            var modalInstance = $modal.open({
+                template: '../modals/login.html',
+                controller: 'ModalController',
+                controllerAs: 'modal'
+            });
+        }
+
+    })
+    .controller('ModalController', function($modalInstance, Auth, $location){
+        var vm = this;
 
         // function to handle login form
         vm.doLogin = function() {
@@ -36,14 +56,6 @@ angular.module('mainCtrl', [])
                         vm.error = data.message;
 
                 });
-        };
-
-        // function to handle logging out
-        vm.doLogout = function() {
-            Auth.logout();
-            vm.user = '';
-
-            $location.path('/');
         };
 
     });
