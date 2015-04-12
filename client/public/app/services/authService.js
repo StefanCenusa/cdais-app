@@ -25,6 +25,26 @@ angular.module('authService', [])
                 });
         };
 
+        authFactory.facebookLogin = function() {
+
+            // return the promise object and its data
+            return $http.get('http://localhost:3000/auth/facebook')
+                .success(function(data) {
+                    AuthToken.setToken(data.token);
+                    return data;
+                });
+        };
+
+        authFactory.googleLogin = function() {
+
+            // return the promise object and its data
+            return $http.get('http://localhost:3000/auth/google')
+                .success(function(data) {
+                    AuthToken.setToken(data.token);
+                    return data;
+                });
+        };
+
         // log a user out by clearing the token
         authFactory.logout = function() {
             // clear the token
@@ -111,7 +131,7 @@ angular.module('authService', [])
             // if our server returns a 403 forbidden response
             if (response.status == 403) {
                 AuthToken.setToken();
-                $location.path('/login');
+                $location.path('/');
             }
 
             // return the errors from the server as a promise

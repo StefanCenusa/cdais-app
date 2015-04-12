@@ -11,14 +11,16 @@
             <label for="inputPassword" class="sr-only">Password</label>
             <input type="password" id="inputPassword" class="form-control" placeholder="Password" required ng-model="loginModal.user.password">
 
-            <div class="alert alert-danger" ng-if="loginModal.error">
+            <div class="alert alert-danger" ng-if="loginModal.error" id="login-alert">
                 {{ loginModal.error }}
             </div>
 
-            <button type="submit" class="btn btn-lg btn-block btn-primary" ng-click="loginModal.doLogin()">
+            <button type="submit" class="btn btn-lg btn-block btn-primary" ng-click="loginModal.doLogin('regular')" id="login-button">
                 <span ng-if="!loginModal.processing">Login</span>
                 <span ng-if="loginModal.processing" class="spinner"><i class="fa fa-circle-o-notch"></i></span>
             </button>
         </form>
+
+        <button class="btn btn-lg btn-block btn-primary" ng-click="loginModal.doLogin('google')"> Google </button>
     </div>
 </div>

@@ -191,3 +191,12 @@ footer {
     from 	{ -moz-transform:rotate(0deg); }
     to 	{ -moz-transform:rotate(360deg); }
 }
+
+#login-alert{
+    margin-top: 23px;
+    margin-bottom: 0;
+}
+
+#login-button{
+    margin-top: 23px;
+}
