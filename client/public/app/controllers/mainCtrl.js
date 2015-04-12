@@ -1,4 +1,4 @@
-angular.module('mainCtrl', ['ui.bootstrap.modal'])
+angular.module('mainCtrl', ['ui.bootstrap'])
 
     .controller('mainController', function($rootScope, $location, Auth, $modal) {
 
@@ -28,15 +28,23 @@ angular.module('mainCtrl', ['ui.bootstrap.modal'])
 
         vm.open = function (){
             var modalInstance = $modal.open({
-                template: '../modals/login.html',
-                controller: 'ModalController',
-                controllerAs: 'modal'
+                templateUrl: 'app/views/modals/login.html',
+                backdrop: true,
+                windowClass: 'modal',
+                controller: 'LoginModalController',
+                controllerAs: 'loginModal',
+                resolve: {}
             });
         }
 
+
     })
-    .controller('ModalController', function($modalInstance, Auth, $location){
+    .controller('LoginModalController', function($modalInstance, Auth, $location){
         var vm = this;
+
+        vm.close = function () {
+            $modalInstance.dismiss('cancel');
+        };
 
         // function to handle login form
         vm.doLogin = function() {
@@ -45,13 +53,15 @@ angular.module('mainCtrl', ['ui.bootstrap.modal'])
             // clear the error
             vm.error = '';
 
-            Auth.login(vm.loginData.username, vm.loginData.password)
+            Auth.login(vm.user.username, vm.user.password)
                 .success(function(data) {
                     vm.processing = false;
 
                     // if a user successfully logs in, redirect to users page
-                    if (data.success)
+                    if (data.success) {
+                        $modalInstance.dismiss('cancel');
                         $location.path('/dashboard');
+                    }
                     else
                         vm.error = data.message;
 
