@@ -10,7 +10,7 @@ var httpServer = require('./serverHttp.js');
 var Passport = require('./passport/init');
 var tokenAuth = require('./tokenAuth');
 
-//___________________________________________s__________
+//_____________________________________________________
 var httpMethodMap;
 var rpcContext = {};
 
@@ -27,7 +27,7 @@ rpcContext['/user'] = {
 //_____________________________________________________
 var writeHeaders = function(response){
     response.header("Access-Control-Allow-Origin", "*");
-    response.header("Access-Control-Allow-Methods", "POST");
+    response.header("Access-Control-Allow-Methods", "POST, GET");
     response.header("Access-Control-Allow-Credentials", true);
     response.header("Access-Control-Max-Age", '86400');
     response.header("Access-Control-Allow-Headers", "X-Requested-With, Access-Control-Allow-Origin, X-HTTP-Method-Override, Content-Type, Authorization, Accept");
@@ -106,9 +106,8 @@ var checkAuth = function (req, res) {
 
 var initExpress = function (app) {
 
-    app.post('/login', require('./paths/login').login);
-    app.post('/signup', require('./paths/login').signup);
-    app.post('/logout', require('./paths/login').logout);
+    app.post('/auth/login', require('./paths/login').login);
+    app.post('/auth/signup', require('./paths/login').signup);
     app.get('/auth/facebook', require('./paths/login').facebookLogin);
     app.get('/auth/facebook/callback', require('./paths/login').facebookLogin);
     app.get('/auth/google', require('./paths/login').googleLogin);

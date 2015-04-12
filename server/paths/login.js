@@ -44,14 +44,6 @@ module.exports.signup = function (req, res) {
     })(req, res);
 };
 
-module.exports.logout = function (req, res) {
-    req.logout();
-    res.json({
-        success: true,
-        message: 'User logged out'
-    });
-};
-
 module.exports.facebookLogin = function (req, res) {
     env.passport.authenticate('facebook', function (err, user, info) {
         if (err) return res.json({
