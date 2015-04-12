@@ -1,6 +1,6 @@
 angular.module('mainCtrl', ['ui.bootstrap'])
 
-    .controller('mainController', function($rootScope, $location, Auth, $modal) {
+    .controller('mainController', function($rootScope, $location, Auth, $modal, $window) {
 
         var vm = this;
 
@@ -14,7 +14,7 @@ angular.module('mainCtrl', ['ui.bootstrap'])
             // get user information on page load
             Auth.getUser()
                 .then(function(data) {
-                    vm.user = data.data;
+                    vm.user = data.data.result;
                 });
         });
 
@@ -23,7 +23,7 @@ angular.module('mainCtrl', ['ui.bootstrap'])
             Auth.logout();
             vm.user = '';
 
-            $location.path('/');
+            $window.location.reload();
         };
 
         vm.open = function (){

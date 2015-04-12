@@ -43,7 +43,7 @@ angular.module('authService', [])
         // get the logged in user
         authFactory.getUser = function() {
             if (AuthToken.getToken())
-                return $http.post('http://localhost:3001/user', {
+                return $http.post('http://localhost:3000/user', {
                     "id": 1,
                     "jsonrpc": "2.0",
                     "method": "hello",
