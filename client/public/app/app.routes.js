@@ -47,6 +47,21 @@ angular.module('app.routes', ['ui.router'])
                 url: "/post",
                 templateUrl: "app/views/pages/dashboard.post.html",
                 controller: 'DashboardPostCtrl'
+            })
+            .state('dashboard.profile.user', {
+                url: "/user",
+                templateUrl: "app/views/pages/dashboard.profile.user.html",
+                controller: 'DashboardProfileCtrl'
+            })
+            .state('dashboard.profile.results', {
+                url: "/results",
+                templateUrl: "app/views/pages/dashboard.profile.results.html",
+                controller: 'DashboardProfileCtrl'
+            })
+            .state('dashboard.profile.progress', {
+                url: "/progress",
+                templateUrl: "app/views/pages/dashboard.profile.progress.html",
+                controller: 'DashboardProfileCtrl'
             });
 
         $locationProvider.html5Mode(true);

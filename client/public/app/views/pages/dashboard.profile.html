@@ -1,3 +1,9 @@
-<div id="dashboard-profile-wrapper">
-    <p>profile</p>
+<div id="dashboard-profile-wrapper" ng-app="DashboardProfile">
+    <tabset>
+        <tab heading="User" ui-sref=".user"></tab>
+        <tab heading="Results" ui-sref=".results"></tab>
+        <tab heading="Progress" ui-sref=".progress"></tab>
+    </tabset>
+    <div ui-view>
+    </div>
 </div>
