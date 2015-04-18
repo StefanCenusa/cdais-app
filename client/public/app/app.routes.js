@@ -1,21 +1,52 @@
-angular.module('app.routes', ['ngRoute'])
+angular.module('app.routes', ['ui.router'])
 
-    .config(function($routeProvider, $locationProvider) {
+    .config(function($stateProvider, $urlRouterProvider, $locationProvider){
 
-        $routeProvider
+        // For any unmatched url, send to /route1
+        $urlRouterProvider.otherwise("/");
+        $urlRouterProvider.when("/dashboard", "/dashboard/home");
 
-            // route for the home page
-            .when('/', {
-                templateUrl : 'app/views/pages/showcase.html',
-                controller  : 'mainController',
-                controllerAs: 'main'
+        $stateProvider
+            .state('showcase', {
+                url: "/",
+                templateUrl: "app/views/pages/showcase.html",
+                controller: 'ShowcaseCtrl'
             })
-
-            // login page
-            .when('/dashboard', {
-                templateUrl : 'app/views/pages/dashboard.html'
+            .state('dashboard', {
+                url: "/dashboard",
+                templateUrl: "app/views/pages/dashboard.html",
+                controller: "DashboardCtrl"
+            })
+            .state('dashboard.home', {
+                url: "/home",
+                templateUrl: "app/views/pages/dashboard.home.html",
+                controller: 'DashboardHomeCtrl'
+            })
+            .state('dashboard.profile', {
+                url: "/profile",
+                templateUrl: "app/views/pages/dashboard.profile.html",
+                controller: 'DashboardProfileCtrl'
+            })
+            .state('dashboard.events', {
+                url: "/events",
+                templateUrl: "app/views/pages/dashboard.events.html",
+                controller: 'DashboardEventsCtrl'
+            })
+            .state('dashboard.learn', {
+                url: "/learn",
+                templateUrl: "app/views/pages/dashboard.learn.html",
+                controller: 'DashboardLearnCtrl'
+            })
+            .state('dashboard.feedback', {
+                url: "/feedback",
+                templateUrl: "app/views/pages/dashboard.feedback.html",
+                controller: 'DashboardFeedbackCtrl'
+            })
+            .state('dashboard.post', {
+                url: "/post",
+                templateUrl: "app/views/pages/dashboard.post.html",
+                controller: 'DashboardPostCtrl'
             });
 
         $locationProvider.html5Mode(true);
-
     });

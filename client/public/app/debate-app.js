@@ -1,4 +1,4 @@
-angular.module('DebateApp', ['ngAnimate', 'app.routes', 'authService', 'mainCtrl'])
+angular.module('DebateApp', ['ngAnimate', 'app.routes', 'authService', 'ShowcaseApp', 'DashboardApp'])
 
 // application configuration to integrate token into requests
     .config(function($httpProvider) {

@@ -1,6 +1,6 @@
-angular.module('mainCtrl', ['ui.bootstrap'])
+angular.module('ShowcaseApp', ['ui.bootstrap'])
 
-    .controller('mainController', function ($rootScope, $location, Auth, $modal, $window) {
+    .controller('ShowcaseCtrl', function ($rootScope, $location, Auth, $modal, $window) {
 
         var vm = this;
 
