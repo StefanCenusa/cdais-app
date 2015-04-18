@@ -3,12 +3,12 @@ env.superSecret = 'MarianPresedinte';
 
 module.exports.login = function (req, res) {
     env.passport.authenticate('login', function (err, user, info) {
-        if (err) return res.json({
+        if (err) return res.status(403).json({
             success: false,
             message: err
         });
         if (!user)
-            return res.json({
+            return res.status(403).json({
                 success: false,
                 message: info
             });
@@ -18,7 +18,7 @@ module.exports.login = function (req, res) {
         }, env.superSecret, {
             expiresInMinutes: 1440 // expires in 24 hours
         });
-        return res.json({
+        return res.status(200).json({
             success: true,
             message: 'Enjoy your token!',
             token: token
@@ -28,16 +28,16 @@ module.exports.login = function (req, res) {
 
 module.exports.signup = function (req, res) {
     env.passport.authenticate('signup', function (err, user, info) {
-        if (err) return res.json({
+        if (err) return res.status(403).json({
             success: false,
             message: err
         });
         if (!user)
-            return res.json({
+            return res.status(403).json({
                 success: false,
                 message: info
             });
-        return res.json({
+        return res.status(200).json({
             success: true,
             message: 'User created'
         });
@@ -46,12 +46,12 @@ module.exports.signup = function (req, res) {
 
 module.exports.facebookLogin = function (req, res) {
     env.passport.authenticate('facebook', function (err, user, info) {
-        if (err) return res.json({
+        if (err) return res.status(403).json({
             success: false,
             message: err
         });
         if (!user)
-            return res.json({
+            return res.status(403).json({
                 success: false,
                 message: info
             });
@@ -62,7 +62,7 @@ module.exports.facebookLogin = function (req, res) {
         }, env.superSecret, {
             expiresInMinutes: 1440 // expires in 24 hours
         });
-        return res.json({
+        return res.status(200).json({
             success: true,
             message: 'Enjoy your token!',
             token: token
@@ -72,12 +72,12 @@ module.exports.facebookLogin = function (req, res) {
 
 module.exports.googleLogin = function (req, res) {
     env.passport.authenticate('google', function (err, user, info) {
-        if (err) return res.json({
+        if (err) return res.status(403).json({
             success: false,
             message: err
         });
         if (!user)
-            return res.json({
+            return res.status(403).json({
                 success: false,
                 message: info
             });
@@ -88,7 +88,7 @@ module.exports.googleLogin = function (req, res) {
         }, env.superSecret, {
             expiresInMinutes: 1440 // expires in 24 hours
         });
-        return res.json({
+        return res.status(200).json({
             success: true,
             message: 'Enjoy your token!',
             token: token

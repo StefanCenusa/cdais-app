@@ -67,7 +67,7 @@ var POST_requestHandler = function (request, response) {
         };
 
         writeHeaders(response);
-        response.end(JSON.stringify(resultObjet));
+        response.send(JSON.stringify(resultObjet));
     };
 
     handleJsonRpcCall(jsonRpcObject, rpcCallHanddler);
@@ -94,7 +94,7 @@ var checkAuth = function (req, res) {
                 "result": result
             };
             writeHeaders(res);
-            res.end(JSON.stringify(resultObjet));
+            res.status(403).send(JSON.stringify(resultObjet));
         }
         else {
             req.body.params[0] = result.username;
