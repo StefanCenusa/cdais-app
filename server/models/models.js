@@ -10,12 +10,13 @@ var userSchema = new mongoose.Schema({
     birthDate: Date,
     email: String,
     phone: String,
+    created_at: {type: Date, default: Date.now},
     socialMedia: [{
     	name: String,
     	url: String
     }],
     notifications: [{
-    	type: Number, //have to discuss on this --- 
+    	type: {type: Number, default: 0},
     	text: String,
         created_at: Date,
     	read: Boolean
@@ -23,10 +24,19 @@ var userSchema = new mongoose.Schema({
     debateHistory: [{
     	competitionID: Schema.Types.ObjectId,
     	name: String, //probabil doar de asta o sa avem nevoie in mod recurent
-    	phase: {type: Number, default: 10}, //sau String --- 0 finala, 1 sferturi, 2 patrimi, 3 optimi, 4 saisprezecimi, 10 preliminarii
-    	avgPoints: Number
+    	phase: {type: Number, default: 10, min: 0, max: 10}, //0 finala, 1 sferturi, 2 patrimi, 3 optimi, 4 saisprezecimi, 10 preliminarii
+    	points:  [Number]
     }],
-    created_at: {type: Date, default: Date.now}
+    judgeHistory: [{
+        competitionID: Schema.Types.ObjectId,
+        name: String, //probabil doar de asta o sa avem nevoie in mod recurent
+        breaking: Boolean,
+        position: String //CA , DCA
+    }],
+    learning: [{
+        lessonID: Schema.Types.ObjectId,
+        progress: Number
+    }]
 });
 
 var competitionSchema = new mongoose.Schema({
@@ -43,13 +53,21 @@ var groupSchema = new mongoose.Schema({
 	name: String
 });
 
-var lessonSchema = new mongoose.Schema({
+var lessonSchema = new mongoose.Schema([{
 	name: String,
 	content: String,
 	created_at: {type: Date, default: Date.now}
+}]);
+
+var blogPostSchema = new mongoose.Schema({
+    content: String,
+    created_at: {type: Date, default: Date.now},
+    created_byID: String,
+    created_byName: String
 });
 
 mongoose.model('User', userSchema);
 mongoose.model('Competition', competitionSchema);
 mongoose.model('Group', groupSchema);
 mongoose.model('Lesson', lessonSchema);
+mongoose.model('Lesson', blogPostSchema);
