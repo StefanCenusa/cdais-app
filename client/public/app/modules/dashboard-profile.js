@@ -1,6 +1,6 @@
 angular.module('DashboardProfile', ['ui.bootstrap'])
 
-    .controller('DashboardProfileCtrl', function ($scope, $state) {
+    .controller('DashboardProfileCtrl', function ($scope, $state, $location) {
         if ($state.current.name == "dashboard.profile")
             $state.go("dashboard.profile.user");
         switch($state.current.name){

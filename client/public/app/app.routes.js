@@ -52,18 +52,15 @@ angular.module('app.routes', ['ui.router'])
             })
             .state('dashboard.profile.user', {
                 url: "/user",
-                templateUrl: "app/views/pages/dashboard.profile.user.html",
-                controller: 'DashboardProfileCtrl'
+                templateUrl: "app/views/pages/dashboard.profile.user.html"
             })
             .state('dashboard.profile.results', {
                 url: "/results",
-                templateUrl: "app/views/pages/dashboard.profile.results.html",
-                controller: 'DashboardProfileCtrl'
+                templateUrl: "app/views/pages/dashboard.profile.results.html"
             })
             .state('dashboard.profile.progress', {
                 url: "/progress",
-                templateUrl: "app/views/pages/dashboard.profile.progress.html",
-                controller: 'DashboardProfileCtrl'
+                templateUrl: "app/views/pages/dashboard.profile.progress.html"
             });
 
         $locationProvider.html5Mode(true);

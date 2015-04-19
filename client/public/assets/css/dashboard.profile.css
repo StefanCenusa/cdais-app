@@ -1,27 +1,22 @@
-#result {
-    text-align: right;
-    color: gray;
-    min-height: 2em;
-}
-#table-sparkline {
+#dashboard-profile-wrapper #table-sparkline {
     margin: 0 auto;
     border-collapse: collapse;
 }
-th {
+#dashboard-profile-wrapper th {
     font-weight: bold;
     text-align: left;
 }
-td, th {
+#dashboard-profile-wrapper td, th {
     padding: 5px;
     border-bottom: 1px solid silver;
     height: 20px;
 }
 
-thead th {
+#dashboard-profile-wrapper thead th {
     border-top: 2px solid gray;
     border-bottom: 2px solid gray;
 }
-.highcharts-tooltip>span {
+#dashboard-profile-wrapper .highcharts-tooltip>span {
     background: white;
     border: 1px solid silver;
     border-radius: 3px;
@@ -29,6 +24,6 @@ thead th {
     padding: 8px;
 }
 
-.progress{
+#dashboard-profile-wrapper .progress{
     height: 22px;
 }
