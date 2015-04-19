@@ -1,5 +1,5 @@
-angular.module('DashboardPost', ['ui.bootstrap'])
+angular.module('DashboardPost', ['ui.bootstrap', 'textAngular'])
 
-    .controller('DashboardPostCtrl', function () {
+    .controller('DashboardPostCtrl', function ($scope) {
 
     });
