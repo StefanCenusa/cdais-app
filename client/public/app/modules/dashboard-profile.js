@@ -2,7 +2,19 @@ angular.module('DashboardProfile', ['ui.bootstrap'])
 
     .controller('DashboardProfileCtrl', function ($scope, $state) {
         if ($state.current.name == "dashboard.profile")
-            $state.go("dashboard.profile.user")
+            $state.go("dashboard.profile.user");
+        switch($state.current.name){
+            case "dashboard.profile.user":
+                $scope.profile = {user: true, results: false, progress: false};
+                break;
+            case "dashboard.profile.results":
+                $scope.profile = {user: false, results: true, progress: false};
+                break;
+            case "dashboard.profile.progress":
+                $scope.profile = {user: false, results: false, progress: true};
+                break;
+
+        }
     })
 
     .controller('ChartCtrl', function ($scope, $rootScope, $http) {
@@ -10,7 +22,7 @@ angular.module('DashboardProfile', ['ui.bootstrap'])
         var chartOptions = {
             chart: {
                 renderTo: 'container',
-                margin: 30,
+                marginBottom: 70,
                 zoomType: 'x'
             },
             legend: {
@@ -23,27 +35,13 @@ angular.module('DashboardProfile', ['ui.bootstrap'])
                 enabled: false
             },
             rangeSelector: {
-                selected: 4,
-                buttons: [{
-                    type: 'minute',
-                    count: 30,
-                    text: '30m'
-                }, {
-                    type: 'minute',
-                    count: 60,
-                    text: '1H'
-                }, {
-                    type: 'minute',
-                    count: 180,
-                    text: '3H'
-                }, {
-                    type: 'day',
-                    count: 1,
-                    text: '1D'
-                }, {
-                    type: 'all',
-                    text: 'All'
-                }]
+                enabled: false
+            },
+            scrollbar: {
+                enabled: false
+            },
+            exporting: {
+                enabled: false
             },
             yAxis: {
                 plotLines: [{
@@ -113,10 +111,10 @@ angular.module('DashboardProfile', ['ui.bootstrap'])
             var dataResponse = {
                 result: [{
                     name: 'Saint George',
-                    data: [[1172707200000, 68.0], [1204502400000, 69.00], [1235952000000, 72.00], [1267401600000, 68.00], [1298937600000, 70.00], [1330560000000, 71.5], [1362096000000, 73.00]]
+                    data: [[1172707200000, 68.0], [1204502400000, 69.00], [1235952000000, 72.00], [1267401600000, 68.00]]
                 }, {
                     name: 'Racovita Open',
-                    data: [[1175707200000, 68.0], [1207502400000, 70.00], [1238552000000, 67.00], [1270801600000, 68.00], [1301937600000, 70.00], [1333560000000, 70.5], [1364096000000, 71.00]]
+                    data: [[1175707200000, 68.0], [1207502400000, 70.00], [1238552000000, 67.00], [1270801600000, 68.00], [1301937600000, 70.00]]
                 }, {
                     name: 'PTA',
                     data: [[1167707200000, 70.0]]
@@ -132,4 +130,151 @@ angular.module('DashboardProfile', ['ui.bootstrap'])
 
         $scope.initChart();
         $rootScope.requestAndBuildChart();
+    })
+
+    .controller('SparklineCtrl', function ($scope, $rootScope, $http) {
+        $scope.initSparkChart = function () {
+            Highcharts.SparkLine = function (options, callback) {
+                var defaultOptions = {
+                    chart: {
+                        renderTo: 'userResults',
+                        backgroundColor: null,
+                        borderWidth: 0,
+                        margin: [2, 0, 2, 0],
+                        width: 200,
+                        height: 60,
+                        style: {
+                            overflow: 'visible'
+                        },
+                        skipClone: true
+                    },
+                    title: {
+                        text: ''
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    xAxis: {
+                        labels: {
+                            enabled: false
+                        },
+                        title: {
+                            text: null
+                        },
+                        startOnTick: false,
+                        endOnTick: false,
+                        tickPositions: []
+                    },
+                    yAxis: {
+                        endOnTick: false,
+                        startOnTick: false,
+                        labels: {
+                            enabled: false
+                        },
+                        title: {
+                            text: null
+                        },
+                        tickPositions: [0],
+                        min: 65
+                    },
+                    legend: {
+                        enabled: false
+                    },
+                    tooltip: {
+                        backgroundColor: null,
+                        borderWidth: 0,
+                        shadow: false,
+                        useHTML: true,
+                        hideDelay: 0,
+                        shared: true,
+                        padding: 0,
+                        positioner: function (w, h, point) {
+                            return {x: point.plotX - w / 2, y: point.plotY - h};
+                        }
+                    },
+                    plotOptions: {
+                        series: {
+                            animation: false,
+                            lineWidth: 1,
+                            shadow: false,
+                            states: {
+                                hover: {
+                                    lineWidth: 1
+                                }
+                            },
+                            marker: {
+                                radius: 1,
+                                states: {
+                                    hover: {
+                                        radius: 2
+                                    }
+                                }
+                            },
+                            fillOpacity: 0.25
+                        },
+                        column: {
+                            negativeColor: '#910000',
+                            borderColor: 'silver'
+                        }
+                    }
+                };
+                options = Highcharts.merge(defaultOptions, options);
+
+                return new Highcharts.Chart(options, callback);
+            };
+
+            var start = +new Date(),
+                $tds = $("td[data-sparkline]"),
+                fullLen = $tds.length,
+                n = 0;
+
+            function doChunk() {
+                var time = +new Date(),
+                    i,
+                    len = $tds.length,
+                    $td,
+                    stringdata,
+                    arr,
+                    data,
+                    chart;
+
+                for (i = 0; i < len; i += 1) {
+                    $td = $($tds[i]);
+                    stringdata = $td.data('sparkline');
+                    arr = stringdata.split('; ');
+                    data = $.map(arr[0].split(', '), parseFloat);
+                    chart = {};
+
+                    if (arr[1]) {
+                        chart.type = arr[1];
+                    }
+                    $td.highcharts('SparkLine', {
+                        series: [{
+                            data: data,
+                            pointStart: 1
+                        }],
+                        tooltip: {
+                            headerFormat: '<span style="font-size: 10px">' + $td.parent().find('th').html() + ', R{point.x}:</span><br/>',
+                            pointFormat: '<b>{point.y}</b> PTS'
+                        },
+                        exporting: {
+                            enabled: false
+                        },
+                        chart: chart
+                    });
+
+                    n += 1;
+
+                    if (new Date() - time > 500) {
+                        $tds.splice(0, i + 1);
+                        setTimeout(doChunk, 0);
+                        break;
+                    }
+
+                }
+            }
+
+            doChunk();
+        };
+        $scope.initSparkChart();
     });

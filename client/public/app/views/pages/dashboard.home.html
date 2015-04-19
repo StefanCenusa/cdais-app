@@ -1,3 +1,27 @@
 <div id="dashboard-home-wrapper">
-    <p>home</p>
+    <div class="row">
+        <div class="col-sm-8 col-md-8">
+            <h1>Welcome, {{dashboardHomeCtrl.data.username}}!</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8 col-md-8" ng-controller="PostsController as postsCtrl">
+           <div class="well" ng-repeat="post in postsCtrl.filteredPosts">
+               <div class="media">
+                   <a class="pull-left" href="#">
+                       <img class="media-object" ng-src="{{post.photo}}">
+                   </a>
+                   <div class="media-body">
+                       <h4 class="media-heading">{{post.title}}</h4>
+                       <p class="text-right">by {{post.author}}</p>
+                       <p>{{post.content}}</p>
+                       <a ng-href="{{post.link}}">Read more...</a>
+                   </div>
+               </div>
+           </div>
+            <pagination ng-change="postsCtrl.pageChanged()" total-items="postsCtrl.posts.length" items-per-page="postsCtrl.itemsOnPage" max-size="4" ng-model="postsCtrl.currentPage" class="pagination-sm" boundary-links="true" rotate="true"></pagination>
+        </div>
+    </div>
+
+
 </div>

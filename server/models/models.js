@@ -1,10 +1,10 @@
 var mongoose = require('mongoose');
-var mongoose-thumbnail = require('mongoose-thumbnail');
+var mongoose_thumbnail = require('mongoose-thumbnail');
 
 var userSchema = new mongoose.Schema({
     username: String,
     password: String,
-    elevation: {type: Number, min: 0, max: 2, default: 2} //0 admin, 1 trainer, 2 debater
+    elevation: {type: Number, min: 0, max: 2, default: 2}, //0 admin, 1 trainer, 2 debater
     firstName: String,
     lastName: String,
     birthDate: Date,
@@ -22,9 +22,9 @@ var userSchema = new mongoose.Schema({
     }],
     debateHistory: [{
     	competitionID: Schema.Types.ObjectId,
-    	name: String //probabil doar de asta o sa avem nevoie in mod recurent
-    	phase: {type: Number, default: 10} //sau String --- 0 finala, 1 sferturi, 2 patrimi, 3 optimi, 4 saisprezecimi, 10 preliminarii
-    	avgPoints: Number,
+    	name: String, //probabil doar de asta o sa avem nevoie in mod recurent
+    	phase: {type: Number, default: 10}, //sau String --- 0 finala, 1 sferturi, 2 patrimi, 3 optimi, 4 saisprezecimi, 10 preliminarii
+    	avgPoints: Number
     }],
     created_at: {type: Date, default: Date.now}
 });
@@ -40,7 +40,7 @@ var competitionSchema = new mongoose.Schema({
 });
 
 var groupSchema = new mongoose.Schema({
-	name: String,
+	name: String
 });
 
 var lessonSchema = new mongoose.Schema({

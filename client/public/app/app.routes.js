@@ -16,12 +16,14 @@ angular.module('app.routes', ['ui.router'])
             .state('dashboard', {
                 url: "/dashboard",
                 templateUrl: "app/views/pages/dashboard.html",
-                controller: "DashboardCtrl"
+                controller: "DashboardCtrl",
+                controllerAs: "dashboardCtrl"
             })
             .state('dashboard.home', {
                 url: "/home",
                 templateUrl: "app/views/pages/dashboard.home.html",
-                controller: 'DashboardHomeCtrl'
+                controller: 'DashboardHomeCtrl',
+                controllerAs: 'dashboardHomeCtrl'
             })
             .state('dashboard.profile', {
                 url: "/profile",
