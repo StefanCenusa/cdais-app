@@ -1,3 +1,189 @@
 <div id="dashboard-profile-results-wrapper">
-    <p>User results</p>
+    <div class="row">
+        <div id="userInfo" class="col-sm-8 col-md-10 main">
+            <h3>Ana Bruma's results</h3>
+
+            <p>From 2007 - today</p>
+        </div>
+        <div class="row">
+            <div id="userResults" class="col-sm-8 col-md-10 main">
+                <table id="table-sparkline" class="col-sm-8 col-md-10 main" ng-controller="SparklineCtrl">
+                    <thead>
+                    <tr>
+                        <th>Nr</th>
+                        <th>Event</th>
+                        <th>Date</th>
+                        <th>Loc</th>
+                        <th>Avg SP</th>
+                        <th>SP in rounds</th>
+                        <th>Avg TP</th>
+                        <th>TP in rounds</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tbody-sparkline">
+                    <tr>
+                        <td>16</td>
+                        <th>PTA</th>
+                        <td>02.01.2007</td>
+                        <td>Ploiesti</td>
+                        <td>70</td>
+                        <td data-sparkline="67, 72, 69, 73 "/>
+                        <td>69</td>
+                        <td data-sparkline="69, 68, 67, 72 ; column"/>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <th>Saint George</th>
+                        <td>02.03.2007</td>
+                        <td>Sfantu Gheorghe</td>
+                        <td>69.5</td>
+                        <td data-sparkline="68, 71, 69, 67 "/>
+                        <td>70</td>
+                        <td data-sparkline="69, 67, 71, 70 ; column"/>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <th>Saint George</th>
+                        <td>02.03.2008</td>
+                        <td>Sfantu Gheorghe</td>
+                        <td>69.5</td>
+                        <td data-sparkline="68, 71, 69, 67 "/>
+                        <td>70</td>
+                        <td data-sparkline="69, 67, 71, 70 ; column"/>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <th>Saint George</th>
+                        <td>02.03.2009</td>
+                        <td>Sfantu Gheorghe</td>
+                        <td>69.5</td>
+                        <td data-sparkline="68, 71, 69, 67 "/>
+                        <td>70</td>
+                        <td data-sparkline="69, 67, 71, 70 ; column"/>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <th>Saint George</th>
+                        <td>02.03.2010</td>
+                        <td>Sfantu Gheorghe</td>
+                        <td>69.5</td>
+                        <td data-sparkline="68, 71, 69, 67 "/>
+                        <td>70</td>
+                        <td data-sparkline="69, 67, 71, 70 ; column"/>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <th>Racovita Open</th>
+                        <td>02.04.2007</td>
+                        <td>Cluj</td>
+                        <td>69</td>
+                        <td data-sparkline="65, 70, 71, 69, 69"/>
+                        <td>68.5</td>
+                        <td data-sparkline="69, 67, 70, 71, 69 ; column"/>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <th>Racovita Open</th>
+                        <td>02.04.2008</td>
+                        <td>Cluj</td>
+                        <td>69</td>
+                        <td data-sparkline="65, 70, 71, 69, 69"/>
+                        <td>68.5</td>
+                        <td data-sparkline="69, 67, 70, 71, 69 ; column"/>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <th>Racovita Open</th>
+                        <td>02.04.2009</td>
+                        <td>Cluj</td>
+                        <td>69</td>
+                        <td data-sparkline="65, 70, 71, 69, 69"/>
+                        <td>68.5</td>
+                        <td data-sparkline="69, 67, 70, 71, 69 ; column"/>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <th>Racovita Open</th>
+                        <td>02.04.2010</td>
+                        <td>Cluj</td>
+                        <td>69</td>
+                        <td data-sparkline="65, 70, 71, 69, 69"/>
+                        <td>68.5</td>
+                        <td data-sparkline="69, 67, 70, 71, 69 ; column"/>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <th>Racovita Open</th>
+                        <td>02.04.2011</td>
+                        <td>Cluj</td>
+                        <td>69</td>
+                        <td data-sparkline="65, 70, 71, 69, 69"/>
+                        <td>68.5</td>
+                        <td data-sparkline="69, 67, 70, 71, 69 ; column"/>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <th>Central Open</th>
+                        <td>17.12.2007</td>
+                        <td>Bucuresti</td>
+                        <td>70</td>
+                        <td data-sparkline="69, 69, 71, 71 "/>
+                        <td>70.5</td>
+                        <td data-sparkline="69, 72, 72, 69 ; column"/>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <th>Central Open</th>
+                        <td>17.12.2008</td>
+                        <td>Bucuresti</td>
+                        <td>70</td>
+                        <td data-sparkline="69, 69, 71, 71 "/>
+                        <td>70.5</td>
+                        <td data-sparkline="69, 72, 72, 69 ; column"/>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <th>Central Open</th>
+                        <td>17.12.2009</td>
+                        <td>Bucuresti</td>
+                        <td>70</td>
+                        <td data-sparkline="69, 69, 71, 71 "/>
+                        <td>70.5</td>
+                        <td data-sparkline="69, 72, 72, 69 ; column"/>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <th>Central Open</th>
+                        <td>17.12.2010</td>
+                        <td>Bucuresti</td>
+                        <td>70</td>
+                        <td data-sparkline="69, 69, 71, 71 "/>
+                        <td>70.5</td>
+                        <td data-sparkline="69, 72, 72, 69 ; column"/>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <th>Central Open</th>
+                        <td>17.12.2011</td>
+                        <td>Bucuresti</td>
+                        <td>70</td>
+                        <td data-sparkline="69, 69, 71, 71 "/>
+                        <td>70.5</td>
+                        <td data-sparkline="69, 72, 72, 69 ; column"/>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <th>Central Open</th>
+                        <td>17.12.2012</td>
+                        <td>Bucuresti</td>
+                        <td>70</td>
+                        <td data-sparkline="69, 69, 71, 71 "/>
+                        <td>70.5</td>
+                        <td data-sparkline="69, 72, 72, 69 ; column"/>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
