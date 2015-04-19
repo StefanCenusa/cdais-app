@@ -1,0 +1,84 @@
+/*
+ * Base structure
+ */
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+    padding-top: 64px;
+}
+
+/*NAVBAR*/
+
+.navbar-fixed-top {
+    border: 0;
+    height: 64px;
+}
+
+#navbar{
+    max-height: 64px;
+}
+
+
+
+/*NAVBAR BADGES*/
+
+
+.badge-navbar{
+    font-size: 19px;
+}
+
+/*NAVBAR ICONS*/
+
+#icons-wrapper a.dropdown-toggle:hover,
+#icons-wrapper a.dropdown-toggle:visited,
+#icons-wrapper a.dropdown-toggle:focus,
+#icons-wrapper a.dropdown-toggle:active { background: #fff; border-style: solid; border-width: 0 0 2px 0;}
+#icons-wrapper a.dropdown-toggle:hover { border-color: #2196f3; border-style: solid; border-width: 0 0 2px 0;}
+
+.icon-navbar {
+    font-size: 15px;
+}
+
+.notifications-counter{
+    color: red;
+    /*position: relative;*/
+    /*top: -10px;*/
+    /*left: -15px;*/
+    font-size: 15px;
+}
+
+
+/*SIDEBAR*/
+
+.sidebar {
+    display: none;
+}
+@media (min-width: 768px) {
+    .sidebar {
+        position: fixed;
+        top: 51px;
+        bottom: 0;
+        left: 0;
+        z-index: 1000;
+        display: block;
+        padding: 20px;
+        overflow-x: hidden;
+        overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+        background-color: #f5f5f5;
+        border-right: 1px solid #eee;
+    }
+}
+
+/*
+ * Main content
+ */
+
+.main {
+    padding: 20px;
+}
+@media (min-width: 768px) {
+    .main {
+        padding-right: 40px;
+        padding-left: 40px;
+    }
+}

@@ -1,45 +1,49 @@
-
-<link rel="stylesheet" href="../../../assets/css/style.css">
+<link rel="stylesheet" href="../../../assets/css/dashboard_style.css">
 
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
                     aria-controls="navbar" class="navbar-toggle collapsed"><i class="fa fa-bars"></i></button>
-            <a href="/" class="navbar-brand">CDAIS</a></div>
+            <a href="/" class="navbar-brand">CDAIS</a>
+        </div>
+
         <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-left">
-                <li><a href="/dashboard">Dashboard</a></li>
+            <ul class="nav navbar-nav" id="badges-wrapper">
+                <li><a href="#"><i class="fa fa-university badge-navbar"></i></a></li>
+                <li><a href="#"><i class="fa fa-graduation-cap badge-navbar"></i></a></li>
+                <li><a href="#"><i class="fa fa-globe badge-navbar"></i></a></li>
             </ul>
-            <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown"><a data-toggle="dropdown" href="#" class="dropdown-toggle"><i
-                        class="fa fa-bell fa-fw"></i><i class="fa fa-caret-down"></i><span
-                        class="badge badge-default">1</span></a>
-                    <ul class="dropdown-menu dropdown-alerts">
-                        <li><a href="#" class="text-center"><strong>See All Alerts</strong></a></li>
+            <ul class="nav navbar-nav navbar-right" id="icons-wrapper">
+                <li class="dropdown" id="feedback-dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <i class="fa fa-comments icon-navbar"></i> <span class="caret"></span>
+                        <span class="fa-stack notifications-counter">
+                            <i class="fa fa-circle fa-stack-1x"></i>
+                            <strong class="fa-stack-1x fa-inverse">5</strong>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
                     </ul>
                 </li>
-                <li class="dropdown"><a data-toggle="dropdown" href="#" class="dropdown-toggle"><i
-                        class="fa fa-envelope fa-fw"></i><i class="fa fa-caret-down"></i><span
-                        class="badge badge-default">1</span></a>
-                    <ul class="dropdown-menu dropdown-messages">
-                        <li><a href="#" class="text-center"><strong>Read All Messages</strong></a></li>
+
+                <li class="dropdown" id="notifications-dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <i class="fa fa-envelope icon-navbar"></i> <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
                     </ul>
                 </li>
-                <li class="dropdown"><a data-toggle="dropdown" href="#" class="dropdown-toggle"><i
-                        class="fa fa-tasks fa-fw"></i><i class="fa fa-caret-down"></i><span class="badge badge-default">1</span></a>
-                    <ul class="dropdown-menu dropdown-tasks">
-                        <li><a href="#" class="text-center"><strong>See All Tasks</strong></a></li>
-                    </ul>
-                </li>
-                <li class="dropdown"><a data-toggle="dropdown" href="#" class="dropdown-toggle"><i
-                        class="fa fa-user fa-fw"></i><i class="fa fa-caret-down"></i></a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i>Profile</a></li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i>Settings</a></li>
+
+                <li class="dropdown" id="profile-dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <i class="fa fa-user icon-navbar"></i> <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a ui-sref=".profile">My Profile</a></li>
+                        <li><a ui-sref=".profile">Settings</a></li>
                         <li class="divider"></li>
-                        <li><a id="sign-out" href="#"><i class="fa fa-sign-in fa-fw"></i>Sign Out</a></li>
-                        <li><a id="login" href="#"><i class="fa fa-sign-in fa-fw"></i>Login</a></li>
+                        <li><a href="#" ng-click="dashboardCtrl.doLogout()">Sign out</a></li>
                     </ul>
                 </li>
             </ul>
