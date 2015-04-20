@@ -195,26 +195,22 @@ angular.module('DashboardProfile', ['ui.bootstrap'])
                     plotOptions: {
                         series: {
                             animation: false,
-                            lineWidth: 1,
+                            lineWidth: 2,
                             shadow: false,
                             states: {
                                 hover: {
-                                    lineWidth: 1
+                                    lineWidth: 3
                                 }
                             },
                             marker: {
-                                radius: 1,
+                                radius: 3,
                                 states: {
                                     hover: {
-                                        radius: 2
+                                        radius: 4
                                     }
                                 }
                             },
                             fillOpacity: 0.25
-                        },
-                        column: {
-                            negativeColor: '#910000',
-                            borderColor: 'silver'
                         }
                     }
                 };
