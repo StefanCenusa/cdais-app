@@ -1,8 +1,4 @@
 #about_thumb{
-<<<<<<< HEAD
-=======
-    margin: 20px 0;
->>>>>>> 816be1647025663ec6ca31cfc54d41442f318c4a
     padding: 0;
 }
 
@@ -11,19 +7,14 @@
 }
 
 #about_thumb img{
-<<<<<<< HEAD
     margin-top: 10px;
     height: 80px;
-=======
-    height: 100px;
->>>>>>> 816be1647025663ec6ca31cfc54d41442f318c4a
 }
 
 #about_thumb p{
     font-size: 0.6em;
 }
 
-<<<<<<< HEAD
 #about_thumb h3{
     font-size: 1.2em;
     margin: 10px 0 60px 0;
@@ -60,13 +51,6 @@
 }
 
 
-=======
-#about_thumb .thumbnail{
-    background-color: #fff;
-    width: 66.6666667%;
-}
-
->>>>>>> 816be1647025663ec6ca31cfc54d41442f318c4a
 @media (max-width: 768px){
     #bmf{
         display: none;
@@ -86,7 +70,4 @@
     }
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 816be1647025663ec6ca31cfc54d41442f318c4a

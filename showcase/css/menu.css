@@ -1,8 +1,5 @@
 /* earlier collapse */
-<<<<<<< HEAD
 
-=======
->>>>>>> 816be1647025663ec6ca31cfc54d41442f318c4a
 #menu{
     margin: 0 auto;
     padding: 15px 0 0 0;
@@ -58,11 +55,7 @@
 }
 .navbar .nav.li>a{
     text-align: center;
-<<<<<<< HEAD
     font-size: x-large;
-=======
-    font-size: large;
->>>>>>> 816be1647025663ec6ca31cfc54d41442f318c4a
     padding: 0 15px;
     background-color: #ffffff;
 }
@@ -114,11 +107,7 @@ ul.nav-tabs.navbar-nav>li>a{
     text-align: center;
     vertical-align: middle;
     line-height: 100%;
-<<<<<<< HEAD
     font-size: x-large;
-=======
-    font-size: large;
->>>>>>> 816be1647025663ec6ca31cfc54d41442f318c4a
 }
 
 .navbar-default .navbar-nav>li>a:hover,
@@ -198,22 +187,15 @@ ul.nav-tabs.navbar-nav>li>a{
     /* Custom */
     .navbar .nav>li>a{
         text-align: center;
-<<<<<<< HEAD
         font-size: x-large;
-=======
-        font-size: large;
->>>>>>> 816be1647025663ec6ca31cfc54d41442f318c4a
     }
 }
 
 @media(max-width: 768px) {
-<<<<<<< HEAD
     #menu{
         height: 50px;
     }
 
-=======
->>>>>>> 816be1647025663ec6ca31cfc54d41442f318c4a
     #menu nav > div > button {
         width: 33.33333%;
     }
