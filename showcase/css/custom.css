@@ -1,0 +1,130 @@
+    /* GENERAL */
+<<<<<<< HEAD
+
+=======
+>>>>>>> 816be1647025663ec6ca31cfc54d41442f318c4a
+    body{
+        text-align: center;
+        font-size: 2em;
+        background-color: #fff;
+<<<<<<< HEAD
+        width: 100%;
+        margin: auto;
+=======
+>>>>>>> 816be1647025663ec6ca31cfc54d41442f318c4a
+    }
+    p {
+        margin: 0 auto;
+    }
+
+/* HEADER */
+    header{
+        background-color: #fff;
+        margin: 0;
+        max-height: 70px;
+        border-bottom: 1px solid rgba(3, 3, 3, 0.08);
+<<<<<<< HEAD
+        position: fixed;
+        width: 100%;
+        z-index: 100;
+    }
+
+    @media (min-width: 768px){
+        header{
+            max-height: 140px;
+        }
+    }
+
+    /* LOGO IS IN logo.css*/
+
+    /* MENU IS IN menu.css */
+
+    /* LOGIN-SEARCH */
+
+    /* SEARCH IS IN search.css: #4875B4 */
+
+    /* LOGIN IS IN login.css */
+
+/* MAIN */
+
+    /* CONTENT IS IN content_home.css */
+=======
+    }
+
+    @media (min-width: 768px){
+        header{
+            margin-top: 5px;
+        }
+    }
+
+    /* LOGO IS IN logo.css*/
+
+    /* MENU IS IN menu.css */
+
+    /* LOGIN-SEARCH */
+    #login-search{
+        padding: 0;
+    }
+
+    /* SEARCH IS IN search.css: #4875B4 */
+
+    /* LOGIN IS IN login.css */
+
+ol.breadcrumbs{
+    margin: 0 auto;
+}
+
+/* MAIN */
+
+    /* CONTENT IS IN content_home.css */
+
+    /* CALENDAR */
+    #calendar{
+        background-color: #999;
+        margin: 40px auto;
+        padding-bottom: 15px; /*no button collision*/
+    }
+    /* SOCIAL MEDIA */
+    #social{
+        background-color: #DDD;
+        margin: 40px auto;
+        padding-bottom: 15px; /*no button collision*/
+    }
+    #social [class*=col-xs]{
+            padding-bottom: 30px;
+        }
+>>>>>>> 816be1647025663ec6ca31cfc54d41442f318c4a
+
+/* BMF IS IN bmf.css*/
+
+/* FOOTER */
+    footer{
+        border-top: 1px solid #000;
+        border-bottom: 1px solid #000;
+        padding: 10px;
+<<<<<<< HEAD
+        background-color: #dadada;
+        color: #fff;
+        border-color: #dadada;
+        font-size: small;
+        margin-top: 20px;
+    }
+
+    footer a{
+        color: #fff;
+    }
+
+    @media (max-width: 768px){
+        footer{
+            font-size: xx-small;
+        }
+=======
+        background-color: #777;
+        color: #fff;
+        font-size: small;
+    }
+
+    footer a{
+        color: #fff;
+>>>>>>> 816be1647025663ec6ca31cfc54d41442f318c4a
+    }

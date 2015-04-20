@@ -32,8 +32,12 @@ showcase/.idea
 showcase/css/bootstrap.css
 showcase/css/bootstrap-theme.css.map
 showcase/css/bootstrap-theme.css
+<<<<<<< HEAD
 showcase/css/bootstrap.css.map
 showcase/bootstrap-3.3.2
 showcase/Notes.txt
 showcase/css/font-awesome.css
 showcase/js/bootstrap.js
+=======
+showcase/css/bootstrap.css.map
+>>>>>>> 816be1647025663ec6ca31cfc54d41442f318c4a

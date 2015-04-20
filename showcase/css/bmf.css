@@ -1,0 +1,30 @@
+#bmf{
+
+}
+
+/*BUTTON*/
+#bmf-button{
+    float: left;
+    position: relative;
+    left: 50%;
+}
+#bmf-button > button{
+    float: left;
+    position: relative;
+    left: -50%;
+    font-size: 1em;
+    font-weight: bold;
+<<<<<<< HEAD
+    margin-top: -120px;
+=======
+    margin-top: -100px;
+>>>>>>> 816be1647025663ec6ca31cfc54d41442f318c4a
+    border-color: inherit;
+    height: 54px;
+    width: 160px;
+;
+}
+/* FORM */
+#bmf-form{
+
+}
