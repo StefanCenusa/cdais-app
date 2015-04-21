@@ -1,7 +1,14 @@
 <div id="dashboard-post-wrapper">
     <div text-angular="text-angular" name="htmlcontent" ng-model="htmlcontent" ta-disabled='disabled'></div>
-    <h1>Codul html</h1>
-    <textarea ng-model="htmlcontent" style="width: 100%"></textarea>
-    <h1>Codul html randat</h1>
-    <div ta-bind="text" ng-model="htmlcontent" ta-readonly='disabled'></div>
+    <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="previewBlogpost()" ng-show="htmlcontent">
+        <span class="glyphicon glyphicon-check" aria-hidden="true"></span> Preview
+    </button>
+    <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="uploadBlogpost()" ng-show="htmlcontent">
+        <span class="glyphicon glyphicon-saved" aria-hidden="true"></span> Finished
+    </button>
+    <div class="row">
+        <div class="col-sm-8 col-md-10 main">
+            <div ng-bind-html="htmlcontent" ng-show="preview"></div>
+        </div>
+    </div>
 </div>
