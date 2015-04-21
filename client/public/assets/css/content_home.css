@@ -1,0 +1,51 @@
+
+
+#carousel-example-generic{
+    padding: 0;
+    margin: 0;
+    max-height: 500px;
+}
+
+#carousel-example-generic > div
+{
+    width: inherit;
+    margin: auto 0;
+    max-height: inherit;
+}
+
+#about_thumb{
+    margin: 20px 0 0 0;
+}
+
+#about_thumb > div{
+    padding: 0;
+}
+
+#about_thumb img{
+    margin-top: 10px;
+    height: 80px;
+}
+
+#about_thumb p{
+    max-height: 100%;
+}
+
+@media (min-width: 1090px) {
+    #about_thumb .thumbnail{
+        text-align: center;
+        width: 80%;
+        background-color: #fff;
+        padding: 0;
+        height: 300px;
+    }
+    
+}
+
+
+#abou1{
+    float: left;
+}
+
+#about4{
+    float: right;
+}

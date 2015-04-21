@@ -15,12 +15,12 @@
                 {{ loginModal.error }}
             </div>
 
-            <button type="submit" class="btn btn-lg btn-block btn-primary" ng-click="loginModal.doLogin('regular')" id="login-button">
+            <button type="submit" class="btn btn-lg btn-block btn-primary" ng-click="loginModal.doLogin('regular')" id="login-submit-button">
                 <span ng-if="!loginModal.processing">Login</span>
                 <span ng-if="loginModal.processing" class="spinner"><i class="fa fa-circle-o-notch"></i></span>
             </button>
         </form>
 
-        <button class="btn btn-lg btn-block btn-primary" ng-click="loginModal.doLogin('google')"> Google </button>
+        <!--<button class="btn btn-lg btn-block btn-primary" ng-click="loginModal.doLogin('google')"> Google </button>-->
     </div>
 </div>

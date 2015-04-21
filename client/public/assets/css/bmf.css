@@ -1,0 +1,28 @@
+
+@media (max-width: 768px) {
+    #bmf-button {
+        display: none;
+    }
+}
+/*BUTTON*/
+#bmf-button{
+    float: left;
+    position: relative;
+    left: 50%;
+}
+#bmf-button > button{
+    float: left;
+    position: relative;
+    left: -50%;
+    font-size: 1em;
+    font-weight: bold;
+    margin-top: -120px;
+    border-color: inherit;
+    height: 40px;
+    width: 160px;
+;
+}
+/* FORM */
+#bmf-form{
+
+}
