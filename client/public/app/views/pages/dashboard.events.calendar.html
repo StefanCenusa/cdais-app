@@ -1,3 +1,22 @@
-<div id="dashboard-events-calendar-wrapper">
-    <p>Calendar</p>
+<div id="dashboard-events-calendar-wrapper" ng-controller="DashboardEventsCalendarCtrl">
+    <div class="btn-toolbar hidden">
+        <div class="btn-group">
+            <button class="btn btn-success" ng-click="changeView('agendaDay', myCalendar)">Day</button>
+            <button class="btn btn-success" ng-click="changeView('agendaWeek', myCalendar)">Week</button>
+            <button class="btn btn-success" ng-click="changeView('agendaMonth', myCalendar)">Month</button>
+        </div>
+    </div>
+    <div class="calendar" ng-model="eventSources" calendar="myCalendar" config="uiConfig.calendar" ui-calendar="uiConfig.calendar">
+        <ul class="unstyled">
+            <li ng-repeat="e in events | filter:currentDate">
+                <div class="alert alert-info">
+                    <a class="close" ng-click="remove($index)"><i class="icon-remove"></i></a>
+                    <b> {{e.title}}</b> - {{e.start | date:"MMM dd"}}
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''" style="background-color:#8fdf82 ;">
+        <h4 style="color:#333;">{{alertMessage}}</h4>
+    </div>
 </div>
