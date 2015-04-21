@@ -1,3 +1,8 @@
 <div id="dashboard-feedback-wrapper">
-    <p>feedback</p>
+    <tabset>
+        <tab heading="Trainer" ui-sref=".trainer" active="feedback.trainer"></tab>
+        <tab heading="Debater" ui-sref=".debater" active="feedback.debater"></tab>
+    </tabset>
+    <div ui-view>
+    </div>
 </div>

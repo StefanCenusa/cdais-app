@@ -1,3 +1,8 @@
 <div id="dashboard-events-wrapper">
-    <p>events</p>
+    <tabset>
+        <tab heading="Calendar" ui-sref=".calendar" active="events.calendar"></tab>
+        <tab heading="My Events" ui-sref=".my-events" active="events.my_events"></tab>
+    </tabset>
+    <div ui-view>
+    </div>
 </div>
