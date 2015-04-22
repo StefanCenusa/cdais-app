@@ -1,0 +1,42 @@
+{
+  "events" : [
+      {
+        "title": "All Day Event",
+        "location": "Iasi",
+        "start": "new Date(y, m, 1)'"
+      },
+      {
+        "title": "Long Event",
+        "location": "Vaslui",
+        "start": "new Date(y, m, d - 5)",
+        "end": "new Date(y, m, d - 2)"
+      },
+      {
+        "id": 999,
+        "title": "Repeating Event",
+        "location": "Bacau",
+        "start": "new Date(y, m, d - 3, 16, 0)",
+        "allDay": false
+      },
+      {
+        "id": 999,
+        "title": "Repeating Event",
+        "location": "Botosani",
+        "start": "new Date(y, m, d + 4, 16, 0)",
+        "allDay": false
+      },
+      {
+        "title": "Party",
+        "location": "Iasi",
+        "start": "new Date(y, m, d + 1, 19, 0)",
+        "end": "new Date(y, m, d + 1, 22, 30)",
+        "allDay": false
+      },
+      {
+        "title": "Birthday",
+        "location": "Nicolina",
+        "start": "new Date(y, m, 28)",
+        "end": "new Date(y, m, 29)"
+      }
+  ]
+}

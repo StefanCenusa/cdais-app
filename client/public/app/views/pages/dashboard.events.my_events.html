@@ -1,3 +1,66 @@
-<div id="dashboard-events-my_events-wrapper">
-    <p>My Events</p>
+<div id="dashboard-events-my_events-wrapper" ng-controller="DashboardEventsCalendarCtrl">
+    <h3>Next Event</h3>
+    <table class="table">
+        <!--<caption>Optional table caption.</caption>-->
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Event</th>
+            <th>Location</th>
+            <th>Remained</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in events" ng-if="item.start.getDate() - today.getDate() == 1" ng-init="x = 0">
+            <th scope="row">1</th>
+            <td>{{item.title}}</td>
+            <td>{{item.location}}</td>
+            <td>{{item.start.getDate() - today.getDate()}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h3>Future Events</h3>
+    <table class="table">
+        <!--<caption>Optional table caption.</caption>-->
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Event</th>
+            <th>Locatiom</th>
+            <th>Days Until</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <tr ng-repeat="item in events" ng-if="item.start.getDate() - today.getDate() >= 0">
+            <th scope="row">1</th>
+            <td>{{item.title}}</td>
+            <td>{{item.location}}</td>
+            <td>{{item.start.getDate() - today.getDate()}}</td>
+        </tr>
+        </tr>
+        </tbody>
+    </table>
+
+    <h3>Past Events</h3>
+    <table class="table">
+        <!--<caption>Optional table caption.</caption>-->
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Event</th>
+            <th>Location</th>
+            <th>Days before</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in events" ng-if="item.start.getDate() - today.getDate() < 0">
+            <th scope="row">1</th>
+            <td>{{item.title}}</td>
+            <td>{{item.location}}</td>
+            <td>{{item.start.getDate() - today.getDate()}}</td>
+        </tr>
+        </tbody>
+    </table>
 </div>

@@ -13,11 +13,16 @@ angular.module('DashboardEvents', ['ui.calendar', 'ui.bootstrap'])
         }
     })
 
-    .controller('DashboardEventsCalendarCtrl', function CalendarCtrl($scope,$compile,uiCalendarConfig) {
+    .controller('DashboardEventsCalendarCtrl', function CalendarCtrl($scope,$http,$compile,uiCalendarConfig) {
         var date = new Date();
         var d = date.getDate();
         var m = date.getMonth();
         var y = date.getFullYear();
+
+        $scope.today = date;
+
+        $scope.future_events = 0;
+        $scope.past_events = 0;
 
         $scope.changeTo = 'Hungarian';
         /* event source that pulls from google.com */
@@ -27,14 +32,51 @@ angular.module('DashboardEvents', ['ui.calendar', 'ui.bootstrap'])
             currentTimezone: 'America/Chicago' // an option!
         };
         /* event source that contains custom events on the scope */
+        /*$http.get('dashboard-events.json').success(function(data) {
+         $scope.events = data;
+         *//*$scope.artistOrder = 'name';*//*
+         });*/
+        $scope.events = [];
         $scope.events = [
-            {title: 'All Day Event',start: new Date(y, m, 1)},
-            {title: 'Long Event',start: new Date(y, m, d - 5),end: new Date(y, m, d - 2)},
-            {id: 999,title: 'Repeating Event',start: new Date(y, m, d - 3, 16, 0),allDay: false},
-            {id: 999,title: 'Repeating Event',start: new Date(y, m, d + 4, 16, 0),allDay: false},
-            {title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
-            {title: 'Birthday',start: new Date(y, m, 28),end: new Date(y, m, 29)}
-        ];
+            {
+                title: "All Day Event",
+                location: "Iasi",
+                start: new Date(y, m, 1)
+            },
+            {
+                title: "Long Event",
+                location: "Iasi",
+                start: new Date(y, m, d - 5),
+                end: new Date(y, m, d - 2)
+            },
+            {
+                id: 999,
+                title: "Repeating Event",
+                location: "Bacau",
+                start: new Date(y, m, d - 3, 16, 0),
+                allDay: false
+            },
+            {
+                id: 999,
+                title: "Repeating Event",
+                location: "Botosani",
+                start: new Date(y, m, d + 4, 16, 0),
+                allDay: false
+            },
+            {
+                title: "Party",
+                location: "Iasi",
+                start: new Date(y, m, d + 1, 19, 0),
+                end: new Date(y, m, d + 1, 22, 30),
+                allDay: false
+            },
+            {
+                title: "Birthday",
+                location: "Nicolina",
+                start: new Date(y, m, 28),
+                end: new Date(y, m, 29)
+            }
+        ]
         /* event source that calls a function on every view switch */
         $scope.eventsF = function (start, end, timezone, callback) {
             var s = new Date(start).getTime() / 1000;
@@ -140,6 +182,54 @@ angular.module('DashboardEvents', ['ui.calendar', 'ui.bootstrap'])
         $scope.eventSources2 = [$scope.calEventsExt, $scope.eventsF, $scope.events];
     })
 
-    .controller('DashboardEventsMy_EventsCtrl', function () {
-
-    });
+    .controller('DashboardEventsMy_EventsCtrl', ['$scope', '$http', function($scope, $http) {
+        //var date = new Date();
+        //var d = date.getDate();
+        //var m = date.getMonth();
+        //var y = date.getFullYear();
+        ///*$http.get('dashboard-events.json').success(function(data) {
+        //    $scope.events = data;
+        //    *//*$scope.artistOrder = 'name';*//*
+        //});*/
+        //$scope.events = [];
+        //$scope.events = [
+        //    {
+        //        title: "All Day Event",
+        //        location: "Iasi",
+        //        start: new Date(y, m, 1)
+        //    },
+        //    {
+        //        title: "Long Event",
+        //        location: "Iasi",
+        //        start: new Date(y, m, d - 5),
+        //        end: new Date(y, m, d - 2)
+        //    },
+        //    {
+        //        id: 999,
+        //        title: "Repeating Event",
+        //        location: "Bacau",
+        //        start: new Date(y, m, d - 3, 16, 0),
+        //        allDay: false
+        //    },
+        //    {
+        //        id: 999,
+        //        title: "Repeating Event",
+        //        location: "Botosani",
+        //        start: new Date(y, m, d + 4, 16, 0),
+        //        allDay: false
+        //    },
+        //    {
+        //        title: "Party",
+        //        location: "Iasi",
+        //        start: new Date(y, m, d + 1, 19, 0),
+        //        end: new Date(y, m, d + 1, 22, 30),
+        //        allDay: false
+        //    },
+        //    {
+        //        title: "Birthday",
+        //        location: "Nicolina",
+        //        start: new Date(y, m, 28),
+        //        end: new Date(y, m, 29)
+        //    }
+        //]
+    }]);
