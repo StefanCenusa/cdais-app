@@ -1,3 +1,9 @@
 <div id="dashboard-learn-wrapper">
-    <p>learn</p>
+    <tabset>
+        <tab heading="General knowledge" ui-sref=".knowledge" active="learn.knowledge"></tab>
+        <tab heading="WS Format" ui-sref=".ws" active="learn.ws"></tab>
+        <tab heading="Others" ui-sref=".others" active="learn.others"></tab>
+    </tabset>
+    <div ui-view>
+    </div>
 </div>

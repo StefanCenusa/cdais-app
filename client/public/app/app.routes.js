@@ -67,7 +67,21 @@ angular.module('app.routes', ['ui.router'])
                 templateUrl: "app/views/pages/dashboard.learn.html",
                 controller: 'DashboardLearnCtrl'
             })
-
+            .state('dashboard.learn.knowledge', {
+                url: "/knowledge",
+                templateUrl: "app/views/pages/dashboard.learn.knowledge.html",
+                controller: 'DashboardLearnCtrl'
+            })
+            .state('dashboard.learn.others', {
+                url: "/others",
+                templateUrl: "app/views/pages/dashboard.learn.others.html",
+                controller: 'DashboardLearnCtrl'
+            })
+            .state('dashboard.learn.ws', {
+                url: "/ws",
+                templateUrl: "app/views/pages/dashboard.learn.ws.html",
+                controller: 'DashboardLearnCtrl'
+            })
             .state('dashboard.feedback', {
                 url: "/feedback",
                 templateUrl: "app/views/pages/dashboard.feedback.html",
