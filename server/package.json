@@ -9,14 +9,14 @@
     "async": "^0.9.0",
     "bcrypt-nodejs": "*",
     "body-parser": "~1.0.0",
-    "debug": "~0.7.4",
+    "debug": "^0.7.4",
     "express": "~4.2.0",
     "jsonwebtoken": "^4.2.2",
     "mongoose": "*",
+    "mongoose-thumbnail": "*",
     "passport": "~0.2.0",
     "passport-facebook": "^2.0.0",
     "passport-google": "^0.3.0",
-    "passport-local": "~1.0.0",
-    "mongoose-thumbnail": "*"
+    "passport-local": "~1.0.0"
   }
 }
