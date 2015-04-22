@@ -6,20 +6,119 @@
     </div>
     <div class="row">
         <div class="col-sm-8 col-md-8" ng-controller="PostsController as postsCtrl">
-           <div class="well" ng-repeat="post in postsCtrl.filteredPosts">
-               <div class="media">
-                   <a class="pull-left" href="#">
-                       <img class="media-object" ng-src="{{post.photo}}">
-                   </a>
-                   <div class="media-body">
-                       <h4 class="media-heading">{{post.title}}</h4>
-                       <p class="text-right">by {{post.author}}</p>
-                       <p>{{post.content}}</p>
-                       <a ng-href="{{post.link}}">Read more...</a>
-                   </div>
-               </div>
-           </div>
-            <pagination ng-change="postsCtrl.pageChanged()" total-items="postsCtrl.posts.length" items-per-page="postsCtrl.itemsOnPage" max-size="4" ng-model="postsCtrl.currentPage" class="pagination-sm" boundary-links="true" rotate="true"></pagination>
+            <div class="well" ng-repeat="post in postsCtrl.filteredPosts">
+                <div class="media">
+                    <a class="pull-left" href="#">
+                        <img class="media-object" ng-src="{{post.photo}}">
+                    </a>
+
+                    <div class="media-body">
+                        <h4 class="media-heading">{{post.title}}</h4>
+
+                        <p class="text-right">by {{post.author}}</p>
+
+                        <p>{{post.content}}</p>
+                        <a ng-href="{{post.link}}">Read more...</a>
+                    </div>
+                </div>
+            </div>
+            <pagination ng-change="postsCtrl.pageChanged()" total-items="postsCtrl.posts.length"
+                        items-per-page="postsCtrl.itemsOnPage" max-size="4" ng-model="postsCtrl.currentPage"
+                        class="pagination-sm" boundary-links="true" rotate="true"></pagination>
+        </div>
+        <div class="col-sm-3 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span>Next Meeting</span>
+                </div>
+                <div class="panel-body">
+                    <span><a ng-href="#">Weekly meeting, Colegiul National "Emil Racovita" Iasi, room P6, 12:00</a></span>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Best Speakers</th>
+                                <th>Rating</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Vladut Obreja</td>
+                                <td>1500</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Mihai Leonte</td>
+                                <td>1300</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Oprea Miruna</td>
+                                <td>1200</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td><strong>Ana Bruma</strong></td>
+                                <td>900</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Viviana Lucaciu</td>
+                                <td>750</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <span><a ng-href="#">View all...</a></span>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Best Contributors</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><strong>Ana Bruma</strong></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Mihai Leonte</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Oprea Miruna</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Vladut Obreja</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Viviana Lucaciu</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <span><a ng-href="#">View all...</a></span>
+                </div>
+            </div>
         </div>
     </div>
 
