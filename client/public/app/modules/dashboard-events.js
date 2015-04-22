@@ -19,11 +19,6 @@ angular.module('DashboardEvents', ['ui.calendar', 'ui.bootstrap'])
         var m = date.getMonth();
         var y = date.getFullYear();
 
-        $scope.today = date;
-
-        $scope.future_events = 0;
-        $scope.past_events = 0;
-
         $scope.changeTo = 'Hungarian';
         /* event source that pulls from google.com */
         $scope.eventSource = {

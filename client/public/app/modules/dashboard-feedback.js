@@ -17,8 +17,45 @@ angular.module('DashboardFeedback', ['ui.bootstrap'])
 
     })
 
-    .controller('DashboardFeedbackDebaterCtrl', function () {
-
+    .controller('DashboardFeedbackDebaterCtrl', function ($scope) {
+        $scope.feedbacks = [
+            {
+                date: new Date(2015, 2, 20),
+                trainer: "Cezar",
+                position: "G2",
+                score: 71,
+                feedback: "Good job!"
+            },
+            {
+                date: new Date(2015, 1, 10),
+                trainer: "Marian",
+                position: "O1",
+                score: 70,
+                feedback: "Could be better!"
+            },
+            {
+                date: new Date(2015, 3, 5),
+                trainer: "Stefan",
+                position: "G1",
+                score: 73,
+                feedback: "GG!"
+            },
+            {
+                date: new Date(2015, 3, 20),
+                trainer: "Andrei",
+                position: "O3",
+                score: 69,
+                feedback: "Ana Bruma!"
+            },
+            {
+                date: new Date(2015, 2, 20),
+                trainer: "Stefana",
+                position: "O2",
+                score: 71,
+                feedback: "Ok!"
+            }
+        ];
+        $scope.predicate = '-date';
     });
 
 

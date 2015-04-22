@@ -1,3 +1,27 @@
-<div id="dashboard-events-feedback-debater-wrapper">
-    <p>Debater's feedbacks</p>
+<div id="dashboard-events-feedback-debater-wrapper" ng-controller="DashboardFeedbackDebaterCtrl">
+    <h3>Received Feedback</h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Date</th>
+            <th>Trainer</th>
+            <th>Played</th>
+            <th>Score</th>
+            <th>Feedback</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in feedbacks | orderBy:predicate">
+            <th scope="row">1</th>
+            <td>{{item.date.getDate() + " / " + (item.date.getMonth()+ 1)}}</td>
+            <td>{{item.trainer}}</td>
+            <td>{{item.position}}</td>
+            <td>{{item.score}}</td>
+            <td>{{item.feedback}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <h3>Suggetions</h3>
+    <textarea class="form-control" rows="3" placeholder="type a suggestion..."></textarea>
 </div>

@@ -1,3 +1,71 @@
-<div id="dashboard-feedback-trainer-wrapper">
-    <p>Trainer Feedback</p>
+<div id="dashboard-feedback-trainer-wrapper" ng-controller="DashboardFeedbackTrainerCtrl">
+    <div class="container-fluid">
+        <button class="btn btn-default" style="margin-top: 10px;" onclick="$('#feedback').toggle()">New Feedback</button>
+        <table class="table table-bordered" id="feedback" style="display: none; margin-top: 10px;">
+            <thead style="max-width: 300px;">
+            <tr>
+                <th>Role</th>
+                <th>Name</th>
+                <!--<th>Content</th>-->
+                <!--<th>Style</th>-->
+                <!--<th>Structure</th>-->
+                <th>Score</th>
+                <th>Feedback</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr style="color: #ccc">
+                    <th style="color: #666">G1</th>
+                    <td><input type="text" placeholder="select..."/></td>
+                    
+                    
+                    
+                    <td><input type="text" placeholder="sum..."/></td>
+                    <td><input type="text" placeholder="feedback.."/></td>
+                </tr>
+                <tr style="color: #ccc">
+                    <th style="color: #666">G2</th>
+                    <td><input type="text" placeholder="select..."/></td>
+                    <td><input type="text" placeholder="sum..."/></td>
+                    <td><input type="text" placeholder="feedback.."/></td>
+                </tr>
+                <tr style="color: #ccc">
+                    <th style="color: #666">G3</th>
+                    <td><input type="text" placeholder="select..."/></td>
+                    <td><input type="text" placeholder="sum..."/></td>
+                    <td><input type="text" placeholder="feedback.."/></td>
+                </tr>
+                <tr style="color: #ccc">
+                    <th style="color: #666">GR</th>
+                    <td><input type="text" placeholder="select..."/></td>
+                    <td><input type="text" placeholder="sum..."/></td>
+                    <td><input type="text" placeholder="feedback.."/></td>
+                </tr>
+                <tr style="color: #ccc">
+                    <th style="color: #666">O1</th>
+                    <td><input type="text" placeholder="select..."/></td>
+                    <td><input type="text" placeholder="sum..."/></td>
+                    <td><input type="text" placeholder="feedback.."/></td>
+                </tr>
+                <tr style="color: #ccc">
+                    <th style="color: #666">O2</th>
+                    <td><input type="text" placeholder="select..."/></td>
+                    <td><input type="text" placeholder="sum..."/></td>
+                    <td><input type="text" placeholder="feedback.."/></td>
+                </tr>
+                <tr style="color: #ccc">
+                    <th style="color: #666">O3</th>
+                    <td><input type="text" placeholder="select..."/></td>
+                    <td><input type="text" placeholder="sum..."/></td>
+                    <td><input type="text" placeholder="feedback.."/></td>
+                </tr>
+                <tr style="color: #ccc">
+                    <th style="color: #666">OR</th>
+                    <td><input type="text" placeholder="select..."/></td>
+                    <td><input type="text" placeholder="sum..."/></td>
+                    <td><input type="text" placeholder="feedback.."/></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
