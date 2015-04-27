@@ -13,9 +13,35 @@ angular.module('DashboardFeedback', ['ui.bootstrap'])
         }
     })
 
-    .controller('DashboardFeedbackTrainerCtrl', function () {
-
-    })
+    .controller('DashboardFeedbackTrainerCtrl', ['$scope', function ($scope) {
+        $scope.roles = ["G1", "G2", "G3", "GR", "O1", "O2", "O3", "OR"];
+        $scope.debaters = [
+            {
+                name: "Ana"
+            },
+            {
+                name: "Mihai"
+            },
+            {
+                name: "Georgiana"
+            },
+            {
+                name: "Ilinca"
+            },
+            {
+                name: "Vlad"
+            },
+            {
+                name: "Irina"
+            },
+            {
+                name: "Ruxandra"
+            },
+            {
+                name: "Marghioala"
+            }
+        ]
+    }])
 
     .controller('DashboardFeedbackDebaterCtrl', function ($scope) {
         $scope.feedbacks = [

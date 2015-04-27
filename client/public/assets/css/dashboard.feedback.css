@@ -1,3 +1,16 @@
-#dashboard-feedback-trainer-wrapper input{
+#feedback > tbody > tr:nth-child(1){
+    color: #ccc;
+}
+
+#dashboard-feedback-trainer-wrapper > div > button{
+    margin-top: 10px;
+}
+
+#feedback{
+    display: none;
+    margin-top: 10px;
+}
+
+#feedback > tbody > tr:nth-child(1) > th{
     color: #666;
 }
