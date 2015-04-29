@@ -50,38 +50,50 @@ angular.module('DashboardFeedback', ['ui.bootstrap'])
                 trainer: "Cezar",
                 position: "G2",
                 score: 71,
-                feedback: "Good job!"
+                feedback: "Good job!",
+                relTime: ""
+
             },
             {
                 date: new Date(2015, 1, 10),
                 trainer: "Marian",
                 position: "O1",
                 score: 70,
-                feedback: "Could be better!"
+                feedback: "Could be better!",
+                relTime: ""
             },
             {
                 date: new Date(2015, 3, 5),
                 trainer: "Stefan",
                 position: "G1",
                 score: 73,
-                feedback: "GG!"
+                feedback: "GG!",
+                relTime: ""
             },
             {
                 date: new Date(2015, 3, 20),
                 trainer: "Andrei",
                 position: "O3",
                 score: 69,
-                feedback: "Ana Bruma!"
+                feedback: "Ana Bruma!",
+                relTime: ""
             },
             {
                 date: new Date(2015, 2, 20),
                 trainer: "Stefana",
                 position: "O2",
                 score: 71,
-                feedback: "Ok!"
+                feedback: "Ok!",
+                relTime: ""
             }
         ];
-        $scope.predicate = '-date';
+        /* relative time construct*/
+        function relativeTime(){
+            $scope.feedbacks.forEach(function(feedback){
+                feedback.relTime = moment(feedback.date).fromNow().toString();
+            });
+        }
+        relativeTime();
     });
 
 

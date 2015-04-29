@@ -15,17 +15,21 @@ angular.module('DashboardEvents', ['ui.calendar', 'ui.bootstrap'])
 
     .controller('DashboardEventsCalendarCtrl', function CalendarCtrl($scope,$http,$compile,uiCalendarConfig) {
         var date = new Date();
-        var d = date.getDate();
-        var m = date.getMonth();
-        var y = date.getFullYear();
+        var minute = date.getMinutes(),
+            h = date.getHours(),
+            d = date.getDate(),
+            m = date.getMonth(),
+            y = date.getFullYear();
 
         $scope.changeTo = 'Hungarian';
+
         /* event source that pulls from google.com */
         $scope.eventSource = {
             url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
             className: 'gcal-event',           // an option!
             currentTimezone: 'America/Chicago' // an option!
         };
+
         /* event source that contains custom events on the scope */
         /*$http.get('dashboard-events.json').success(function(data) {
          $scope.events = data;
@@ -34,50 +38,70 @@ angular.module('DashboardEvents', ['ui.calendar', 'ui.bootstrap'])
         $scope.events = [];
         $scope.events = [
             {
-                title: "All Day Event",
-                location: "Iasi",
-                start: new Date(y, m, 1)
+                name: "Last Week",
+                loc: "Iasi",
+                start: new Date(y, m, d-7),
+                relTime: ""
             },
             {
-                title: "Long Event",
-                location: "Iasi",
-                start: new Date(y, m, d - 5),
-                end: new Date(y, m, d - 2)
+                name: "Three Days Ago",
+                loc: "Iasi",
+                start: new Date(y, m, d - 3, 12, 0),
+                end: new Date(y, m, d - 2, 18, 0),
+                allDay: false,
+                relTime: ""
             },
             {
-                id: 999,
-                title: "Repeating Event",
-                location: "Bacau",
-                start: new Date(y, m, d - 3, 16, 0),
-                allDay: false
+                name: "Yesterday",
+                loc: "Bacau",
+                start: new Date(y, m, d - 1, 16, 0),
+                allDay: false,
+                relTime: ""
             },
             {
-                id: 999,
-                title: "Repeating Event",
-                location: "Botosani",
-                start: new Date(y, m, d + 4, 16, 0),
-                allDay: false
+                name: "In 1h and a half",
+                loc: "Botosani",
+                start: new Date(y, m, d, h+1, minute+30),
+                allDay: false,
+                relTime: ""
             },
             {
-                title: "Party",
-                location: "Iasi",
+                name: "Tomorrow at Seven",
+                loc: "Iasi",
                 start: new Date(y, m, d + 1, 19, 0),
                 end: new Date(y, m, d + 1, 22, 30),
-                allDay: false
+                allDay: false,
+                relTime: ""
             },
             {
-                title: "Birthday",
-                location: "Nicolina",
-                start: new Date(y, m, 28),
-                end: new Date(y, m, 29)
+                name: "Four Days From Now",
+                loc: "Botosani",
+                start: new Date(y, m, d + 4, 16, 0),
+                allDay: false,
+                relTime: ""
+            },
+            {
+                name: "On the 5th this Month",
+                loc: "Nicolina",
+                start: new Date(y, m, 5),
+                end: new Date(y, m, 7),
+                relTime: ""
+            },
+            {
+                name: "On the 5th next Month",
+                loc: "Nicolina",
+                start: new Date(y, m+1, 5),
+                end: new Date(y, m+1, 7),
+                relTime: ""
             }
-        ]
+        ];
+
         /* event source that calls a function on every view switch */
         $scope.eventsF = function (start, end, timezone, callback) {
             var s = new Date(start).getTime() / 1000;
             var e = new Date(end).getTime() / 1000;
             var m = new Date(start).getMonth();
-            var events = [{title: 'Feed Me ' + m,start: s + (50000),end: s + (100000),allDay: false, className: ['customFeed']}];
+            var events = [{name: 'Feed Me ' + m,start: s + (50000),end: s + (100000),allDay: false, className: ['customFeed']}];
             callback(events);
         };
 
@@ -85,23 +109,27 @@ angular.module('DashboardEvents', ['ui.calendar', 'ui.bootstrap'])
             color: '#f00',
             textColor: 'yellow',
             events: [
-                {type:'party',title: 'Lunch',start: new Date(y, m, d, 12, 0),end: new Date(y, m, d, 14, 0),allDay: false},
-                {type:'party',title: 'Lunch 2',start: new Date(y, m, d, 12, 0),end: new Date(y, m, d, 14, 0),allDay: false},
-                {type:'party',title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
+                {type:'party',name: 'Lunch',start: new Date(y, m, d, 12, 0),end: new Date(y, m, d, 14, 0),allDay: false},
+                {type:'party',name: 'Lunch 2',start: new Date(y, m, d, 12, 0),end: new Date(y, m, d, 14, 0),allDay: false},
+                {type:'party',name: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
             ]
         };
+
         /* alert on eventClick */
         $scope.alertOnEventClick = function( date, jsEvent, view){
-            $scope.alertMessage = ('Subscribed to "' + date.title + '"');
+            $scope.alertMessage = ('Subscribed to "' + date.name + '"');
         };
+
         /* alert on Drop */
         $scope.alertOnDrop = function(event, delta, revertFunc, jsEvent, ui, view){
             $scope.alertMessage = ('Event Droped to make dayDelta ' + delta);
         };
+
         /* alert on Resize */
         $scope.alertOnResize = function(event, delta, revertFunc, jsEvent, ui, view ){
             $scope.alertMessage = ('Event Resized to make dayDelta ' + delta);
         };
+
         /* add and removes an event source of choice */
         $scope.addRemoveEventSource = function(sources,source) {
             var canAdd = 0;
@@ -115,42 +143,48 @@ angular.module('DashboardEvents', ['ui.calendar', 'ui.bootstrap'])
                 sources.push(source);
             }
         };
+
         /* add custom event*/
         $scope.addEvent = function() {
             $scope.events.push({
-                title: 'Open Sesame',
+                name: 'Open Sesame',
                 start: new Date(y, m, 28),
                 end: new Date(y, m, 29),
                 className: ['openSesame']
             });
         };
+
         /* remove event */
         $scope.remove = function(index) {
             $scope.events.splice(index,1);
         };
+
         /* Change View */
         $scope.changeView = function(view,calendar) {
             uiCalendarConfig.calendars[calendar].fullCalendar('changeView',view);
         };
+
         /* Change View */
         $scope.renderCalender = function(calendar) {
             if(uiCalendarConfig.calendars[calendar]){
                 uiCalendarConfig.calendars[calendar].fullCalendar('render');
             }
         };
+
         /* Render Tooltip */
         $scope.eventRender = function( event, element, view ) {
-            element.attr({'tooltip': event.title,
+            element.attr({'tooltip': event.name,
                 'tooltip-append-to-body': true});
             $compile(element)($scope);
         };
+
         /* config object */
         $scope.uiConfig = {
             calendar:{
                 height: 450,
                 editable: false,
                 header:{
-                    left: 'title',
+                    left: 'name',
                     center: '',
                     right: 'today prev,next'
                 },
@@ -172,59 +206,65 @@ angular.module('DashboardEvents', ['ui.calendar', 'ui.bootstrap'])
                 $scope.changeTo = 'Hungarian';
             }
         };
+
         /* event sources array*/
         $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
         $scope.eventSources2 = [$scope.calEventsExt, $scope.eventsF, $scope.events];
-    })
 
-    .controller('DashboardEventsMy_EventsCtrl', ['$scope', '$http', function($scope, $http) {
-        //var date = new Date();
-        //var d = date.getDate();
-        //var m = date.getMonth();
-        //var y = date.getFullYear();
-        ///*$http.get('dashboard-events.json').success(function(data) {
-        //    $scope.events = data;
-        //    *//*$scope.artistOrder = 'name';*//*
-        //});*/
-        //$scope.events = [];
-        //$scope.events = [
-        //    {
-        //        title: "All Day Event",
-        //        location: "Iasi",
-        //        start: new Date(y, m, 1)
-        //    },
-        //    {
-        //        title: "Long Event",
-        //        location: "Iasi",
-        //        start: new Date(y, m, d - 5),
-        //        end: new Date(y, m, d - 2)
-        //    },
-        //    {
-        //        id: 999,
-        //        title: "Repeating Event",
-        //        location: "Bacau",
-        //        start: new Date(y, m, d - 3, 16, 0),
-        //        allDay: false
-        //    },
-        //    {
-        //        id: 999,
-        //        title: "Repeating Event",
-        //        location: "Botosani",
-        //        start: new Date(y, m, d + 4, 16, 0),
-        //        allDay: false
-        //    },
-        //    {
-        //        title: "Party",
-        //        location: "Iasi",
-        //        start: new Date(y, m, d + 1, 19, 0),
-        //        end: new Date(y, m, d + 1, 22, 30),
-        //        allDay: false
-        //    },
-        //    {
-        //        title: "Birthday",
-        //        location: "Nicolina",
-        //        start: new Date(y, m, 28),
-        //        end: new Date(y, m, 29)
-        //    }
-        //]
-    }]);
+
+        //--------- My-Events -----------
+
+        /* relative time construct*/
+        function relativeTime(){
+            $scope.events.forEach(function(event){
+                event.relTime = moment(event.start).fromNow().toString();
+            });
+        }
+        relativeTime();
+
+        /* nr of events limit*/
+        var nrMaxEvents = 10;
+
+        /* Future events */
+        function futureEv(nrMaxEvents){
+            var now = new Date();
+            var fe = [];
+            var evCounter = 0;
+
+            $scope.events.forEach(function(event){
+                if(event.start >  now && evCounter < nrMaxEvents){
+                    fe.push(event);
+                    evCounter++;
+                }});
+            return fe;
+        }
+
+        $scope.futureEvents = [];
+        $scope.futureEvents = futureEv(nrMaxEvents);
+        $scope.futureEvents.sort(function(eventA, eventB){
+            return eventA.start-eventB.start;
+        });
+
+        /* Past events */
+        function pastEv(nrMaxEvents){
+            var now = new Date();
+            var pe = [];
+            var evCounter = 0;
+
+            $scope.events.forEach(function(event){
+                if(event.start <  now && evCounter < nrMaxEvents){
+                    pe.push(event);
+                    evCounter++;
+                }});
+            return pe;
+        }
+
+        $scope.pastEvents = [];
+        $scope.pastEvents = pastEv(nrMaxEvents);
+        $scope.pastEvents.sort(function(eventA, eventB){
+            return eventB.start-eventA.start;
+        });
+
+        /* Next event*/
+        $scope.nextEvent = $scope.futureEvents[0];
+    });

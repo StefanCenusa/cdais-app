@@ -1,23 +1,23 @@
 <div id="dashboard-events-feedback-debater-wrapper" ng-controller="DashboardFeedbackDebaterCtrl">
     <h3>Received Feedback</h3>
-    <table class="table">
+    <table class="table-responsive table-bordered table-hover">
         <thead>
         <tr>
             <th>#</th>
-            <th>Date</th>
             <th>Trainer</th>
             <th>Played</th>
             <th>Score</th>
+            <th>Date</th>
             <th>Feedback</th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="item in feedbacks | orderBy:predicate">
-            <th scope="row">1</th>
-            <td>{{item.date.getDate() + " / " + (item.date.getMonth()+ 1)}}</td>
+        <tr ng-repeat="item in feedbacks | orderBy:'-date'">
+            <th>{{$index+1}}</th>
             <td>{{item.trainer}}</td>
             <td>{{item.position}}</td>
             <td>{{item.score}}</td>
+            <td>{{item.relTime}}</td>
             <td>{{item.feedback}}</td>
         </tr>
         </tbody>

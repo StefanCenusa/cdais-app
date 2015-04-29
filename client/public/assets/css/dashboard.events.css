@@ -1,3 +1,14 @@
 #dashboard-events-calendar-wrapper{
     margin: 20px auto;
 }
+
+#dashboard-events-my_events-wrapper > table > tbody > tr > td{
+    min-width: 300px;
+    height: 40px;
+    padding: 5px;
+}
+
+#dashboard-events-my_events-wrapper > table > tbody > tr > td:nth-child(1){
+    min-width: 50px;
+    margin: auto;
+}
