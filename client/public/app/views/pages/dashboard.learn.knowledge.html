@@ -1,48 +1,30 @@
-<div id="dashboard-learn-knowledge-wrapper">
-    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-        <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="headingOne">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Despre Libertate - John Stuart Mill
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                <div class="panel-body">
-                    „Mill reprezintă în lumea anglo-americană ceea ce este Nietzsche pentru tradiţia continental-europeană: apogeul «modernităţii». Nu este de mirare că eseul Despre libertate e atât de relevant, atât de rezistent în contemporaneitatea lui.“ (Gertrude HIMMELFARB)
-                    „Impactul tratatului lui Mill asupra gândirii politice a fost imediat şi a lăsat urme de durată. El a înlocuit formulările anterioare ale argumentării în favoarea individualismului şi toleranţei, de la Milton la Locke până la Montesquieu şi Voltaire, şi rămâne pledoaria clasică pentru libertatea individuală.“ (Isaiah BERLIN)                    <a href="https://paideiacab.files.wordpress.com/2013/05/john-stuart-mill-despre-libertate.pdf">Despre Libertate</a>
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="headingTwo">
-                <h4 class="panel-title">
-                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Debatabase
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                <div class="panel-body">
-                    Debatabase is a starting point on the road to participating in debates. The volume provides a beginning for those debaters who would like to learn about important topics being argued in the public sphere. Debaters can use this volume as a method of discovering the basic issues relevant to some of the more important topics being discussed in various public forums. It will provide debaters a brief look at some of the claims that can be used to support or to oppose many of the issues argued about by persons in democratic societies; it will also provide some sketches of evidence that can be used to support these claims.
-                    <a href="https://www.uvm.edu/~asnider/IDAS_2011_CD/Teachers/Materials%20for%20Parliamentary%20Debate/debatabase%20pdf.pdf"> DebataBase</a>
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="headingThree">
-                <h4 class="panel-title">
-                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        Platon - Republica
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                <div class="panel-body">
-                    Republica este o lucrare (dialog socratic) scrisă de Platon aproximativ în anul 360 î.Hr. Este o lucrare influentă de filozofie și de teorie politică, probabil și cea mai cunoscută lucrare a lui.                <a href="https://biancadobrescu.files.wordpress.com/2012/06/fileshare-ro_platon-republica.pdf"> Republica </a>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="dashboard-learn-wrapper">
+    <p>
+        <button class="btn btn-default btn-sm" ng-click="status.open = !status.open">Toggle last panel</button>
+        <button class="btn btn-default btn-sm" ng-click="status.isFirstDisabled = ! status.isFirstDisabled">Enable / Disable first panel</button>
+    </p>
+
+    <label class="checkbox">
+        <input type="checkbox" ng-model="oneAtATime">
+        Open only one at a time
+    </label>
+    <accordion close-others="oneAtATime">
+        <accordion-group heading="Static Header, initially expanded" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+            This content is straight in the template.
+        </accordion-group>
+        <accordion-group heading="{{knowledge.title}}" ng-repeat="knowledge in knowledge">
+            {{knowledge.content}}
+        </accordion-group>
+        <accordion-group heading="Dynamic Body Content">
+            <p>The body of the accordion group grows to fit the contents</p>
+            <button class="btn btn-default btn-sm" ng-click="addItem()">Add Item</button>
+            <div ng-repeat="item in items">{{item}}</div>
+        </accordion-group>
+        <accordion-group is-open="status.open">
+            <accordion-heading>
+                I can have markup, too! <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+            </accordion-heading>
+            This is just some content to illustrate fancy headings.
+        </accordion-group>
+    </accordion>
 </div>

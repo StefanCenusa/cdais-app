@@ -1,0 +1,16 @@
+.dashboard-learn-wrapper .nav,
+.dashboard-learn-wrapper .pagination,
+.dashboard-learn-wrapper .carousel,
+.dashboard-learn-wrapper .panel-title
+.dashboard-learn-wrapper a {
+    cursor: pointer;
+}
+
+.dashboard-learn-wrapper{
+    margin-top: 1%;
+}
+
+#dashboard-learn-wrapper > div.ng-scope > div > label > input
+{
+    margin: 0px;
+}
