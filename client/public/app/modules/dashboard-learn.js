@@ -1,107 +1,63 @@
-angular.module('DashboardLearn', ['ui.bootstrap'])
+angular.module('DashboardLearn',['ui.bootstrap'])
+    .controller('DashboardLearnCtrl', function ($scope, $state, $location) {
+        if ($state.current.name == "dashboard.learn")
+            $state.go("dashboard.learn.knowledge");
+        switch($state.current.name){
+            case "dashboard.learn.knowledge":
+                $scope.learn = {knowledge: true, ws: false, others: false};
+                break;
+            case "dashboard.learn.ws":
+                $scope.learn = {knowledge: false, ws: true, others: false};
+                break;
+            case "dashboard.learn.others":
+                $scope.learn = {knowledge: false, ws: false, others: true};
+                break;
+        }
 
-    .controller('DashboardLearnCtrl', function($scope) {
-            $scope.topics = [
-                {
-                    title: "A",
-                    content: "Lorem ipsum ",
-                    photo: "http://placekitten.com/g/150/150"
-                },
-                {
-                    title: "A",
-                    content: "Lorem ipsum ",
-                    photo: "http://placekitten.com/g/150/150"
-                }
-            ];
-        });
+        $scope.oneAtATime = true;
 
-        /*
-         'use strict';
-        angular.module('angAccordion', ['collapsibleItem'])
-            .controller('angAccordionController', ['$scope', function($scope){
-                var collapsibleItems = [];
+        $scope.knowledge = [
+            {
+                title: 'Knowledge Group Header - 1',
+                content: 'Knowledge Group Body - 1'
+            },
+            {
+                title: 'Knowledge Group Header - 2',
+                content: 'Knowledge Group Body - 2'
+            }
+        ];
 
-                this.openCollapsibleItem = function(collapsibleItemToOpen) {
-                    if( $scope.oneAtATime ) {
-                        angular.forEach(collapsibleItems, function(collapsibleItem) {
-                            collapsibleItem.isOpenned = false;
-                            collapsibleItem.icon = collapsibleItem.closeIcon;
-                        });
-                    }
-                    collapsibleItemToOpen.isOpenned = true;
-                };
+        $scope.ws = [
+            {
+                title: 'WS Group Header - 1',
+                content: 'WS Group Body - 1'
+            },
+            {
+                title: 'WS Group Header - 2',
+                content: 'WS Group Body - 2'
+            }
+        ];
 
-                this.addCollapsibleItem = function(collapsibleItem) {
-                    collapsibleItems.push(collapsibleItem);
+        $scope.others = [
+            {
+                title: 'Others Group Header - 1',
+                content: 'Others Group Body - 1'
+            },
+            {
+                title: 'Others Group Header - 2',
+                content: 'Others Group Body - 2'
+            }
+        ];
 
-                    if ( $scope.closeIconClass !== undefined || $scope.openIconClass !== undefined ) {
-                        collapsibleItem.iconsType = 'class';
-                        collapsibleItem.closeIcon = $scope.closeIconClass;
-                        collapsibleItem.openIcon = $scope.openIconClass;
-                    }
-                    else if ( $scope.closeIconUrl !== undefined || $scope.openIconUrl !== undefined ) {
-                        collapsibleItem.iconsType = 'url';
-                        collapsibleItem.closeIcon = $scope.closeIconUrl;
-                        collapsibleItem.openIcon = $scope.openIconUrl;
-                    }
+        $scope.items = ['Item 1', 'Item 2', 'Item 3'];
 
-                    collapsibleItem.iconIsOnLeft = $scope.iconPosition == 'left' ? true: false;
-                };
+        $scope.addItem = function() {
+            var newItemNo = $scope.items.length + 1;
+            $scope.items.push('Item ' + newItemNo);
+        };
 
-            }])
-            .directive('angAccordion', function() {
-                return {
-                    restrict: 'EA',
-                    transclude: true,
-                    replace: true,
-                    scope: {
-                        oneAtATime: '@',
-                        closeIconUrl: '@',
-                        openIconUrl: '@',
-                        closeIconClass: '@',
-                        openIconClass: '@',
-                        iconPosition: '@'
-                    },
-                    controller: 'angAccordionController',
-                    template: '<div class="accordion" ng-transclude></div>'
-                };
-            });
-
-        angular.module('collapsibleItem', [])
-            .directive('collapsibleItem', function() {
-                return {
-                    require: '^angAccordion',
-                    restrict: 'EA',
-                    transclude: true,
-                    replace: true,
-                    scope: {
-                        title: '@',
-                        initiallyOpen: '@'
-                    },
-                    link: function(scope, element, attrs, accordionController) {
-                        scope.isOpenned = (scope.initiallyOpen) ? true : false;
-                        accordionController.addCollapsibleItem(scope);
-
-                        if(scope.isOpenned)
-                            scope.icon = scope.openIcon;
-                        else
-                            scope.icon = scope.closeIcon;
-
-                        scope.toggleCollapsibleItem = function () {
-                            if(!scope.isOpenned) {
-                                accordionController.openCollapsibleItem(this);
-                                scope.icon = scope.openIcon;
-                            }
-                            else {
-                                scope.isOpenned = false;
-                                scope.icon = scope.closeIcon;
-                            }
-                        };
-
-                        scope.getIconUrl = function ( type ) {
-                            return type == 'url' ? scope.icon : null;
-                        };
-                    },
-                    template: '<div class="collapsible-item" ng-class="{open: isOpenned}"><div class="title" ng-click="toggleCollapsibleItem()">{{title}}<i ng-show="iconsType == \'class\'" class="{{icon}} icon" ng-class="{iconleft: iconIsOnLeft}"></i><img ng-show="iconsType == \'url\'" class="icon" ng-class="{iconleft: iconIsOnLeft}" ng-src="{{getIconUrl(iconsType)}}" /></div><div class="body"><div class="content" ng-transclude></div></div></div>'
-                };
-            });*/
+        $scope.status = {
+            isFirstOpen: true,
+            isFirstDisabled: false
+        };
+    });
