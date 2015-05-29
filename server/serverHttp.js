@@ -5,7 +5,7 @@ var express = require('express'),
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-var init = function (serverPort, serverAddress, postHandler, callback) {
+var init = function (serverPort, serverAddress, callback) {
     app.listen(serverPort, serverAddress);
     callback(app);
 };

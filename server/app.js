@@ -9,95 +9,54 @@ var async = require('async'),
     Passport = require('./passport/init'),
     tokenAuth = require('./tokenAuth');
 
-//_____________________________________________________
-var httpMethodMap,
-    rpcContext = {};
-
-rpcContext['/user'] = {
-    'hello': {
-        'handler': require('./paths/user').hello,
-        'description': "Hello debater!"
+var httpMethodMap = {
+    'GET': {
+        '/user': require('./paths/user').getNotifications
     },
-    'getNotifications': {
-        'handler': require('./paths/user').getNotifications,
-        'description': "gets a specific user's notifications"
+    'POST':{
+        '/user': require('./paths/user').hello
     }
 };
-//_____________________________________________________
-var writeHeaders = function(response){
+
+var writeHeaders = function (response) {
     response.header("Access-Control-Allow-Origin", "*");
-    response.header("Access-Control-Allow-Methods", "POST, GET");
+    response.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE");
     response.header("Access-Control-Allow-Credentials", true);
     response.header("Access-Control-Max-Age", '86400');
     response.header("Access-Control-Allow-Headers", "X-Requested-With, Access-Control-Allow-Origin, X-HTTP-Method-Override, Content-Type, Authorization, Accept");
     response.header("Content-Type", "application/json");
 };
 
-var handleJsonRpcCall = function (input, callback) {
-    var err, result;
-    if (rpcContext.hasOwnProperty(input.originalUrl)) {
-        var rpcFunction = rpcContext[input.originalUrl][input.method].handler;
-        var handlerReady = function (err, result) {
-            callback(err, result);
-        };
-        if (Array.isArray(input.params))
-            rpcFunction(input.params, handlerReady);
-        else {
-            err = "Invalid type for params. Array expected";
-            result = null;
-            callback(err, result);
-        }
-    }
-    else {
-        err = "Invalid method";
-        result = null;
-        callback(err, result);
-    }
-};
-
-var POST_requestHandler = function (request, response) {
-    request.body.originalUrl = request.originalUrl;
-    var jsonRpcObject = request.body;
-
-    var rpcCallHanddler = function (error, result) {
-        var resultObjet = {
-            "id": 1,
-            "error": error,
-            "result": result
-        };
-
-        writeHeaders(response);
-        response.send(JSON.stringify(resultObjet));
-    };
-
-    handleJsonRpcCall(jsonRpcObject, rpcCallHanddler);
-};
-
 var requestHandlerWraper = function (request, response) {
-    if (request.url == "/favicon.ico") {
-        return;
-    }
     console.log(request.method + " - " + request.url);
     if (httpMethodMap.hasOwnProperty(request.method))
-        var requestHandler = httpMethodMap[request.method];
+        var requestHandler = httpMethodMap[request.method][request._parsedUrl.pathname];
     else
         return;
-    requestHandler(request, response);
+    requestHandler(request, response, function (err, result) {
+        var resultObjet = {
+            "error": err,
+            "result": result
+        };
+        writeHeaders(response);
+        response.status(200).send(JSON.stringify(resultObjet));
+    });
 };
 
 var checkAuth = function (req, res) {
-    tokenAuth(req.body.params[0], function (err, result) {
+    var urlFormatter = require('url');
+    var params = urlFormatter.parse(req.url, true).query;
+    tokenAuth(params.token, function (err, result) {
         if (err) {
             var resultObjet = {
-                "id": 1,
                 "error": err,
                 "result": result
             };
             writeHeaders(res);
             res.status(403).send(JSON.stringify(resultObjet));
         }
-        else {
-            req.body.params[0] = result.username;
+        else{
+            req.params.username = result.username;
             requestHandlerWraper(req, res);
         }
     });
@@ -112,15 +71,13 @@ var initExpress = function (app) {
     app.get('/auth/google', require('./paths/login').googleLogin);
     app.get('/auth/google/return', require('./paths/login').googleLogin);
     app.post('/user', checkAuth);
+    app.get('/user', checkAuth);
 
-    httpMethodMap = {
-        "POST": POST_requestHandler
-    };
 };
 
 var initHttp = function (callback) {
     console.log('Init http');
-    httpServer(config.http.port, config.http.host, POST_requestHandler, function (httpServer) {
+    httpServer(config.http.port, config.http.host, function (httpServer) {
         env.express = httpServer;
         initExpress(env.express);
         callback();

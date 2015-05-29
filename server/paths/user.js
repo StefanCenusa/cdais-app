@@ -1,15 +1,16 @@
 var User = require('../models/user');
 
-module.exports.hello = function (params, callback) {
+module.exports.hello = function (request, response, callback) {
     var r = {"text": "r is the result of process data"};
+    var username = request.params.username;
     // r is the result of process data
-    callback(null, params[0]);
+    callback(null, username);
 
 };
 
-module.exports.getNotifications = function (params, callback) {
+module.exports.getNotifications = function (request, response, callback) {
     var r = [];
-    var username = params[0];
+    var username = request.params.username;
     User.findOne({'username': username}, function (err, user) {
         if (err) {
             console.log('Error in getting notifications: ' + err);
