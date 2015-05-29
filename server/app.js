@@ -72,6 +72,8 @@ var initExpress = function (app) {
     app.get('/auth/google/return', require('./paths/login').googleLogin);
     app.post('/user', checkAuth);
     app.get('/user', checkAuth);
+    app.put('/user', checkAuth);
+    app.del('/user', checkAuth);
 
 };
 
