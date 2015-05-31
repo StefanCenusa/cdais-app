@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var thumbnailPluginLib = require('mongoose-thumbnail');
 var thumbnailPlugin = thumbnailPluginLib.thumbnailPlugin;
 var make_upload_to_model = thumbnailPluginLib.make_upload_to_model;
+var path = require('path');
 
 var uploads_base = path.join(__dirname, "uploads");
 var uploads = path.join(uploads_base, "u");
@@ -75,10 +76,11 @@ var lessonSchema = new mongoose.Schema([{
 }]);
 
 var blogPostSchema = new mongoose.Schema({
+    title: String,
+    photo: String,
     content: String,
     created_at: {type: Date, default: Date.now},
-    created_byID: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-    created_byName: String
+    created_byID: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 
 mongoose.model('User', userSchema);

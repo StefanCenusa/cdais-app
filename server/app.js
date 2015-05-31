@@ -12,7 +12,7 @@ var async = require('async'),
 var httpMethodMap = {
     'GET': {
         '/user': require('./paths/user').getNotifications,
-        '/post': require('./paths/post').getBlogposts
+        '/blogpost': require('./paths/blogpost').getBlogposts
     },
     'POST':{
         '/user': require('./paths/user').hello
@@ -74,7 +74,8 @@ var initExpress = function (app) {
     app.post('/user', checkAuth);
     app.get('/user', checkAuth);
     app.put('/user', checkAuth);
-    app.del('/user', checkAuth);
+    app.delete('/user', checkAuth);
+    app.get('/blogpost', requestHandlerWraper)
 
 };
 
