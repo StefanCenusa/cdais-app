@@ -11,7 +11,8 @@ var async = require('async'),
 
 var httpMethodMap = {
     'GET': {
-        '/user': require('./paths/user').getNotifications
+        '/user': require('./paths/user').getNotifications,
+        '/post': require('./paths/post').getBlogposts
     },
     'POST':{
         '/user': require('./paths/user').hello

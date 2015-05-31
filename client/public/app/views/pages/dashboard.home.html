@@ -22,7 +22,7 @@
                     </div>
                 </div>
             </div>
-            <pagination ng-change="postsCtrl.pageChanged()" total-items="postsCtrl.posts.length"
+            <pagination ng-change="postsCtrl.pageChanged()" total-items="postsCtrl.totalItems"
                         items-per-page="postsCtrl.itemsOnPage" max-size="4" ng-model="postsCtrl.currentPage"
                         class="pagination-sm" boundary-links="true" rotate="true"></pagination>
         </div>

@@ -4,7 +4,7 @@ module.exports = {
         port: 3000
     },
     mongo: {
-        host: 'mongodb://46.101.36.40/passport_local_mongoose_express4',
+        host: 'mongodb://46.101.36.40/cdais-app',
         port: 27017
     }
 };
