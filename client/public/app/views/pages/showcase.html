@@ -9,8 +9,8 @@
                     <button ng-hide="loggedIn" type="button" class="btn btn-default navbar-btn btn-sm"
                             ng-click="toggleLoginModal()"> Login <i class="fa fa-sign-in"></i></button>
                     <span ng-hide="loggedIn"> <a href="#" ng-click="toggleSignUpModal()"> Sing Up</a> </span>
-                    <span ng-show="loggedIn" class="navbar-text"> Hello {{main.user}} </span>
-                    <span ng-show="loggedIn" ng-click="doLogin('logout')"><a href="#">Logout</a></span>
+                    <span ng-show="loggedIn" class="navbar-text"> Hello {{loggedInUser}} </span>
+                    <span ng-show="!loggedIn" ng-click="doLogin('logout')"><a href="#">Logout</a></span>
                 </div>
                 <div id="sb-search" class="sb-search">
                     <form>

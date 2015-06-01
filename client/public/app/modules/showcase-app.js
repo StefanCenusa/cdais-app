@@ -2,6 +2,8 @@ angular.module('ShowcaseApp', ['ui.bootstrap'])
 
     .controller('ShowcaseCtrl', function ($rootScope, $location, $http, $modal, $window, $scope, AuthToken, Auth) {
 
+        $scope.user={};
+        $scope.loggedInUser = Auth.getUser();
         $scope.loggedIn = Auth.isLoggedIn();
         $scope.showLoginModal = false;
         $scope.showSignUpModal = false;
@@ -43,7 +45,7 @@ angular.module('ShowcaseApp', ['ui.bootstrap'])
                         });
                 },
                 logout: function(){
-                    Auth.logout();
+                    
                 }
             };
 
@@ -53,9 +55,6 @@ angular.module('ShowcaseApp', ['ui.bootstrap'])
                     break;
                 case 'signup':
                     Authentificate.signup();
-                    break;
-                case 'logout':
-                    Authentificate.logout();
                     break;
             }
         };
