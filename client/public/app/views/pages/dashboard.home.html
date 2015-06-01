@@ -5,8 +5,8 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-8 col-md-8" ng-controller="PostsController as postsCtrl">
-            <div class="well" ng-repeat="blogpost in postCtrl.blogposts">
+        <div class="col-sm-8 col-md-8" ng-controller="PostsController">
+            <div class="well" ng-repeat="blogpost in blogposts">
                 <div class="media">
                     <a class="pull-left" href="#">
                         <img class="media-object" ng-src="{{blogpost.photo}}">
@@ -22,8 +22,8 @@
                     </div>
                 </div>
             </div>
-            <pagination ng-change="postsCtrl.pageChanged()" total-items="postsCtrl.totalItems"
-                        items-per-page="postsCtrl.itemsOnPage" max-size="4" ng-model="postsCtrl.currentPage"
+            <pagination ng-change="pageChanged()" total-items="totalItems"
+                        items-per-page="itemsOnPage" max-size="4" ng-model="currentPage"
                         class="pagination-sm" boundary-links="true" rotate="true"></pagination>
         </div>
         <div class="col-sm-3 col-md-3">
