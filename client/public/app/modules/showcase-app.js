@@ -1,44 +1,57 @@
 angular.module('ShowcaseApp', ['ui.bootstrap'])
 
-    .controller('ShowcaseCtrl', function ($rootScope, $location, Auth, $modal, $window) {
+    .controller('ShowcaseCtrl', function ($rootScope, $location, Auth, $modal, $window, $scope) {
 
-        var vm = this;
-
-        // get info if a person is logged in
-        vm.loggedIn = Auth.isLoggedIn();
-
-        // check to see if a user is logged in on every request
-        $rootScope.$on('$routeChangeStart', function () {
-            vm.loggedIn = Auth.isLoggedIn();
-
-            // get user information on page load
-            Auth.getUser()
-                .then(function (data) {
-                    vm.user = data.data.result;
-                });
-        });
-
-        // function to handle logging out
-        vm.doLogout = function () {
-            Auth.logout();
-            vm.user = '';
-
-            $window.location.reload();
+        $scope.loggedIn = false;
+        $scope.showModal = false;
+        $scope.toggleModal = function () {
+            $scope.showModal = !$scope.showModal;
         };
 
-        vm.open = function () {
-            var modalInstance = $modal.open({
-                templateUrl: 'app/views/modals/login.html',
-                backdrop: true,
-                windowClass: 'modal',
-                controller: 'LoginModalController',
-                controllerAs: 'loginModal',
-                resolve: {}
-            });
-        }
-
-
     })
+
+    .directive('modal', function () {
+        return {
+            template: '<div class="modal fade">' +
+            '<div class="modal-dialog">' +
+            '<div class="modal-content">' +
+            '<div class="modal-header">' +
+            '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
+            '<h4 class="modal-title">{{ title }}</h4>' +
+            '</div>' +
+            '<div class="modal-body" ng-transclude></div>' +
+            '</div>' +
+            '</div>' +
+            '</div>',
+            restrict: 'E',
+            transclude: true,
+            replace: true,
+            scope: true,
+            link: function postLink(scope, element, attrs) {
+                scope.title = attrs.title;
+
+                scope.$watch(attrs.visible, function (value) {
+                    if (value == true)
+                        $(element).modal('show');
+                    else
+                        $(element).modal('hide');
+                });
+
+                $(element).on('shown.bs.modal', function () {
+                    scope.$apply(function () {
+                        scope.$parent[attrs.visible] = true;
+                    });
+                });
+
+                $(element).on('hidden.bs.modal', function () {
+                    scope.$apply(function () {
+                        scope.$parent[attrs.visible] = false;
+                    });
+                });
+            }
+        };
+    })
+
     .controller('LoginModalController', function ($modalInstance, Auth, $location) {
         var vm = this;
 
