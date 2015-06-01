@@ -26,7 +26,9 @@ module.exports.getBlogposts = function (request, response, callback) {
                 item._doc.author = user._doc.firstName + ' ' + user._doc.lastName;
                 cb();
             }
-            cb(err);
+            else{
+                cb(err);
+            }
         })
     };
 
@@ -35,12 +37,22 @@ module.exports.getBlogposts = function (request, response, callback) {
         var page = parseInt(query.page) - 1;
         Blogpost.find().count().exec(function (err, number) {
             r.lg = number;
-            Blogpost.find().skip(page * postsPerPage).limit(postsPerPage).sort({'created_at': 1}).exec(function (err, arr) {
-                r.arr = arr;
-                async.each(arr, decorateBlogpost, function(err){
-                    callback(err, r);
-                });
-            })
+            if (err){
+                callback(err, null);
+            }
+            else{
+                Blogpost.find().skip(page * postsPerPage).limit(postsPerPage).sort({'created_at': -1}).exec(function (err, arr) {
+                    if (err){
+                        callback(err, null);
+                    }
+                    else{
+                        r.arr = arr;
+                        async.each(arr, decorateBlogpost, function(){
+                            callback(err, r);
+                        });
+                    }
+                })
+            }
         });
     }
     else {
