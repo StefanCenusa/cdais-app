@@ -22,6 +22,9 @@ var feedbackFromDebaterSchema = new mongoose.Schema({
         },
         {
             learning: {type: Number, default: 0}
+        },
+        {
+            suggestion: String
         }
     ]
 });
