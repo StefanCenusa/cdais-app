@@ -42,6 +42,9 @@ angular.module('ShowcaseApp', ['ui.bootstrap'])
                                 getUser();
                                 $location.path('/dashboard');
                             }
+                        })
+                        .error(function (data) {
+                            swal('Fail to login!', "Invalid username or password", "error");
                         });
                 },
                 signup: function () {

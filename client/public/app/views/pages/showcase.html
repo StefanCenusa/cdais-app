@@ -65,14 +65,18 @@
             <label for="password">Password</label>
             <input type="password" class="form-control" id="password" ng-model="user.pass" placeholder="Password"/>
         </div>
-        <div class="row">
-            <div class="col-md-8 col-sm-8">
-                <button id="googleBtn" data-dismiss="modal"><i class="fa fa-google" ng-click="doLogin('google')"> </i></button>
-                <button id="facebookBtn" data-dismiss="modal"><i class="fa fa-facebook" ng-click="doLogin('facebook')"> </i></button>
-            </div>
-        </div>
         <button id="loginBtn" type="submit" ng-click="doLogin('regular')" data-dismiss="modal" class="btn btn-default">Submit</button>
     </form>
+    <div class="row">
+        <div class="col-md-8 col-sm-8">
+            <a class="btn btn-block btn-social btn-google">
+                <i class="fa fa-google" ng-click="doLogin('google')"></i> Sign in with Google
+            </a>
+            <a class="btn btn-block btn-social btn-facebook">
+                <i class="fa fa-facebook" ng-click="doLogin('facebook')"></i> Sign in with Facebook
+            </a>
+        </div>
+    </div>
 </modal>
 
 <!-- Login Modal -->

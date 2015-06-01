@@ -114,16 +114,6 @@ footer a{
     width: 70%;
 }
 
-#googleBtn{
-    color: red;
-    font-size: 36px;
-}
-
-#facebookBtn{
-    color: blue;
-    font-size: 36px;
-}
-
 #loginBtn{
-    margin-top: 8px;
+    margin-bottom: 8px;
 }
