@@ -41,6 +41,9 @@ angular.module('ShowcaseApp', ['ui.bootstrap'])
                         .error(function (data, status, header, config) {
                             console.log(status);
                         });
+                },
+                logout: function(){
+                    Auth.logout();
                 }
             };
 
@@ -50,6 +53,9 @@ angular.module('ShowcaseApp', ['ui.bootstrap'])
                     break;
                 case 'signup':
                     Authentificate.signup();
+                    break;
+                case 'logout':
+                    Authentificate.logout();
                     break;
             }
         };
