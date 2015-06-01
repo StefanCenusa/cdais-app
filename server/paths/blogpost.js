@@ -57,3 +57,27 @@ module.exports.getBlogposts = function (request, response, callback) {
     }
 
 };
+
+module.exports.saveBlogpost = function (request, response, callback){
+    var newPost = new Blogpost();
+    var data = request.body;
+    if (data.hasOwnProperty("content"))
+        newPost.content = data.content;
+    if (data.hasOwnProperty("created_at"))
+        newPost.created_at = data.created_at;
+    if (data.hasOwnProperty("created_byID"))
+        newPost.created_byID = data.created_byID;
+    if (data.hasOwnProperty("photo"))
+        newPost.photo = data.photo;
+    if (data.hasOwnProperty("title"))
+        newPost.title = data.title;
+
+    newPost.save(function (err) {
+        if (err) {
+            console.log('Error in saving blogpost: ' + err);
+            return callback(err, null);
+        }
+        console.log('Blogpost saving succesful');
+        return callback(null, newPost);
+    });
+};
