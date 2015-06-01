@@ -16,7 +16,8 @@ var httpMethodMap = {
         '/user': require('./paths/user').getUserById
     },
     'POST':{
-        '/user': require('./paths/user').hello
+        '/user': require('./paths/user').hello,
+        '/blogpost': require('./paths/blogpost').saveBlogpost
     }
 };
 
@@ -75,6 +76,7 @@ var initExpress = function (app) {
     app.all('/user', checkAuth);
     app.all('/user/*', checkAuth);
     app.get('/blogpost', requestHandlerWraper)
+    app.post('/blogpost', checkAuth)
 
 };
 
