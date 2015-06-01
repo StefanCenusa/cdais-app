@@ -40,19 +40,6 @@ angular.module('authService', [])
                 return false;
         };
 
-        // get the logged in user
-        authFactory.getUser = function() {
-            if (AuthToken.getToken())
-                return $http.post('http://localhost:3000/user', {
-                    "id": 1,
-                    "jsonrpc": "2.0",
-                    "method": "hello",
-                    "params": [AuthToken.getToken()]
-                });
-            else
-                return $q.reject({ message: 'User has no token.' });
-        };
-
         // return auth factory object
         return authFactory;
 
@@ -99,8 +86,8 @@ angular.module('authService', [])
             var token = AuthToken.getToken();
 
             // if the token exists, add it to the header as x-access-token
-            if (token)
-                config.headers['x-access-token'] = token;
+            //if (token)
+                //config.headers['x-access-token'] = token;
 
             return config;
         };

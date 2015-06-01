@@ -13,7 +13,7 @@ var httpMethodMap = {
     'GET': {
         '/user/notifications': require('./paths/user').getNotifications,
         '/blogpost': require('./paths/blogpost').getBlogposts,
-        '/user': require('./paths/user').getUserById
+        '/user': require('./paths/user').getUser
     },
     'POST':{
         '/user': require('./paths/user').hello,
@@ -46,6 +46,20 @@ var requestHandlerWraper = function (request, response) {
     });
 };
 
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+    // intercept OPTIONS method
+    if ('OPTIONS' == req.method) {
+        res.send(200);
+    }
+    else {
+        next();
+    }
+};
+
 var checkAuth = function (req, res) {
     var urlFormatter = require('url');
     var params = urlFormatter.parse(req.url, true).query;
@@ -67,6 +81,7 @@ var checkAuth = function (req, res) {
 
 var initExpress = function (app) {
 
+    app.use(allowCrossDomain);
     app.post('/auth/login', require('./paths/login').login);
     app.post('/auth/signup', require('./paths/login').signup);
     app.get('/auth/facebook', require('./paths/login').facebookLogin);
@@ -74,7 +89,6 @@ var initExpress = function (app) {
     app.get('/auth/google', require('./paths/login').googleLogin);
     app.get('/auth/google/return', require('./paths/login').googleLogin);
     app.all('/user', checkAuth);
-    app.all('/user/*', checkAuth);
     app.get('/blogpost', requestHandlerWraper);
     app.post('/blogpost', checkAuth);
 

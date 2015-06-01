@@ -2,19 +2,35 @@ angular.module('ShowcaseApp', ['ui.bootstrap'])
 
     .controller('ShowcaseCtrl', function ($rootScope, $location, $http, $modal, $window, $scope, AuthToken, Auth) {
 
-        $scope.user={};
-        $scope.loggedInUser = Auth.getUser();
+        var getUser = function () {
+            return $http.get(CONFIG.user + '?token=' + AuthToken.getToken())
+                .success(function (dataResult) {
+                    $scope.loggedInUser = dataResult.result.username;
+                })
+                .error(function (data, status, header, config) {
+                    console.log(data);
+                })
+        };
+
+        $scope.user = {};
         $scope.loggedIn = Auth.isLoggedIn();
+        if ($scope.loggedIn)
+            getUser();
         $scope.showLoginModal = false;
         $scope.showSignUpModal = false;
         $scope.toggleLoginModal = function () {
             $scope.showLoginModal = !$scope.showLoginModal;
         };
 
+
         $scope.toggleSignUpModal = function () {
             $scope.showSignUpModal = !$scope.showSignUpModal;
         };
 
+        $scope.doLogout = function () {
+            Auth.logout();
+            $window.location.reload();
+        };
         $scope.doLogin = function (loginType) {
 
             var Authentificate = {
@@ -23,6 +39,7 @@ angular.module('ShowcaseApp', ['ui.bootstrap'])
                         login($scope.user.username, $scope.user.pass)
                         .success(function (data) {
                             if (data.success) {
+                                getUser();
                                 $location.path('/dashboard');
                             }
                         });
@@ -43,9 +60,6 @@ angular.module('ShowcaseApp', ['ui.bootstrap'])
                         .error(function (data, status, header, config) {
                             console.log(status);
                         });
-                },
-                logout: function(){
-                    
                 }
             };
 
