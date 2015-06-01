@@ -11,8 +11,9 @@ var async = require('async'),
 
 var httpMethodMap = {
     'GET': {
-        '/user': require('./paths/user').getNotifications,
-        '/post': require('./paths/post').getBlogposts
+        '/user/notifications': require('./paths/user').getNotifications,
+        '/blogpost': require('./paths/blogpost').getBlogposts,
+        '/user': require('./paths/user').getUserById
     },
     'POST':{
         '/user': require('./paths/user').hello
@@ -71,10 +72,9 @@ var initExpress = function (app) {
     app.get('/auth/facebook/callback', require('./paths/login').facebookLogin);
     app.get('/auth/google', require('./paths/login').googleLogin);
     app.get('/auth/google/return', require('./paths/login').googleLogin);
-    app.post('/user', checkAuth);
-    app.get('/user', checkAuth);
-    app.put('/user', checkAuth);
-    app.del('/user', checkAuth);
+    app.all('/user', checkAuth);
+    app.all('/user/*', checkAuth);
+    app.get('/blogpost', requestHandlerWraper)
 
 };
 
@@ -113,4 +113,3 @@ var initApp = function () {
 };
 
 initApp();
-

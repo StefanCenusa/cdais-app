@@ -71,7 +71,6 @@ angular.module('DashboardProfile', ['ui.bootstrap'])
             series: []
         };
 
-
         $scope.initChart = function () {
             Highcharts.setOptions({
                 global: {

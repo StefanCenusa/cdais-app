@@ -16,19 +16,19 @@ angular.module('DashboardEvents', ['ui.calendar', 'ui.bootstrap'])
     .controller('DashboardEventsCalendarCtrl', function CalendarCtrl($scope,$http,$compile,uiCalendarConfig) {
         var date = new Date();
         var minute = date.getMinutes(),
-            h = date.getHours(),
-            d = date.getDate(),
-            m = date.getMonth(),
-            y = date.getFullYear();
+            hour = date.getHours(),
+            day = date.getDate(),
+            month = date.getMonth(),
+            year = date.getFullYear();
 
-        $scope.changeTo = 'Hungarian';
+        /*$scope.changeTo = 'Hungarian';
 
-        /* event source that pulls from google.com */
+        *//* event source that pulls from google.com *//*
         $scope.eventSource = {
             url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
             className: 'gcal-event',           // an option!
             currentTimezone: 'America/Chicago' // an option!
-        };
+        };*/
 
         /* event source that contains custom events on the scope */
         /*$http.get('dashboard-events.json').success(function(data) {
@@ -40,58 +40,58 @@ angular.module('DashboardEvents', ['ui.calendar', 'ui.bootstrap'])
             {
                 name: "Last Week",
                 loc: "Iasi",
-                start: new Date(y, m, d-7),
+                start: new Date(year, month, day-7),
                 relTime: ""
             },
             {
                 name: "Three Days Ago",
                 loc: "Iasi",
-                start: new Date(y, m, d - 3, 12, 0),
-                end: new Date(y, m, d - 2, 18, 0),
+                start: new Date(year, month, day - 3, 12, 0),
+                end: new Date(year, month, day - 2, 18, 0),
                 allDay: false,
                 relTime: ""
             },
             {
                 name: "Yesterday",
                 loc: "Bacau",
-                start: new Date(y, m, d - 1, 16, 0),
+                start: new Date(year, month, day - 1, 16, 0),
                 allDay: false,
                 relTime: ""
             },
             {
                 name: "In 1h and a half",
                 loc: "Botosani",
-                start: new Date(y, m, d, h+1, minute+30),
+                start: new Date(year, month, day, hour+1, minute+30),
                 allDay: false,
                 relTime: ""
             },
             {
                 name: "Tomorrow at Seven",
                 loc: "Iasi",
-                start: new Date(y, m, d + 1, 19, 0),
-                end: new Date(y, m, d + 1, 22, 30),
+                start: new Date(year, month, day + 1, 19, 0),
+                end: new Date(year, month, day + 1, 22, 30),
                 allDay: false,
                 relTime: ""
             },
             {
                 name: "Four Days From Now",
                 loc: "Botosani",
-                start: new Date(y, m, d + 4, 16, 0),
+                start: new Date(year, month, day + 4, 16, 0),
                 allDay: false,
                 relTime: ""
             },
             {
                 name: "On the 5th this Month",
                 loc: "Nicolina",
-                start: new Date(y, m, 5),
-                end: new Date(y, m, 7),
+                start: new Date(year, month, 5),
+                end: new Date(year, month, 7),
                 relTime: ""
             },
             {
                 name: "On the 5th next Month",
                 loc: "Nicolina",
-                start: new Date(y, m+1, 5),
-                end: new Date(y, m+1, 7),
+                start: new Date(year, month+1, 5),
+                end: new Date(year, month+1, 7),
                 relTime: ""
             }
         ];
@@ -109,9 +109,9 @@ angular.module('DashboardEvents', ['ui.calendar', 'ui.bootstrap'])
             color: '#f00',
             textColor: 'yellow',
             events: [
-                {type:'party',name: 'Lunch',start: new Date(y, m, d, 12, 0),end: new Date(y, m, d, 14, 0),allDay: false},
-                {type:'party',name: 'Lunch 2',start: new Date(y, m, d, 12, 0),end: new Date(y, m, d, 14, 0),allDay: false},
-                {type:'party',name: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
+                {type:'party',name: 'Lunch',start: new Date(year, month, day, 12, 0),end: new Date(year, month, day, 14, 0),allDay: false},
+                {type:'party',name: 'Lunch 2',start: new Date(year, month, day, 12, 0),end: new Date(year, month, day, 14, 0),allDay: false},
+                {type:'party',name: 'Click for Google',start: new Date(year, month, 28),end: new Date(year, month, 29),url: 'http://google.com/'}
             ]
         };
 
@@ -148,8 +148,8 @@ angular.module('DashboardEvents', ['ui.calendar', 'ui.bootstrap'])
         $scope.addEvent = function() {
             $scope.events.push({
                 name: 'Open Sesame',
-                start: new Date(y, m, 28),
-                end: new Date(y, m, 29),
+                start: new Date(year, month, 28),
+                end: new Date(year, month, 29),
                 className: ['openSesame']
             });
         };
@@ -196,14 +196,14 @@ angular.module('DashboardEvents', ['ui.calendar', 'ui.bootstrap'])
         };
 
         $scope.changeLang = function() {
-            if($scope.changeTo === 'Hungarian'){
-                $scope.uiConfig.calendar.dayNames = ["Vasárnap", "Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek", "Szombat"];
-                $scope.uiConfig.calendar.dayNamesShort = ["Vas", "Hét", "Kedd", "Sze", "Csüt", "Pén", "Szo"];
+            if($scope.changeTo === 'Romanian'){
+                $scope.uiConfig.calendar.dayNames = ["Duminica", "Luni", "Marti", "Miercuri", "Joi", "Vineri", "Sambata"];
+                $scope.uiConfig.calendar.dayNamesShort = ["Dum", "Lun", "Mar", "Mie", "Joi", "Vin", "Sam"];
                 $scope.changeTo= 'English';
             } else {
                 $scope.uiConfig.calendar.dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
                 $scope.uiConfig.calendar.dayNamesShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-                $scope.changeTo = 'Hungarian';
+                $scope.changeTo = 'Romanian';
             }
         };
 

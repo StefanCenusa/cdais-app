@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var thumbnailPluginLib = require('mongoose-thumbnail');
 var thumbnailPlugin = thumbnailPluginLib.thumbnailPlugin;
 var make_upload_to_model = thumbnailPluginLib.make_upload_to_model;
+var path = require('path');
 
 var uploads_base = path.join(__dirname, "uploads");
 var uploads = path.join(uploads_base, "u");
@@ -17,20 +18,20 @@ var userSchema = new mongoose.Schema({
     phone: {type: String, match: /\d{10}/},
     created_at: {type: Date, default: Date.now},
     socialMedia: [{
-    	name: String,
-    	url: String
+        name: String,
+        url: String
     }],
     notifications: [{
-    	type: {type: Number, default: 0},
-    	text: String,
+        type: {type: Number, default: 0},
+        text: String,
         created_at: Date,
-    	read: Boolean
+        read: Boolean
     }],
     debateHistory: [{
-    	competitionID: {type: mongoose.Schema.Types.ObjectId, ref: 'Competition'},
-    	name: String, //probabil doar de asta o sa avem nevoie in mod recurent
-    	phase: {type: Number, default: 10, min: 0, max: 10}, //0 finala, 1 sferturi, 2 patrimi, 3 optimi, 4 saisprezecimi, 10 preliminarii
-    	points:  [Number]
+        competitionID: {type: mongoose.Schema.Types.ObjectId, ref: 'Competition'},
+        name: String, //probabil doar de asta o sa avem nevoie in mod recurent
+        phase: {type: Number, default: 10, min: 0, max: 10}, //0 finala, 1 sferturi, 2 patrimi, 3 optimi, 4 saisprezecimi, 10 preliminarii
+        points:  [Number]
     }],
     judgeHistory: [{
         competitionID: {type: mongoose.Schema.Types.ObjectId, ref: 'Competition'},
@@ -65,20 +66,21 @@ var competitionSchema = new mongoose.Schema({
 });
 
 var groupSchema = new mongoose.Schema({
-	name: String
+    name: String
 });
 
 var lessonSchema = new mongoose.Schema([{
-	name: String,
-	content: String,
-	created_at: {type: Date, default: Date.now}
+    name: String,
+    content: String,
+    created_at: {type: Date, default: Date.now}
 }]);
 
 var blogPostSchema = new mongoose.Schema({
+    title: String,
+    photo: String,
     content: String,
     created_at: {type: Date, default: Date.now},
-    created_byID: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-    created_byName: String
+    created_byID: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 
 mongoose.model('User', userSchema);
