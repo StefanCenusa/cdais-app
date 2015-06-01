@@ -1,6 +1,6 @@
 angular.module('ShowcaseApp', ['ui.bootstrap'])
 
-    .controller('ShowcaseCtrl', function ($rootScope, $location, Auth, $modal, $window, $scope) {
+    .controller('ShowcaseCtrl', function ($rootScope, $location, $http, $modal, $window, $scope) {
 
         $scope.loggedIn = false;
         $scope.showModal = false;
@@ -8,9 +8,36 @@ angular.module('ShowcaseApp', ['ui.bootstrap'])
             $scope.showModal = !$scope.showModal;
         };
 
+        $scope.doLogin = function (loginType) {
+            var vm = this;
+
+            var Auth = {
+                regular: function () {
+                    var reqData = {
+                        username: vm.user.username,
+                        password: vm.user.pass
+                    };
+
+                    $http.post(CONFIG.login, JSON.stringify(reqData))
+                        .success(function (data, status, header, config) {
+                            console.log(data.result);
+                            $scope.loggedIn = true;
+                            $location.path('/dashboard');
+                        })
+                        .error(function (data, status, header, config) {
+                            console.log(data);
+                        });
+                }
+            };
+
+            switch (loginType) {
+                case 'regular':
+                    Auth.regular()
+            }
+        };
     })
 
-    .directive('modal', function () {
+    .directive('modal', function ($rootScope) {
         return {
             template: '<div class="modal fade">' +
             '<div class="modal-dialog">' +
@@ -50,70 +77,4 @@ angular.module('ShowcaseApp', ['ui.bootstrap'])
                 });
             }
         };
-    })
-
-    .controller('LoginModalController', function ($modalInstance, Auth, $location) {
-        var vm = this;
-
-        vm.close = function () {
-            $modalInstance.dismiss('cancel');
-        };
-
-        // function to handle login form
-        vm.doLogin = function (loginType) {
-            vm.processing = true;
-
-            // clear the error
-            vm.error = '';
-            switch (loginType) {
-                case 'regular':
-                    Auth.
-                        login(vm.user.username, vm.user.password)
-                        .success(function (data) {
-                            vm.processing = false;
-
-                            // if a user successfully logs in, redirect to users page
-                            if (data.success) {
-                                $modalInstance.dismiss('cancel');
-                                $location.path('/dashboard');
-                            }
-                            else
-                                vm.error = data.message;
-
-                        });
-                    break;
-                case 'google':
-                    Auth.
-                        googleLogin()
-                        .success(function (data) {
-                            vm.processing = false;
-
-                            // if a user successfully logs in, redirect to users page
-                            if (data.success) {
-                                $modalInstance.dismiss('cancel');
-                                $location.path('/dashboard');
-                            }
-                            else
-                                vm.error = data.message;
-
-                        });
-                    break;
-                case 'facebook':
-                    Auth.
-                        facebookLogin()
-                        .success(function (data) {
-                            vm.processing = false;
-
-                            // if a user successfully logs in, redirect to users page
-                            if (data.success) {
-                                $modalInstance.dismiss('cancel');
-                                $location.path('/dashboard');
-                            }
-                            else
-                                vm.error = data.message;
-
-                        });
-            }
-        };
-
     });
