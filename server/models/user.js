@@ -29,31 +29,31 @@ var userSchema = new mongoose.Schema({
         created_at: Date,
         read: {type: Boolean, default: false}
     }],
-    //feedback: [{
-    //    type: {type: mongoose.Schema.Types.ObjectId, ref: 'FeedbackFromTrainer'},
-    //    read: {type: Boolean, default: false}
-    //}],
+    feedback: [{
+        type: {type: mongoose.Schema.Types.ObjectId, ref: 'FeedbackFromTrainer'},
+        read: {type: Boolean, default: false}
+    }],
     //events: [{
     //    type: {type: mongoose.Schema.Types.ObjectID, ref: 'Event'},
     //    subscribe: {type: Boolean, default: false},
     //    notifications: {type: Boolean, default: false}
     //}],
-    //debateHistory: [{
-    //    competitionID: {type: mongoose.Schema.Types.ObjectId, ref: 'Competition'},
-    //    name: String, //probabil doar de asta o sa avem nevoie in mod recurent
-    //    phase: {type: Number, default: 10, min: 0, max: 10}, //0 finala, 1 sferturi, 2 patrimi, 3 optimi, 4 saisprezecimi, 10 preliminarii
-    //    points:  [Number]
-    //}],
-    //judgeHistory: [{
-    //    competitionID: {type: mongoose.Schema.Types.ObjectId, ref: 'Competition'},
-    //    name: String, //probabil doar de asta o sa avem nevoie in mod recurent
-    //    breaking: Boolean,
-    //    position: String //CA , DCA
-    //}],
-    //learning: [{
-    //    lessonID: {type: mongoose.Schema.Types.ObjectId, ref: 'Lesson'},
-    //    progress: Number
-    //}]
+    debateHistory: [{
+        competitionID: {type: mongoose.Schema.Types.ObjectId, ref: 'Competition'},
+        name: String, //probabil doar de asta o sa avem nevoie in mod recurent
+        phase: {type: Number, default: 10, min: 0, max: 10}, //0 finala, 1 sferturi, 2 patrimi, 3 optimi, 4 saisprezecimi, 10 preliminarii
+        points:  [Number]
+    }],
+    judgeHistory: [{
+        competitionID: {type: mongoose.Schema.Types.ObjectId, ref: 'Competition'},
+        name: String, //probabil doar de asta o sa avem nevoie in mod recurent
+        breaking: Boolean,
+        position: String //CA , DCA
+    }],
+    learning: [{
+        lessonID: {type: mongoose.Schema.Types.ObjectId, ref: 'Lesson'},
+        progress: Number
+    }]
 });
 
 userSchema.plugin(thumbnailPlugin, {
