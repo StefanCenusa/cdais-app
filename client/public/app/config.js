@@ -1,3 +1,7 @@
+var BASE_ADDR = "http://localhost:3000";
+
 var CONFIG={
-    "user": "http://localhost:3000/user"
+    "user": BASE_ADDR + "/user",
+    "blogpost": BASE_ADDR + "/blogpost",
+    "login": BASE_ADDR + "/auth/login"
 };

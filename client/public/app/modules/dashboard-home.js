@@ -7,16 +7,33 @@ angular.module('DashboardHome', ['ui.bootstrap'])
         };
 
     })
-    .controller('PostsController', function(){
-        var vm = this;
-        vm.posts = [];
+    .controller('PostsController', function ($scope, $http) {
 
-        vm.itemsOnPage = 3;
-        vm.currentPage = 1;
+        $scope.itemsOnPage = 3;
+        $scope.currentPage = 1;
 
-        vm.totalItems=0;
+        var getBlogposts = function(page){
+            $http.get(CONFIG.blogpost+'?page='+page)
+                .success(function(response){
+                    if(response.err){
+                        $scope.blogposts = [];
+                        $scope.totalItems = 0;
+                    }
+                    else{
+                        $scope.totalItems = response.result.lg;
+                        $scope.blogposts = response.result.arr;
+                    }
+                })
+                .error(function(){
+                    $scope.blogposts = [];
+                    $scope.totalItems = 0;
+                });
 
-        vm.pageChanged = function() {
+        };
 
+        getBlogposts($scope.currentPage);
+
+        $scope.pageChanged = function () {
+            getBlogposts($scope.currentPage);
         };
     });

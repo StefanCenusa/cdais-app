@@ -5,25 +5,25 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-8 col-md-8" ng-controller="PostsController as postsCtrl">
-            <div class="well" ng-repeat="post in postsCtrl.filteredPosts">
+        <div class="col-sm-8 col-md-8" ng-controller="PostsController">
+            <div class="well" ng-repeat="blogpost in blogposts">
                 <div class="media">
                     <a class="pull-left" href="#">
-                        <img class="media-object" ng-src="{{post.photo}}">
+                        <img class="media-object" ng-src="{{blogpost.photo}}">
                     </a>
 
                     <div class="media-body">
-                        <h4 class="media-heading">{{post.title}}</h4>
+                        <h4 class="media-heading">{{blogpost.title}}</h4>
 
-                        <p class="text-right">by {{post.author}}</p>
+                        <p class="text-right">by {{blogpost.created_byID}}</p>
 
-                        <p>{{post.content}}</p>
-                        <a ng-href="{{post.link}}">Read more...</a>
+                        <p>{{blogpost.content}}</p>
+                        <!--<a ng-href="{{blogpost.link}}">Read more...</a>-->
                     </div>
                 </div>
             </div>
-            <pagination ng-change="postsCtrl.pageChanged()" total-items="postsCtrl.totalItems"
-                        items-per-page="postsCtrl.itemsOnPage" max-size="4" ng-model="postsCtrl.currentPage"
+            <pagination ng-change="pageChanged()" total-items="totalItems"
+                        items-per-page="itemsOnPage" max-size="4" ng-model="currentPage"
                         class="pagination-sm" boundary-links="true" rotate="true"></pagination>
         </div>
         <div class="col-sm-3 col-md-3">
