@@ -13,6 +13,7 @@ angular.module('ShowcaseApp', ['ui.bootstrap'])
         };
 
         $scope.user = {};
+        $scope.signup = {};
         $scope.loggedIn = Auth.isLoggedIn();
         if ($scope.loggedIn)
             getUser();
@@ -44,6 +45,8 @@ angular.module('ShowcaseApp', ['ui.bootstrap'])
                             }
                         })
                         .error(function (data) {
+                            $scope.user.username = null;
+                            $scope.user.pass = null;
                             swal('Fail to login!', "Invalid username or password", "error");
                         });
                 },
@@ -61,7 +64,7 @@ angular.module('ShowcaseApp', ['ui.bootstrap'])
                             console.log(data.result);
                         })
                         .error(function (data, status, header, config) {
-                            console.log(status);
+                            swal('Fail to singup!', "Invalid data", "error");
                         });
                 },
                 facebook: function(){
