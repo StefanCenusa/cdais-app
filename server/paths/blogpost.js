@@ -89,7 +89,7 @@ module.exports.saveBlogpost = function (request, response, callback){
             console.log('Error in saving blogpost: ' + err);
             return callback(err, null);
         }
-        console.log('Blogpost saving succesful');
+        console.log('Blogpost saved succesfully');
         return callback(null, newPost);
     });
 };

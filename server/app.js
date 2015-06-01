@@ -13,11 +13,16 @@ var httpMethodMap = {
     'GET': {
         '/user/notifications': require('./paths/user').getNotifications,
         '/blogpost': require('./paths/blogpost').getBlogposts,
-        '/user': require('./paths/user').getUser
+        '/user': require('./paths/user').getUser,
+        '/group': require('./paths/group').getGroup
     },
     'POST':{
         '/user': require('./paths/user').hello,
-        '/blogpost': require('./paths/blogpost').saveBlogpost
+        '/blogpost': require('./paths/blogpost').saveBlogpost,
+        '/group': require('./paths/group').createGroup
+    },
+    'PUT':{
+        '/group': require('./paths/group').updateGroup
     }
 };
 
@@ -91,6 +96,9 @@ var initExpress = function (app) {
     app.all('/user', checkAuth);
     app.get('/blogpost', requestHandlerWraper);
     app.post('/blogpost', checkAuth);
+    app.get('/group', requestHandlerWraper);
+    app.post('/group', checkAuth);
+    app.put('/group', checkAuth);
 
 };
 
