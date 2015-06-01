@@ -26,7 +26,7 @@ var userSchema = new mongoose.Schema({
     notifications: [{
         type: {type: Number, default: 0},
         text: String,
-        created_at: Date,
+        created_at: {type: Date, default: Date.now},
         read: {type: Boolean, default: false}
     }],
     //feedback: [{

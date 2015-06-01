@@ -19,7 +19,8 @@ var httpMethodMap = {
     'POST':{
         '/user': require('./paths/user').hello,
         '/blogpost': require('./paths/blogpost').saveBlogpost,
-        '/group': require('./paths/group').createGroup
+        '/group': require('./paths/group').createGroup,
+        '/notification': require('./paths/notification').sendNotification
     },
     'PUT':{
         '/group': require('./paths/group').updateGroup
@@ -103,6 +104,7 @@ var initExpress = function (app) {
     app.post('/group', checkAuth);
     app.put('/group', checkAuth);
     app.delete('/group', checkAuth);
+    app.post('/notification', checkAuth);
 
 };
 
