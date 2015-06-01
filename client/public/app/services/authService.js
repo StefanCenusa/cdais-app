@@ -15,30 +15,10 @@ angular.module('authService', [])
         authFactory.login = function(username, password) {
 
             // return the promise object and its data
-            return $http.post('http://localhost:3000/auth/login', {
+            return $http.post(CONFIG.login, {
                 username: username,
                 password: password
             })
-                .success(function(data) {
-                    AuthToken.setToken(data.token);
-                    return data;
-                });
-        };
-
-        authFactory.facebookLogin = function() {
-
-            // return the promise object and its data
-            return $http.get('http://localhost:3000/auth/facebook')
-                .success(function(data) {
-                    AuthToken.setToken(data.token);
-                    return data;
-                });
-        };
-
-        authFactory.googleLogin = function() {
-
-            // return the promise object and its data
-            return $http.get('http://localhost:3000/auth/google')
                 .success(function(data) {
                     AuthToken.setToken(data.token);
                     return data;

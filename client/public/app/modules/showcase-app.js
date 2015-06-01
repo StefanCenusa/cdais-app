@@ -1,8 +1,8 @@
 angular.module('ShowcaseApp', ['ui.bootstrap'])
 
-    .controller('ShowcaseCtrl', function ($rootScope, $location, $http, $modal, $window, $scope) {
+    .controller('ShowcaseCtrl', function ($rootScope, $location, $http, $modal, $window, $scope, AuthToken, Auth) {
 
-        $scope.loggedIn = false;
+        $scope.loggedIn = Auth.isLoggedIn();
         $scope.showLoginModal = false;
         $scope.showSignUpModal = false;
         $scope.toggleLoginModal = function () {
@@ -14,32 +14,24 @@ angular.module('ShowcaseApp', ['ui.bootstrap'])
         };
 
         $scope.doLogin = function (loginType) {
-            var vm = this;
 
-            var Auth = {
+            var Authentificate = {
                 regular: function () {
-                    var reqData = {
-                        username: vm.user.username,
-                        password: vm.user.pass
-                    };
-
-                    $http.post(CONFIG.login, JSON.stringify(reqData))
-                        .success(function (data, status, header, config) {
-                            console.log(data.result);
-                            $scope.loggedIn = true;
-                            $location.path('/dashboard');
-                        })
-                        .error(function (data, status, header, config) {
-                            console.log(data);
+                    Auth.
+                        login($scope.user.username, $scope.user.pass)
+                        .success(function (data) {
+                            if (data.success) {
+                                $location.path('/dashboard');
+                            }
                         });
                 },
                 signup: function () {
                     var reqData = {
-                        email: vm.signup.email,
-                        username: vm.signup.username,
-                        password: vm.signup.pass,
-                        firstName: vm.signup.firstname,
-                        lastName: vm.signup.lastname
+                        email: $scope.signup.email,
+                        username: $scope.signup.username,
+                        password: $scope.signup.pass,
+                        firstName: $scope.signup.firstname,
+                        lastName: $scope.signup.lastname
                     };
 
                     $http.post(CONFIG.signup, JSON.stringify(reqData))
@@ -54,10 +46,10 @@ angular.module('ShowcaseApp', ['ui.bootstrap'])
 
             switch (loginType) {
                 case 'regular':
-                    Auth.regular();
+                    Authentificate.regular();
                     break;
                 case 'signup':
-                    Auth.signup();
+                    Authentificate.signup();
                     break;
             }
         };

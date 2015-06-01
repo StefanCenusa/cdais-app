@@ -10,8 +10,7 @@ angular.module('app.routes', ['ui.router'])
             .state('showcase', {
                 url: "/",
                 templateUrl: "app/views/pages/showcase.html",
-                controller: 'ShowcaseCtrl',
-                controllerAs: 'showcaseCtrl'
+                controller: 'ShowcaseCtrl'
             })
 
             .state('dashboard', {
