@@ -11,3 +11,5 @@ angular.module('DashboardApp', ['ui.bootstrap', 'DashboardHome', 'DashboardProfi
         };
 
     });
+
+

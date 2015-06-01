@@ -15,30 +15,10 @@ angular.module('authService', [])
         authFactory.login = function(username, password) {
 
             // return the promise object and its data
-            return $http.post('http://localhost:3000/auth/login', {
+            return $http.post(CONFIG.login, {
                 username: username,
                 password: password
             })
-                .success(function(data) {
-                    AuthToken.setToken(data.token);
-                    return data;
-                });
-        };
-
-        authFactory.facebookLogin = function() {
-
-            // return the promise object and its data
-            return $http.get('http://localhost:3000/auth/facebook')
-                .success(function(data) {
-                    AuthToken.setToken(data.token);
-                    return data;
-                });
-        };
-
-        authFactory.googleLogin = function() {
-
-            // return the promise object and its data
-            return $http.get('http://localhost:3000/auth/google')
                 .success(function(data) {
                     AuthToken.setToken(data.token);
                     return data;
@@ -58,19 +38,6 @@ angular.module('authService', [])
                 return true;
             else
                 return false;
-        };
-
-        // get the logged in user
-        authFactory.getUser = function() {
-            if (AuthToken.getToken())
-                return $http.post('http://localhost:3000/user', {
-                    "id": 1,
-                    "jsonrpc": "2.0",
-                    "method": "hello",
-                    "params": [AuthToken.getToken()]
-                });
-            else
-                return $q.reject({ message: 'User has no token.' });
         };
 
         // return auth factory object
@@ -119,8 +86,8 @@ angular.module('authService', [])
             var token = AuthToken.getToken();
 
             // if the token exists, add it to the header as x-access-token
-            if (token)
-                config.headers['x-access-token'] = token;
+            //if (token)
+                //config.headers['x-access-token'] = token;
 
             return config;
         };

@@ -7,12 +7,9 @@ module.exports.hello = function (request, response, callback) {
     callback(null, username);
 };
 
-module.exports.getUserById = function (request, response, callback){
-    var url = require('url');
-    var url_parts = url.parse(request.url, true);
-    var query = url_parts.query;
-    if (query.hasOwnProperty('id')){
-        User.findOne({'_id': query.id}, function(err, user){
+module.exports.getUser = function (request, response, callback){
+    if (request.params.hasOwnProperty('username')){
+        User.findOne({'username': request.params.username}, function(err, user){
             if (err){
                 callback(err,null);
             }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="DebateApp">
 <head>
     <meta charset="UTF-8">
     <title>CDAIS App</title>
@@ -38,10 +38,10 @@
     <script src="assets/libs/jquery/jquery-ui.custom.min.js"></script>
     <script src="assets/libs/bootstrap/bootstrap.min.js"></script>
     <!--angular-->
-    <script src="assets/libs/angular/angular.min.js"></script>
-        <!--<script src="//angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.js"></script>
+    <script src="assets/libs/angular/ngStorage.js"></script>
     <script src="assets/libs/angular/angular-ui-router.js"></script>
-    <script src="assets/libs/angular/angular-animate.min.js"></script>
+    <!-- <script src="assets/libs/angular/angular-animate.min.js"></script> -->
     <!--textangular-->
     <!--<script src='http://cdnjs.cloudflare.com/ajax/libs/textAngular/1.2.2/textAngular-sanitize.min.js'></script>-->
     <script src='assets/libs/angular/textAngular-sanitize.min.js'></script>
@@ -85,7 +85,7 @@
     <script src="assets/libs/fullcalendar/fullcalendar.min.js"></script>
 
 </head>
-<body ng-app="DebateApp">
+<body ng-controller="MainCtrl">
 
 <main ui-view>
 
