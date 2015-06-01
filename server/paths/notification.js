@@ -46,8 +46,11 @@ module.exports.sendNotification = function (request, response, callback) {
         }
         else {
             var members = group.members;
+            var trainers = group.trainers;
             async.each(members, send, function (err) {
-                callback(err, null);
+                async.each(trainers, send, function (err) {
+                    callback(err, null);
+                });
             });
         }
     })
