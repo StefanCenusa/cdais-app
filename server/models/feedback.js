@@ -30,4 +30,3 @@ var feedbackFromDebaterSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('FeedbackFromTrainer', feedbackFromTrainerSchema);
-module.exports = mongoose.model('FeedbackFromDebater', feedbackFromDebaterSchema);
