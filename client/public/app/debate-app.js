@@ -57,6 +57,11 @@ angular.module('DebateApp', ['ngStorage', 'app.routes', 'authService', 'Showcase
         if (!$rootScope.$storage.hasOwnProperty('cache'))
             $rootScope.$storage.cache = {};
         CacheManager.init($rootScope.$storage.cache);
+    })
+
+    .controller('AuthCtrl',  function ($scope, $rootScope, $location, $localStorage, AuthToken){
+        AuthToken.setToken($location.search().token);
+        $location.path('/dashboard');
     });
 
 

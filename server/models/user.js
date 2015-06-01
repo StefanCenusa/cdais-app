@@ -20,13 +20,13 @@ var userSchema = new mongoose.Schema({
     phone: {type: String, match: /\d{10}/},
     created_at: {type: Date, default: Date.now},
     socialMedia: [{
-        name: String,
+        id: String,
         url: String
     }],
     notifications: [{
         type: {type: Number, default: 0},
         text: String,
-        created_at: Date,
+        created_at: {type: Date, default: Date.now},
         read: {type: Boolean, default: false}
     }],
     feedback: [{

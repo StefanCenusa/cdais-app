@@ -9,7 +9,7 @@ module.exports = function (passport) {
         },
         function (accessToken, refreshToken, profile, done) {
             profile = profile._json;
-            User.findOne({'meta.facebookId': profile.id}, function (err, user) {
+            User.findOne({'socialMedia': {$elemMatch: {id: profile.id}}}, function (err, user) {
                 if (err) {
                     return done(err);
                 }
@@ -17,7 +17,10 @@ module.exports = function (passport) {
                     var newUser = new User();
 
                     var username = profile.first_name + profile.last_name;
-                    newUser.meta.facebookId = profile.id;
+                    var obj = {};
+                    obj.id = profile.id;
+                    obj.url = profile.profileUrl;
+                    newUser.socialMedia.push(obj);
                     newUser.username = username;
                     newUser.firstName = profile.first_name;
                     newUser.lastName = profile.last_name;

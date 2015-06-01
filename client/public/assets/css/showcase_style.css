@@ -113,3 +113,7 @@ footer a{
 #form-body{
     width: 70%;
 }
+
+#loginBtn{
+    margin-bottom: 8px;
+}

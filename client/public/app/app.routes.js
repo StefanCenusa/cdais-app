@@ -13,6 +13,11 @@ angular.module('app.routes', ['ui.router'])
                 controller: 'ShowcaseCtrl'
             })
 
+            .state('auth', {
+                url: "/auth",
+                controller: 'AuthCtrl'
+            })
+
             .state('dashboard', {
                 url: "/dashboard",
                 templateUrl: "app/views/pages/dashboard.html",

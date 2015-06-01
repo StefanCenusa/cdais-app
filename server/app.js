@@ -13,11 +13,20 @@ var httpMethodMap = {
     'GET': {
         '/user/notifications': require('./paths/user').getNotifications,
         '/blogpost': require('./paths/blogpost').getBlogposts,
-        '/user': require('./paths/user').getUser
+        '/user': require('./paths/user').getUser,
+        '/group': require('./paths/group').getGroup
     },
     'POST':{
         '/user': require('./paths/user').hello,
-        '/blogpost': require('./paths/blogpost').saveBlogpost
+        '/blogpost': require('./paths/blogpost').saveBlogpost,
+        '/group': require('./paths/group').createGroup,
+        '/notification': require('./paths/notification').sendNotification
+    },
+    'PUT':{
+        '/group': require('./paths/group').updateGroup
+    },
+    'DELETE':{
+        '/group': require('./paths/group').deleteGroup
     }
 };
 
@@ -89,8 +98,14 @@ var initExpress = function (app) {
     app.get('/auth/google', require('./paths/login').googleLogin);
     app.get('/auth/google/return', require('./paths/login').googleLogin);
     app.all('/user', checkAuth);
+    app.all('/user/*', checkAuth);
     app.get('/blogpost', requestHandlerWraper);
     app.post('/blogpost', checkAuth);
+    app.get('/group', requestHandlerWraper);
+    app.post('/group', checkAuth);
+    app.put('/group', checkAuth);
+    app.delete('/group', checkAuth);
+    app.post('/notification', checkAuth);
 
 };
 
