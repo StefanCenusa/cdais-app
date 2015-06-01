@@ -23,6 +23,9 @@ var httpMethodMap = {
     },
     'PUT':{
         '/group': require('./paths/group').updateGroup
+    },
+    'DELETE':{
+        '/group': require('./paths/group').deleteGroup
     }
 };
 
@@ -99,6 +102,7 @@ var initExpress = function (app) {
     app.get('/group', requestHandlerWraper);
     app.post('/group', checkAuth);
     app.put('/group', checkAuth);
+    app.delete('/group', checkAuth);
 
 };
 

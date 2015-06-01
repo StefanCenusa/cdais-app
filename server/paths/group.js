@@ -71,5 +71,48 @@ module.exports.getGroup = function (request, response, callback) {
 };
 
 module.exports.updateGroup = function(request, response, callback){
+    if (!request.body.hasOwnProperty('_id') || typeof request.body._id != 'string') {
+        callback('Invalid or insufficient params', null);
+    }
 
+    Group.findOne({'_id': request.body._id}, function (err, group) {
+        if (err) {
+            callback(err, null);
+        }
+        if (group) {
+            if (request.body.hasOwnProperty('name') && typeof request.body.name === 'string') {
+                group.name = request.body.name;
+            }
+            if (request.body.hasOwnProperty('members') && Array.isArray(request.body.members)) {
+                group.members = request.body.members;
+            }
+            if (request.body.hasOwnProperty('trainers') && Array.isArray(request.body.trainers)) {
+                group.trainers = request.body.trainers;
+            }
+            if (request.body.hasOwnProperty('filepath') && typeof request.body.filepath === 'string') {
+                group.filepath = request.body.filepath;
+            }
+            group.save(function (err) {
+                if (err) {
+                    console.log('Group in saving blogpost: ' + err);
+                    return callback(err, null);
+                }
+                console.log('Group saved succesfully');
+                return callback(null, group);
+            });
+        }
+        else{
+            callback('No group was found', null);
+        }
+    });
+};
+
+module.exports.deleteGroup = function(request, response, callback){
+    if (!request.body.hasOwnProperty('_id') || typeof request.body._id != 'string') {
+        callback('Invalid or insufficient params', null);
+    }
+
+    Group.findOneAndRemove({'_id': request.body._id}, function (err) {
+        callback(err, null);
+    });
 };
