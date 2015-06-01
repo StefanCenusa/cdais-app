@@ -60,6 +60,9 @@ angular.module('ShowcaseApp', ['ui.bootstrap'])
                         .error(function (data, status, header, config) {
                             console.log(status);
                         });
+                },
+                facebook: function(){
+                    $window.open(CONFIG.facebook, "_self");
                 }
             };
 
@@ -69,6 +72,9 @@ angular.module('ShowcaseApp', ['ui.bootstrap'])
                     break;
                 case 'signup':
                     Authentificate.signup();
+                    break;
+                case 'facebook':
+                    Authentificate.facebook();
                     break;
             }
         };

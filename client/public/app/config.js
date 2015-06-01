@@ -4,5 +4,6 @@ var CONFIG={
     "user": BASE_ADDR + "/user",
     "blogpost": BASE_ADDR + "/blogpost",
     "login": BASE_ADDR + "/auth/login",
-    "signup": BASE_ADDR + "/auth/signup"
+    "signup": BASE_ADDR + "/auth/signup",
+    "facebook": BASE_ADDR + '/auth/facebook'
 };

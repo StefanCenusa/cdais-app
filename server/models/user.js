@@ -20,7 +20,7 @@ var userSchema = new mongoose.Schema({
     phone: {type: String, match: /\d{10}/},
     created_at: {type: Date, default: Date.now},
     socialMedia: [{
-        name: String,
+        id: String,
         url: String
     }],
     notifications: [{
