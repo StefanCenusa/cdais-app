@@ -21,19 +21,38 @@ module.exports.getUser = function (request, response, callback){
 
 };
 
+//TODO de citit marcat ca citite notificarile
+
 module.exports.getNotifications = function (request, response, callback) {
-    var r = [];
-    var username = request.params.username;
-    User.findOne({'username': username}, function (err, user) {
-        if (err) {
-            console.log('Error in getting notifications: ' + err);
-            callback(err, r);
-        }
-        if (!user) {
-            console.log('User does not exists with username: ' + username);
-            return callback("Wrong user", r);
-        } else {
-            callback(null, user.meta.notifications);
-        }
-    });
+    var url = require('url');
+    var url_parts = url.parse(request.url, true);
+    var query = url_parts.query;
+
+    if(query.hasOwnProperty('username')){
+        var username = query.username;
+        User.findOne({'username': username}, function (err, user) {
+            if (err) {
+                callback(err, null);
+            }
+            if (!user) {
+                return callback("Wrong user", null);
+            } else {
+                callback(null, user.notifications);
+            }
+        });
+    }
+    if(query.hasOwnProperty('id')){
+        var id = query.id;
+        User.findOne({'_id': id}, function (err, user) {
+            if (err) {
+                callback(err, null);
+            }
+            if (!user) {
+                return callback("Wrong user", null);
+            } else {
+                callback(null, user.notifications);
+            }
+        });
+    }
+
 };
