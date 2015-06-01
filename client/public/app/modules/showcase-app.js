@@ -3,9 +3,14 @@ angular.module('ShowcaseApp', ['ui.bootstrap'])
     .controller('ShowcaseCtrl', function ($rootScope, $location, $http, $modal, $window, $scope) {
 
         $scope.loggedIn = false;
-        $scope.showModal = false;
-        $scope.toggleModal = function () {
-            $scope.showModal = !$scope.showModal;
+        $scope.showLoginModal = false;
+        $scope.showSignUpModal = false;
+        $scope.toggleLoginModal = function () {
+            $scope.showLoginModal = !$scope.showLoginModal;
+        };
+
+        $scope.toggleSignUpModal = function () {
+            $scope.showSignUpModal = !$scope.showSignUpModal;
         };
 
         $scope.doLogin = function (loginType) {
@@ -27,12 +32,33 @@ angular.module('ShowcaseApp', ['ui.bootstrap'])
                         .error(function (data, status, header, config) {
                             console.log(data);
                         });
+                },
+                signup: function () {
+                    var reqData = {
+                        email: vm.signup.email,
+                        username: vm.signup.username,
+                        password: vm.signup.pass,
+                        firstName: vm.signup.firstname,
+                        lastName: vm.signup.lastname
+                    };
+
+                    $http.post(CONFIG.signup, JSON.stringify(reqData))
+                        .success(function (data, status, header, config) {
+                            console.log(data.result);
+                        })
+                        .error(function (data, status, header, config) {
+                            console.log(status);
+                        });
                 }
             };
 
             switch (loginType) {
                 case 'regular':
-                    Auth.regular()
+                    Auth.regular();
+                    break;
+                case 'signup':
+                    Auth.signup();
+                    break;
             }
         };
     })
