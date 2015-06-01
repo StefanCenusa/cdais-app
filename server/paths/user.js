@@ -5,6 +5,22 @@ module.exports.hello = function (request, response, callback) {
     var username = request.params.username;
     // r is the result of process data
     callback(null, username);
+};
+
+module.exports.getUserById = function (request, response, callback){
+    var url = require('url');
+    var url_parts = url.parse(request.url, true);
+    var query = url_parts.query;
+    if (query.hasOwnProperty('id')){
+        User.findOne({'_id': query.id}, function(err, user){
+            if (err){
+                callback(err,null);
+            }
+            else{
+                callback(null,user);
+            }
+        })
+    }
 
 };
 
