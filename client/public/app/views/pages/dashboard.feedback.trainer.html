@@ -1,7 +1,7 @@
 <div id="dashboard-feedback-trainer-wrapper" ng-controller="DashboardFeedbackTrainerCtrl">
     <div class="container-fluid">
         <h3>Give feedback!</h3>
-        <form method="post" class="hidden">
+        <form method="post" class="">
             <table class="table-bordered">
                 <thead>
                 <tr>
@@ -33,7 +33,7 @@
                             $(this).closest('form').find('input[type=text], textarea').val('');} );
             </script>
         </form>
-        <form name="saveTemplateData" action="#" ng-controller="FormCtrl" ng-submit="submitForm()">
+        <form name="saveTemplateData" action="#" ng-controller="FormCtrl" ng-submit="submitForm()" class="hidden">
 
             First name:    <br/><input type="text" name="form.firstname">   <br/>
             Email Address: <br/><input type="text" ng-model="form.emailaddress"> <br/>
