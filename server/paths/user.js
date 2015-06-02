@@ -10,12 +10,42 @@ module.exports.hello = function (request, response, callback) {
 
 var user_fields = ['lastName', 'firstName', 'email', 'username', '_id'];
 
-var decorate_user = function(user){
+var avgArr = function (times) {
+    var sum = times.reduce(function (a, b) {
+        return a + b;
+    });
+    var avg = sum / times.length;
+    return avg;
+};
+
+var decorate_user = function (user) {
     var decorated_user = {};
-    for(var key in user){
-        if (user_fields.indexOf(key) != -1){
+    for (var key in user) {
+        if (user_fields.indexOf(key) != -1) {
             decorated_user[key] = user[key];
         }
+    }
+    if (user.hasOwnProperty('elevation')) {
+        switch (user.elevation) {
+            case 0:
+                decorated_user.role = 'Admin';
+                break;
+            case 1:
+                decorated_user.role = 'Trainer';
+                break;
+            case 2:
+                decorated_user.role = 'Debater';
+                break;
+        }
+    }
+    if (user.hasOwnProperty('debateHistory')) {
+        var debateHistory = user.debateHistory;
+        var rating = 0;
+        for (var i = 0; i < debateHistory.length; i++) {
+            var competition = debateHistory[i];
+            rating += avgArr(competition.speakerPoints);
+        }
+        decorated_user.rating = rating / debateHistory.length;
     }
     return decorated_user;
 };
@@ -85,56 +115,56 @@ module.exports.getNotifications = function (request, response, callback) {
 };
 
 /*
-module.exports.getUsersList = function (request, response, callback) {
-    var url = require('url');
-    var url_parts = url.parse(request.url, true);
-    var query = url_parts.query;
+ module.exports.getUsersList = function (request, response, callback) {
+ var url = require('url');
+ var url_parts = url.parse(request.url, true);
+ var query = url_parts.query;
 
-    var username = request.params.username;
-    User.findOne({'username': username}, function (err, user) {
-        if (err) {
-            callback(err, null);
-        }
-        if (!user) {
-            return callback("Wrong user", null);
-        }
-        else {
-            var not = user.notifications;
-            if (query.hasOwnProperty('unread') && query.unread == 'true') {
-                //the method will return the unread notifications only
-                var unreadNot = [];
-                for (var i = not.length - 1; i >= 0; i--) {
-                    var item = not[i];
-                    if (!item.read) {
-                        unreadNot.push(item);
-                    }
-                }
-                callback(null, unreadNot);
-            }
-            else {
-                if (query.hasOwnProperty('readall') && query.readall == 'true'){
-                    for (var i = user.notifications.length - 1; i >= 0; i--) {
-                        var item = user.notifications[i];
-                        if (!item.read) {
-                            user.notifications[i].read = true;
-                        }
-                    }
-                    user.save(function (err) {
-                        if (err) {
-                            return callback(err, null);
-                        }
-                        return callback(null, user.notifications);
-                    });
-                }
-                else{
-                    callback(null, user.notifications);
-                }
-            }
-        }
-    });
+ var username = request.params.username;
+ User.findOne({'username': username}, function (err, user) {
+ if (err) {
+ callback(err, null);
+ }
+ if (!user) {
+ return callback("Wrong user", null);
+ }
+ else {
+ var not = user.notifications;
+ if (query.hasOwnProperty('unread') && query.unread == 'true') {
+ //the method will return the unread notifications only
+ var unreadNot = [];
+ for (var i = not.length - 1; i >= 0; i--) {
+ var item = not[i];
+ if (!item.read) {
+ unreadNot.push(item);
+ }
+ }
+ callback(null, unreadNot);
+ }
+ else {
+ if (query.hasOwnProperty('readall') && query.readall == 'true'){
+ for (var i = user.notifications.length - 1; i >= 0; i--) {
+ var item = user.notifications[i];
+ if (!item.read) {
+ user.notifications[i].read = true;
+ }
+ }
+ user.save(function (err) {
+ if (err) {
+ return callback(err, null);
+ }
+ return callback(null, user.notifications);
+ });
+ }
+ else{
+ callback(null, user.notifications);
+ }
+ }
+ }
+ });
 
-};
-*/
+ };
+ */
 
 module.exports.addDebateHistory = function (request, response, callback) {
     var username = request.params.username;
@@ -196,13 +226,6 @@ module.exports.addDebateHistory = function (request, response, callback) {
 module.exports.getDebateHistory = function (request, response, callback) {
     var dataResponse = [];
     var debateHistory = [];
-    var avgArr = function (times) {
-        var sum = times.reduce(function (a, b) {
-            return a + b;
-        });
-        var avg = sum / times.length;
-        return avg;
-    };
 
     var addCompetitionData = function (competionObj) {
         for (var k = 0; k < dataResponse.length; k++) {
@@ -251,20 +274,13 @@ module.exports.getDebateHistory = function (request, response, callback) {
 module.exports.getDetailedDebateHistory = function (request, response, callback) {
     var dataResponse = [];
     var debateHistory = [];
-    var avgArr = function (times) {
-        var sum = times.reduce(function (a, b) {
-            return a + b;
-        });
-        var avg = sum / times.length;
-        return avg;
-    };
 
     var arrToString = function (arr) {
         var res = "";
-        for (var k = 0; k < arr.length-1; k++) {
+        for (var k = 0; k < arr.length - 1; k++) {
             res += arr[k] + ', ';
         }
-        res+= arr[k];
+        res += arr[k];
         return res;
     };
 

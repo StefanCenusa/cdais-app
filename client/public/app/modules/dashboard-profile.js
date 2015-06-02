@@ -13,7 +13,6 @@ angular.module('DashboardProfile', ['ui.bootstrap'])
             case "dashboard.profile.progress":
                 $scope.profile = {user: false, results: false, progress: true};
                 break;
-
         }
     })
 
