@@ -125,8 +125,6 @@ var initExpress = function (app) {
     app.get('/auth/facebook/callback', require('./paths/login').facebookLogin);
     app.get('/auth/google', require('./paths/login').googleLogin);
     app.get('/auth/google/return', require('./paths/login').googleLogin);
-    app.get('/auth/pocket', require('./paths/login').pocketLogin);
-    app.get('/auth/pocket/callback', require('./paths/login').pocketLogin);
     app.all('/user', checkAuth);
     app.all('/user/*', checkAuth);
     app.get('/blogpost', requestHandlerWraper);
