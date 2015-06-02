@@ -11,17 +11,17 @@
                     <thead>
                     <tr>
                         <th>Nr</th>
-                        <th>Event</th>
-                        <th>Date</th>
-                        <th>Loc</th>
-                        <th>Avg SP</th>
+                        <th><a href="" ng-click="orderByField='name'; reverseSort = !reverseSort">Event</a></th>
+                        <th><a href="" ng-click="orderByField='date'; reverseSort = !reverseSort">Date</a></th>
+                        <th><a href="" ng-click="orderByField='loc'; reverseSort = !reverseSort">Loc</a></th>
+                        <th><a href="" ng-click="orderByField='avgSpeakerPoints'; reverseSort = !reverseSort">Avg SP</a></th>
                         <th>SP in rounds</th>
-                        <th>Avg TP</th>
+                        <th><a href="" ng-click="orderByField='avgTeamPoints'; reverseSort = !reverseSort">Avg TP</a></th>
                         <th>TP in rounds</th>
                     </tr>
                     </thead>
                     <tbody id="tbody-sparkline">
-                    <tr ng-repeat="chartData in sparkChartData">
+                    <tr ng-repeat="chartData in sparkChartData | filter: searchKeyword | orderBy:orderByField:reverseSort">
                         <td>{{$index}}</td>
                         <th>{{chartData.name}}</th>
                         <td>{{formatDate(chartData.date)}}</td>
