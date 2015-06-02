@@ -88,24 +88,3 @@ module.exports.googleLogin = function (req, res) {
         return res.redirect('http://localhost:3030/auth?token='+token);
     })(req, res);
 };
-
-module.exports.pocketLogin = function (req, res) {
-    env.passport.authenticate('pocket', function (err, user, info) {
-        if (err) return res.status(403).json({
-            success: false,
-            message: err
-        });
-        if (!user)
-            return res.status(403).json({
-                success: false,
-                message: info
-            });
-        var token = jwt.sign({
-            name: user.name,
-            username: user.username
-        }, env.superSecret, {
-            expiresInMinutes: 1440 // expires in 24 hours
-        });
-        return res.redirect('http://localhost:3030/auth?token='+token);
-    })(req, res);
-};
