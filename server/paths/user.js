@@ -49,7 +49,7 @@ module.exports.getNotifications = function (request, response, callback) {
                 callback(null, unreadNot);
             }
             else {
-                if (query.hasOwnProperty('readall') && query.readall == 'true'){
+                if (query.hasOwnProperty('readall') && query.readall == 'true') {
                     for (var i = user.notifications.length - 1; i >= 0; i--) {
                         var item = user.notifications[i];
                         if (!item.read) {
@@ -63,7 +63,7 @@ module.exports.getNotifications = function (request, response, callback) {
                         return callback(null, user.notifications);
                     });
                 }
-                else{
+                else {
                     callback(null, user.notifications);
                 }
             }
@@ -81,10 +81,10 @@ module.exports.addDebateHistory = function (request, response, callback) {
     newDebateCompetition.phase = data.phase;
     newDebateCompetition.speakerPoints = data.speakerPoints;
     newDebateCompetition.teamPoints = data.teamPoints;
-    try{
+    try {
         var objId = new ObjectId(newDebateCompetition.competitionID);
     }
-    catch(e){
+    catch (e) {
         console.log(e);
         callback('Invalid competition id!')
     }
@@ -143,7 +143,7 @@ module.exports.getDebateHistory = function (request, response, callback) {
     var addCompetitionData = function (competionObj) {
         for (var k = 0; k < dataResponse.length; k++) {
             if (dataResponse[k].name === competionObj.name) {
-                for (var t = 0; t<competionObj.data.length; t++)
+                for (var t = 0; t < competionObj.data.length; t++)
                     dataResponse[k].data.push(competionObj.data[t]);
                 return;
             }
@@ -177,6 +177,61 @@ module.exports.getDebateHistory = function (request, response, callback) {
                         }
                     }
                     addCompetitionData(competionObj);
+                }
+                callback(null, dataResponse);
+            })
+        }
+    })
+};
+
+module.exports.getDetailedDebateHistory = function (request, response, callback) {
+    var dataResponse = [];
+    var debateHistory = [];
+    var avgArr = function (times) {
+        var sum = times.reduce(function (a, b) {
+            return a + b;
+        });
+        var avg = sum / times.length;
+        return avg;
+    };
+
+    var arrToString = function (arr) {
+        var res = "";
+        for (var k = 0; k < arr.length-1; k++) {
+            res += arr[k] + ', ';
+        }
+        res+= arr[k];
+        return res;
+    };
+
+    User.findOne({username: request.params.username}, function (err, user) {
+        if (err) {
+            callback(err, null);
+        }
+        if (!user) {
+            return callback("Wrong user", null);
+        } else {
+            debateHistory = user.debateHistory;
+            Competitions.getCompetitions(request, response, function (err, result) {
+                if (err) {
+                    callback(err, null);
+                }
+                var competitions = result;
+                for (var i = 0; i < debateHistory.length; i++) {
+                    for (var j = 0; j < competitions.length; j++) {
+                        if (debateHistory[i].competitionID.equals(competitions[j]._id)) {
+                            var competitionObj = {};
+                            competitionObj.name = competitions[j].name;
+                            competitionObj.date = competitions[j].dateStart;
+                            competitionObj.location = competitions[j].location;
+                            competitionObj.speakerPoints = arrToString(debateHistory[i].speakerPoints);
+                            competitionObj.avgSpeakerPoints = avgArr(debateHistory[i].speakerPoints);
+                            competitionObj.avgTeamPoints = avgArr(debateHistory[i].teamPoints);
+                            competitionObj.teamPoints = arrToString(debateHistory[i].teamPoints);
+                        }
+                    }
+                    if (competitionObj.name)
+                        dataResponse.push(competitionObj)
                 }
                 callback(null, dataResponse);
             })
