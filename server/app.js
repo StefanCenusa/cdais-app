@@ -7,7 +7,10 @@ var async = require('async'),
     config = require('./config'),
     httpServer = require('./serverHttp.js'),
     Passport = require('./passport/init'),
-    tokenAuth = require('./tokenAuth');
+    tokenAuth = require('./tokenAuth'),
+    tv4 = require('tv4'),
+    schema = require('./schema'),
+    error_handler = require('./error_handler');
 
 var httpMethodMap = {
     'GET': {
@@ -16,16 +19,18 @@ var httpMethodMap = {
         '/user': require('./paths/user').getUser,
         '/group': require('./paths/group').getGroup
     },
-    'POST':{
+    'POST': {
         '/user': require('./paths/user').hello,
         '/blogpost': require('./paths/blogpost').saveBlogpost,
         '/group': require('./paths/group').createGroup,
-        '/notification': require('./paths/notification').sendNotification
+        '/notification': require('./paths/notification').sendNotification,
+        '/competitions': require('./paths/competitions').addCompetition,
+        '/user/debateHistory': require('./paths/user').addDebateHistory
     },
-    'PUT':{
+    'PUT': {
         '/group': require('./paths/group').updateGroup
     },
-    'DELETE':{
+    'DELETE': {
         '/group': require('./paths/group').deleteGroup
     }
 };
@@ -39,9 +44,29 @@ var writeHeaders = function (response) {
     response.header("Content-Type", "application/json");
 };
 
+var validateParams = function (request, response, callback) {
+    if (schema[request.method] && schema[request.method][request._parsedUrl.pathname]) {
+        var tv4Result = tv4.validateResult(request.body, schema[request.method][request._parsedUrl.pathname]);
+        if (tv4Result.error) {
+            var errObj = error_handler.extract_error(tv4Result.error);
+            var resultObjet = {
+                "error": error_handler.errMsg[errObj.code],
+                "result": null
+            };
+            writeHeaders(response);
+            response.status(403).send(JSON.stringify(resultObjet));
+        }
+        else {
+            callback(request, response);
+        }
+    }
+    else
+        callback(request, response);
+};
+
 var requestHandlerWraper = function (request, response) {
     console.log(request.method + " - " + request.url);
-    if (httpMethodMap.hasOwnProperty(request.method))
+    if (httpMethodMap.hasOwnProperty(request.method) && httpMethodMap[request.method].hasOwnProperty(request._parsedUrl.pathname))
         var requestHandler = httpMethodMap[request.method][request._parsedUrl.pathname];
     else
         return;
@@ -55,7 +80,7 @@ var requestHandlerWraper = function (request, response) {
     });
 };
 
-var allowCrossDomain = function(req, res, next) {
+var allowCrossDomain = function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
@@ -81,9 +106,9 @@ var checkAuth = function (req, res) {
             writeHeaders(res);
             res.status(403).send(JSON.stringify(resultObjet));
         }
-        else{
+        else {
             req.params.username = result.username;
-            requestHandlerWraper(req, res);
+            validateParams(req, res, requestHandlerWraper);
         }
     });
 };
@@ -106,6 +131,7 @@ var initExpress = function (app) {
     app.put('/group', checkAuth);
     app.delete('/group', checkAuth);
     app.post('/notification', checkAuth);
+    app.post('/competitions', checkAuth);
 
 };
 

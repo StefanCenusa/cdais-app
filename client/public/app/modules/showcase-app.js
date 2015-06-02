@@ -69,6 +69,9 @@ angular.module('ShowcaseApp', ['ui.bootstrap'])
                 },
                 facebook: function(){
                     $window.open(CONFIG.facebook, "_self");
+                },
+                google: function(){
+                    $window.open(CONFIG.google, "_self");
                 }
             };
 
@@ -80,6 +83,9 @@ angular.module('ShowcaseApp', ['ui.bootstrap'])
                     Authentificate.signup();
                     break;
                 case 'facebook':
+                    Authentificate.facebook();
+                    break;
+                case 'google':
                     Authentificate.facebook();
                     break;
             }
