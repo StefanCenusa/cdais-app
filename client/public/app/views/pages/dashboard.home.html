@@ -17,7 +17,7 @@
 
                         <p class="text-right">by {{blogpost.author}}</p>
 
-                        <p>{{blogpost.content}}</p>
+                        <div ng-bind-html="blogpost.content"></div>
                         <!--<a ng-href="{{blogpost.link}}">Read more...</a>-->
                     </div>
                 </div>

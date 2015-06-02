@@ -1,14 +1,18 @@
 <div id="dashboard-post-wrapper">
-    <div text-angular="text-angular" name="htmlcontent" ng-model="htmlcontent" ta-disabled='disabled'></div>
-    <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="previewBlogpost()" ng-show="htmlcontent">
+    <input type="text" class="form-control input-lg" placeholder="Title" ng-model="blogpost.title">
+    <div text-angular="text-angular" name="htmlcontent" ng-model="blogpost.htmlcontent" ta-disabled='disabled'></div>
+    <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="previewBlogpost()" ng-show="blogpost.htmlcontent">
         <span class="glyphicon glyphicon-check" aria-hidden="true"></span> Preview
     </button>
-    <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="uploadBlogpost()" ng-show="htmlcontent">
+    <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="uploadBlogpost()" ng-show="blogpost.htmlcontent">
         <span class="glyphicon glyphicon-saved" aria-hidden="true"></span> Finished
     </button>
     <div class="row">
         <div class="col-sm-8 col-md-10 main">
-            <div ng-bind-html="htmlcontent" ng-show="preview"></div>
+            <div ng-show="preview">
+                <h1>{{blogpost.title}}</h1>
+                <div ng-bind-html="blogpost.htmlcontent"></div>
+            </div>
         </div>
     </div>
 </div>
