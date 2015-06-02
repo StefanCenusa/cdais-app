@@ -80,6 +80,13 @@ module.exports.addDebateHistory = function (request, response, callback) {
     newDebateCompetition.phase = data.phase;
     newDebateCompetition.speakerPoints = data.speakerPoints;
     newDebateCompetition.teamPoints = data.teamPoints;
+    try{
+        var objId = new ObjectId(newDebateCompetition.competitionID);
+    }
+    catch(e){
+        console.log(e);
+        callback('Invalid competition id!')
+    }
     User.findOne(query, function (err, user) {
         if (err) {
             callback(err, null);
@@ -87,7 +94,7 @@ module.exports.addDebateHistory = function (request, response, callback) {
         if (!user) {
             return callback("Wrong user", null);
         } else {
-            User.findOne({debateHistory: {$elemMatch: {competitionID: new ObjectId(newDebateCompetition.competitionID)}}}, function (err, result) {
+            User.findOne({debateHistory: {$elemMatch: {competitionID: objId}}}, function (err, result) {
                 if (err)
                     callback(err, null);
                 if (!result) {
@@ -104,7 +111,7 @@ module.exports.addDebateHistory = function (request, response, callback) {
                 else {
                     query = {
                         'username': username,
-                        debateHistory: {$elemMatch: {competitionID: new ObjectId(newDebateCompetition.competitionID)}}
+                        debateHistory: {$elemMatch: {competitionID: objId}}
                     };
                     var update = {$set: {"debateHistory.$": newDebateCompetition}};
                     User.update(query, update, {}, function (err, updated) {
