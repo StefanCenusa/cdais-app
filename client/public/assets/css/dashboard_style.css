@@ -39,6 +39,18 @@ body {
     white-space: pre-line;
 }
 
+.red{
+    color: red;
+}
+
+#read_all{
+    text-align: center;
+}
+
+#new{
+    text-align: center;
+}
+
 
 /*NAVBAR ICONS*/
 

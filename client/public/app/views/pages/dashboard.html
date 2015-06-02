@@ -10,17 +10,17 @@
 
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right" id="icons-wrapper">
-                <li class="dropdown" id="feedback-dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        <i class="fa fa-comments icon-navbar"></i> <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu" role="menu">
-                    </ul>
-                </li>
+                <!--<li class="dropdown" id="feedback-dropdown">-->
+                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">-->
+                        <!--<i class="fa fa-comments icon-navbar"></i> <span class="caret"></span>-->
+                    <!--</a>-->
+                    <!--<ul class="dropdown-menu" role="menu">-->
+                    <!--</ul>-->
+                <!--</li>-->
 
                 <li class="dropdown" id="notifications-dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        <i class="fa fa-envelope icon-navbar"></i> <span class="caret"></span>
+                        <i class="fa fa-envelope icon-navbar" ng-class="setNotificationsClass()"></i> <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-messages" role="menu">
                         <li ng-repeat="notification in notifications">
@@ -33,6 +33,12 @@
                                 </div>
                             </a>
                         </li>
+                        <li ng-show="notifications.length" ng-click="viewNotifications()" id="read_all">
+                            <a href=""> Read all </a>
+                        </li>
+                        <li ng-hide="notifications.length" id="new">
+                            No new notifications
+                        </li>
                     </ul>
                 </li>
 
@@ -42,7 +48,6 @@
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a ui-sref=".profile" ui-sref-opts="{reload: true}">My Profile</a></li>
-                        <li><a ui-sref=".profile">Settings</a></li>
                         <li class="divider"></li>
                         <li><a href="#" ng-click="doLogout()">Sign out</a></li>
                     </ul>
