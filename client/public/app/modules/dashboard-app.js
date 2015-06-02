@@ -1,6 +1,6 @@
 angular.module('DashboardApp', ['ui.bootstrap', 'DashboardHome', 'DashboardProfile', 'DashboardEvents', 'DashboardLearn', 'DashboardFeedback', 'DashboardPost'])
 
-    .controller('DashboardCtrl', function ($scope, Auth, AuthToken, $state, $http) {
+    .controller('DashboardCtrl', function ($scope, Auth, AuthToken, $state, $http, $rootScope) {
         // function to handle logging out
         $scope.doLogout = function () {
             Auth.logout();
@@ -9,16 +9,28 @@ angular.module('DashboardApp', ['ui.bootstrap', 'DashboardHome', 'DashboardProfi
 
         var token = AuthToken.getToken();
 
+        $scope.formatDate = function(date){
+            return moment(date).format('MMMM Do YYYY, h:mm a');
+        };
+        $scope.formatText = function(text){
+            if (text.length > 80){
+                var res = text.substring(0,80) + '...';
+                return res;
+            }
+            return text;
+        };
+
         $http.get(CONFIG.user+'?token='+token)
             .success(function(data){
                 if (!data.err){
-                    $scope.user = data.result;
-                    $scope.notifications = [];
-                    $http.get(CONFIG.user+'/notifications?token='+token+'&unread=true')
-                        .success(function(res){
-                            $scope.notifications=res.result;
-                        });
+                    $rootScope.user = data.result;
                 }
+            });
+
+        $scope.notifications = [];
+        $http.get(CONFIG.user+'/notifications?token='+token+'&unread=true')
+            .success(function(res){
+                $scope.notifications=res.result;
             });
 
     });

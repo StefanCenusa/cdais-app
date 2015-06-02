@@ -1,11 +1,14 @@
 angular.module('DashboardHome', ['ui.bootstrap'])
 
-    .controller('DashboardHomeCtrl', function () {
-        var vm = this;
-        vm.data = {
-            'username': 'Ana Bruma'
-        };
-
+    .controller('DashboardHomeCtrl', function ($scope, $http, AuthToken) {
+        var token = AuthToken.getToken();
+        $http.get(CONFIG.user+'?token='+token)
+            .success(function(data){
+                if (!data.err){
+                    $scope.user = data.result;
+                    $scope.username = $scope.user.firstName + ' ' + $scope.user.lastName;
+                }
+            });
     })
     .controller('PostsController', function ($scope, $http) {
 

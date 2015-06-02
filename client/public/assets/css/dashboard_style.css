@@ -20,12 +20,25 @@ body {
 
 
 
-/*NAVBAR BADGES*/
+/*NAVBAR DROPDOWNS*/
 
 
-.badge-navbar{
-    font-size: 19px;
+#notifications-dropdown .dropdown-messages {
+    width: 310px;
+    min-width: 0;
+    margin-left: 5px;
 }
+#not_date{
+    display: block;
+    height: 20px;
+}
+
+#not_text{
+    display: block;
+    word-wrap: break-word;
+    white-space: pre-line;
+}
+
 
 /*NAVBAR ICONS*/
 
