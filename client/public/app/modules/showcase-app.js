@@ -72,6 +72,9 @@ angular.module('ShowcaseApp', ['ui.bootstrap'])
                 },
                 google: function(){
                     $window.open(CONFIG.google, "_self");
+                },
+                pocket: function(){
+                    $window.open(CONFIG.pocket, "_self");
                 }
             };
 
@@ -86,7 +89,10 @@ angular.module('ShowcaseApp', ['ui.bootstrap'])
                     Authentificate.facebook();
                     break;
                 case 'google':
-                    Authentificate.facebook();
+                    Authentificate.google();
+                    break;
+                case 'pocket':
+                    Authentificate.pocket();
                     break;
             }
         };

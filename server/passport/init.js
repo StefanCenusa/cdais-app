@@ -2,7 +2,8 @@ var login = require('./login'),
     signup = require('./signup'),
     facebook = require('./facebook-login'),
     User = require('../models/user'),
-    google = require('./google-login');
+    google = require('./google-login'),
+    pocket = require('./pocket-login');
 
 module.exports = function(passport){
 
@@ -22,4 +23,5 @@ module.exports = function(passport){
     signup(passport);
     facebook(passport);
     google(passport);
+    pocket(passport);
 };
