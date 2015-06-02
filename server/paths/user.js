@@ -8,7 +8,7 @@ module.exports.hello = function (request, response, callback) {
     callback(null, username);
 };
 
-var user_fields = ['lastName', 'firstName', 'email', 'username'];
+var user_fields = ['lastName', 'firstName', 'email', 'username', '_id'];
 
 var decorate_user = function(user){
     var decorated_user = {};
