@@ -1,5 +1,6 @@
 var User = require('../models/user');
 var ObjectId = require('mongoose').Types.ObjectId;
+var Competitions = require('../paths/competitions');
 module.exports.hello = function (request, response, callback) {
     var r = {"text": "r is the result of process data"};
     var username = request.params.username;
@@ -49,7 +50,7 @@ module.exports.getNotifications = function (request, response, callback) {
                     callback(null, unreadNot);
                 }
                 else {
-                    if (query.hasOwnProperty('readall') && query.readall == 'true'){
+                    if (query.hasOwnProperty('readall') && query.readall == 'true') {
                         for (var i = user.notifications.length - 1; i >= 0; i--) {
                             var item = user.notifications[i];
                             if (!item.read) {
@@ -63,7 +64,7 @@ module.exports.getNotifications = function (request, response, callback) {
                             return callback(null, user.notifications);
                         });
                     }
-                    else{
+                    else {
                         callback(null, user.notifications);
                     }
                 }
@@ -82,10 +83,10 @@ module.exports.addDebateHistory = function (request, response, callback) {
     newDebateCompetition.phase = data.phase;
     newDebateCompetition.speakerPoints = data.speakerPoints;
     newDebateCompetition.teamPoints = data.teamPoints;
-    try{
+    try {
         var objId = new ObjectId(newDebateCompetition.competitionID);
     }
-    catch(e){
+    catch (e) {
         console.log(e);
         callback('Invalid competition id!')
     }
@@ -125,6 +126,61 @@ module.exports.addDebateHistory = function (request, response, callback) {
                         return callback(null, newDebateCompetition);
                     })
                 }
+            })
+        }
+    })
+};
+
+module.exports.getDebateHistory = function (request, response, callback) {
+    var dataResponse = [];
+    var debateHistory = [];
+    var avgArr = function (times) {
+        var sum = times.reduce(function (a, b) {
+            return a + b;
+        });
+        var avg = sum / times.length;
+        return avg;
+    };
+
+    var addCompetitionData = function (competionObj) {
+        for (var k = 0; k < dataResponse.length; k++) {
+            if (dataResponse[k].name === competionObj.name) {
+                for (var t = 0; t<competionObj.data.length; t++)
+                dataResponse[k].data.push(competionObj.data[t]);
+                return;
+            }
+        }
+        dataResponse.push(competionObj);
+    };
+
+    User.findOne({username: request.params.username}, function (err, user) {
+        if (err) {
+            callback(err, null);
+        }
+        if (!user) {
+            return callback("Wrong user", null);
+        } else {
+            debateHistory = user.debateHistory;
+            Competitions.getCompetitions(request, response, function (err, result) {
+                if (err) {
+                    callback(err, null);
+                }
+                var competitions = result;
+                for (var j = 0; j < competitions.length; j++) {
+                    var competionObj = {};
+                    competionObj.name = competitions[j].name;
+                    competionObj.data = [];
+                    for (var i = 0; i < debateHistory.length; i++) {
+                        if (debateHistory[i].competitionID.equals(competitions[j]._id)) {
+                            var competitionArr = [];
+                            competitionArr.push(competitions[j].dateStart.getTime());
+                            competitionArr.push(avgArr(debateHistory[i].speakerPoints));
+                            competionObj.data.push(competitionArr);
+                        }
+                    }
+                    addCompetitionData(competionObj);
+                }
+                callback(null, dataResponse);
             })
         }
     })

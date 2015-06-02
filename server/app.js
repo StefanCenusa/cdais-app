@@ -17,7 +17,8 @@ var httpMethodMap = {
         '/user/notifications': require('./paths/user').getNotifications,
         '/blogpost': require('./paths/blogpost').getBlogposts,
         '/user': require('./paths/user').getUser,
-        '/group': require('./paths/group').getGroup
+        '/group': require('./paths/group').getGroup,
+        '/user/debateHistory': require('./paths/user').getDebateHistory
     },
     'POST': {
         '/user': require('./paths/user').hello,

@@ -17,13 +17,12 @@ angular.module('DashboardProfile', ['ui.bootstrap'])
         }
     })
 
-    .controller('ChartCtrl', function ($scope, $rootScope, $http) {
+    .controller('ChartCtrl', function ($scope, $rootScope, $http, AuthToken) {
         var chart = null;
         var chartOptions = {
             chart: {
                 renderTo: 'container',
-                marginBottom: 70,
-                zoomType: 'x'
+                marginBottom: 70
             },
             legend: {
                 enabled: true
@@ -96,35 +95,11 @@ angular.module('DashboardProfile', ['ui.bootstrap'])
         };
 
         $rootScope.requestAndBuildChart = function () {
-            var reqData = {
-                "id": 0,
-                "jsonrpc": "2.0",
-                "method": "getEvolutionInfo",
-                "params": ["TOKEN"]
-            };
-
-            //$http.post(CONFIG.user, JSON.stringify(reqData))
-            //    .success(function (dataResponse) {
-            //        $scope.setChartData(dataResponse.result);
-            //    });
-            var dataResponse = {
-                result: [{
-                    name: 'Saint George',
-                    data: [[1172707200000, 68.0], [1204502400000, 69.00], [1235952000000, 72.00], [1267401600000, 68.00]]
-                }, {
-                    name: 'Racovita Open',
-                    data: [[1175707200000, 68.0], [1207502400000, 70.00], [1238552000000, 67.00], [1270801600000, 68.00], [1301937600000, 70.00]]
-                }, {
-                    name: 'PTA',
-                    data: [[1167707200000, 70.0]]
-                }, {
-                    name: 'Central Open',
-                    data: [[1196502400000, 67.00], [1228552000000, 68.00], [1259801600000, 69.00], [1291937600000, 71.00], [1322560000000, 69.5], [1354096000000, 72.00]]
-                }
-                ]
-            };
-
-            $scope.setChartData(dataResponse.result);
+            var token = AuthToken.getToken();
+            $http.get(CONFIG.user + '/debateHistory?token=' + token)
+                .success(function (dataResponse) {
+                    $scope.setChartData(dataResponse.result);
+                });
         };
 
         $scope.initChart();

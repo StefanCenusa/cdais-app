@@ -22,3 +22,12 @@ module.exports.addCompetition = function (request, response, callback){
         return callback(null, newCompetition);
     });
 };
+
+module.exports.getCompetitions = function (request, response, callback){
+    Competition.find({}, (function(err, competitions){
+        if (err) {
+            return callback(err, null);
+        }
+        return callback(null, competitions);
+    }))
+};
