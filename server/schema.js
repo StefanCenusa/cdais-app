@@ -13,6 +13,17 @@ module.exports = {
             },
             additionalProperties: true,
             required: ["name", "location", "organiser", "dateStart", "dateEnd"]
+        },
+        '/user/debateHistory': {
+            type: "object",
+            properties: {
+                competitionID: {type: "string"},
+                phase: {type: "number"},
+                speakerPoints: {type: "array"},
+                teamPoints: {type: "array"}
+            },
+            additionalProperties: true,
+            required: ["competitionID", "phase", "speakerPoints", "teamPoints"]
         }
     }
 };

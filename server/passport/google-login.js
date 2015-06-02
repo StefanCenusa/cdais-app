@@ -6,6 +6,7 @@ module.exports = function (passport) {
             returnURL: 'http://localhost:3000/auth/google/return',
             realm: 'http://localhost:3000/auth/google/return'
         },
+        //TODO: save accessToken
         function (identifier, profile, done) {
             User.findOne({'meta.googleId': identifier}, function (err, user) {
                 if (err) {
