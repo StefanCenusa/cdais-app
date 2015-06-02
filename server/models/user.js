@@ -40,9 +40,10 @@ var userSchema = new mongoose.Schema({
     //}],
     debateHistory: [{
         competitionID: {type: mongoose.Schema.Types.ObjectId, ref: 'Competition'},
-        name: String, //probabil doar de asta o sa avem nevoie in mod recurent
+        //name: String, //probabil doar de asta o sa avem nevoie in mod recurent
         phase: {type: Number, default: 10, min: 0, max: 10}, //0 finala, 1 sferturi, 2 patrimi, 3 optimi, 4 saisprezecimi, 10 preliminarii
-        points:  [Number]
+        speakerPoints:  [Number],
+        teamPoints:  [Number]
     }],
     judgeHistory: [{
         competitionID: {type: mongoose.Schema.Types.ObjectId, ref: 'Competition'},

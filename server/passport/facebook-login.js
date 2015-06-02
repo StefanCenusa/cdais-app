@@ -7,6 +7,7 @@ module.exports = function (passport) {
             clientSecret: "5c0300813077f6e4d18d28ff8704184f",
             callbackURL: "http://localhost:3000/auth/facebook/callback"
         },
+        //TODO: save accessToken
         function (accessToken, refreshToken, profile, done) {
             profile = profile._json;
             User.findOne({'socialMedia': {$elemMatch: {id: profile.id}}}, function (err, user) {
