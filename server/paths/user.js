@@ -8,6 +8,18 @@ module.exports.hello = function (request, response, callback) {
     callback(null, username);
 };
 
+var user_fields = ['lastName', 'firstName', 'email', 'username'];
+
+var decorate_user = function(user){
+    var decorated_user = {};
+    for(var key in user){
+        if (user_fields.indexOf(key) != -1){
+            decorated_user[key] = user[key];
+        }
+    }
+    return decorated_user;
+};
+
 module.exports.getUser = function (request, response, callback) {
     if (request.params.hasOwnProperty('username')) {
         User.findOne({'username': request.params.username}, function (err, user) {
@@ -15,7 +27,7 @@ module.exports.getUser = function (request, response, callback) {
                 callback(err, null);
             }
             else {
-                callback(null, user);
+                callback(null, decorate_user(user._doc));
             }
         })
     }
