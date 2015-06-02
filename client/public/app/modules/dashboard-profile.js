@@ -3,7 +3,7 @@ angular.module('DashboardProfile', ['ui.bootstrap'])
     .controller('DashboardProfileCtrl', function ($scope, $state, $location) {
         if ($state.current.name == "dashboard.profile")
             $state.go("dashboard.profile.user");
-        switch($state.current.name){
+        switch ($state.current.name) {
             case "dashboard.profile.user":
                 $scope.profile = {user: true, results: false, progress: false};
                 break;
@@ -106,7 +106,7 @@ angular.module('DashboardProfile', ['ui.bootstrap'])
         $rootScope.requestAndBuildChart();
     })
 
-    .controller('SparklineCtrl', function ($scope, $rootScope, $http) {
+    .controller('SparklineCtrl', function ($scope, $rootScope, $http, AuthToken) {
         $scope.initSparkChart = function () {
             Highcharts.SparkLine = function (options, callback) {
                 var defaultOptions = {
@@ -246,5 +246,19 @@ angular.module('DashboardProfile', ['ui.bootstrap'])
 
             doChunk();
         };
-        $scope.initSparkChart();
+
+        $scope.formatDate = function(timestamp){
+            return moment(timestamp).format('LL')
+        };
+
+        $scope.requestAndBuildSparkChart = function () {
+            var token = AuthToken.getToken();
+            $http.get(CONFIG.user + '/detailedDebateHistory?token=' + token)
+                .success(function (dataResponse) {
+                    $scope.sparkChartData = dataResponse.result;
+                    setTimeout($scope.initSparkChart, 0);
+                });
+        };
+
+        $scope.requestAndBuildSparkChart();
     });
