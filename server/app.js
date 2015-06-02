@@ -19,11 +19,8 @@ var httpMethodMap = {
         '/user': require('./paths/user').getUser,
         '/group': require('./paths/group').getGroup,
         '/user/debateHistory': require('./paths/user').getDebateHistory,
-<<<<<<< HEAD
-        '/user/list': require('./paths/user').getUsersList
-=======
+        //'/user/list': require('./paths/user').getUsersList
         '/user/detailedDebateHistory': require('./paths/user').getDetailedDebateHistory
->>>>>>> cc35ff179fab0ac49f5f8f9563e932e048c5457c
     },
     'POST': {
         '/user': require('./paths/user').hello,
