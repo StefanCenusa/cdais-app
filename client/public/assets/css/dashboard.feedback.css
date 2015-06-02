@@ -1,42 +1,73 @@
-#feedback > tbody > tr:nth-child(1){
-    color: #ccc;
+#dashboard-feedback-trainer-wrapper > div > form > table,
+#dashboard-feedback-debater-wrapper > table {
+    margin-top: 20px;
 }
 
-#dashboard-feedback-trainer-wrapper > div > button{
-    margin-top: 10px;
-}
-
-#feedback{
-    display: none;
-    margin-top: 10px;
-}
-
-#feedback > tbody > tr:nth-child(1) > th{
-    color: #666;
-}
-
-#dashboard-events-feedback-debater-wrapper > table > tbody > tr > td{
-    padding: 0 5px;
+#dashboard-feedback-trainer-wrapper > table > tbody > tr > td,
+#dashboard-feedback-debater-wrapper > table > tbody > tr > td{
+    padding: 0;
     min-width: 200px;
 }
 
-#dashboard-events-feedback-debater-wrapper > table > tbody > tr > th{
-    padding: 0 5px;
+#dashboard-feedback-trainer-wrapper > div > form > table > tbody > tr > th,
+#dashboard-feedback-debater-wrapper table > tbody > tr > th{
+    padding: 0;
     min-width: 50px;
-}
-
-#feedback > tbody > tr > th{
-    padding: 0 5px;
-    min-width: 50px;
+    text-align: center;
     font-size: small;
 }
-#feedback > tbody > tr > td{
-    padding: 0 5px;
-    min-width: 200px;
+
+#dashboard-feedback-trainer-wrapper > div > form > table > thead > tr > th,
+#dashboard-feedback-debater-wrapper > table > thead > tr > th{
+    min-width: 50px;
+    min-height: 75px;
+    text-align: center;
+    font-size: medium;
+    padding: 5px 0;
 }
 
-#feedback > tbody > tr > td > input{
-    padding: 0 5px;
+#dashboard-feedback-trainer-wrapper > div > form > table > thead > tr,
+#dashboard-feedback-debater-wrapper > table > thead > tr{
+    background-color: #f0f0f0;
+}
+
+#dashboard-feedback-trainer-wrapper input[type="text"],
+#dashboard-feedback-trainer-wrapper textarea,
+#dashboard-feedback-debater-wrapper td {
+    -webkit-box-shadow: inset 0 -1px 0 #fff;
+    text-align: center;
+    min-height: 40px;
+}
+
+#dashboard-feedback-trainer-wrapper textarea{
+    vertical-align: middle;
+}
+
+#dashboard-feedback-trainer-wrapper > div > form > input,
+#dashboard-feedback-debater-wrapper input {
+    margin: 20px 20px 20px 0;
+}
+
+#dashboard-feedback-trainer-wrapper > div > form > table > tbody > tr > td:nth-child(4){
+    width: 400px;
+    max-width: 400px;
+    min-width: 400px;
+    max-height: 50px;
+}
+
+#dashboard-feedback-trainer-wrapper > div > form > table > tbody > tr > td > textarea {
     width: 100%;
+    max-width: 399px;
+    min-width: 399px;
+    max-height: 40px;
 }
 
+#dashboard-feedback-trainer-wrapper > div > form > table > tbody > tr > td > input[type="text"]{
+    padding: 0;
+    border: 0;
+}
+
+#dashboard-feedback-debater-wrapper > table > tbody > tr > td{
+    padding: 5px;
+    font-size: medium;
+}

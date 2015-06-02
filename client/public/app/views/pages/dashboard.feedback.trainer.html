@@ -1,30 +1,45 @@
 <div id="dashboard-feedback-trainer-wrapper" ng-controller="DashboardFeedbackTrainerCtrl">
     <div class="container-fluid">
-        <button class="btn btn-default" onclick="$('#feedback').toggle()">New Feedback</button>
-        <table class="table-responsive table-bordered table-hover" id="feedback">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Score</th>
-                <th>Feedback</th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="role in roles">
-                    <th>{{role}}</th>
-                    <td>
-                        <input type="text" placeholder="select..." ng-model="query"/>
-                        <select ng-show="query" style="z-index: -100;">
-                            <option class="artist cf" ng-repeat="item in debaters | filter:query" value="{{item.name}}">
-                                {{item.name}}
-                            </option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="sum..."/></td>
-                    <td><input type="text" placeholder="feedback.."/></td>
+        <h3>Give feedback!</h3>
+        <form method="post" class="hidden">
+            <table class="table-bordered">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Debater</th>
+                    <th>Score</th>
+                    <th>Feedback</th>
                 </tr>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="role in roles">
+                        <th>{{role}}</th>
+                        <td>
+                            <input type="text" ng-model="selected" typeahead="debater.name for debater in debaters | filter:$viewValue | limitTo:10" class="form-control" placeholder="..." required>
+                        </td>
+                        <td>
+                            <input type="text" placeholder="..." required >
+                        </td>
+                        <td>
+                            <textarea rows="1" ngMaxLength="3000"/></textarea> 
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <input type="submit" value="Submit" class="btn btn-success" >
+            <input type="button" value="Clear" class="btn btn-default reset" >
+            <script>
+                $('.reset').click(function() {
+                            $(this).closest('form').find('input[type=text], textarea').val('');} );
+            </script>
+        </form>
+        <form name="saveTemplateData" action="#" ng-controller="FormCtrl" ng-submit="submitForm()">
+
+            First name:    <br/><input type="text" name="form.firstname">   <br/>
+            Email Address: <br/><input type="text" ng-model="form.emailaddress"> <br/>
+
+            <input type="submit">
+
+        </form>
     </div>
 </div>

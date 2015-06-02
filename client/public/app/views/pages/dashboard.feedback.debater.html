@@ -1,18 +1,18 @@
-<div id="dashboard-events-feedback-debater-wrapper" ng-controller="DashboardFeedbackDebaterCtrl">
-    <h3>Received Feedback</h3>
+<div id="dashboard-feedback-debater-wrapper" ng-controller="DashboardFeedbackDebaterCtrl">
+    <h3>Received feedback</h3>
     <table class="table-responsive table-bordered table-hover">
         <thead>
         <tr>
             <th>#</th>
-            <th>Trainer</th>
-            <th>Played</th>
-            <th>Score</th>
-            <th>Date</th>
+            <th><a href="" ng-click="orderByField='trainer'; reverseSort = !reverseSort">Trainer</a></th>
+            <th><a href="" ng-click="orderByField='position'; reverseSort = !reverseSort">Played</a></th>
+            <th><a href="" ng-click="orderByField='score'; reverseSort = !reverseSort">Score</a></th>
+            <th><a href="" ng-click="orderByField='date'; reverseSort = !reverseSort">Time</a></th>
             <th>Feedback</th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="item in feedbacks | orderBy:'-date'">
+        <tr ng-repeat="item in feedbacks | filter: searchKeyword | orderBy:orderByField:reverseSort">
             <th>{{$index+1}}</th>
             <td>{{item.trainer}}</td>
             <td>{{item.position}}</td>
@@ -22,6 +22,38 @@
         </tr>
         </tbody>
     </table>
-    <h3>Suggetions</h3>
-    <textarea class="form-control" rows="3" placeholder="type a suggestion..."></textarea>
+    <br/>
+    <h3>Training needs:</h3>
+    <form action="" method="" style="margin: 20px;">
+        <div>
+            <h5 style="width: 370px;" >Style:
+                <span ng-controller="RatingDemoCtrl" style="float: right;">
+                    <span class="label" ng-class="{'label-danger': percent <= 10, 'label-warning': percent > 10 && percent<50, 'label-info': percent>=50 && percent<80, 'label-success': percent>=80}" ng-show="overStar && !isReadonly">{{percent}}%</span>
+                    <rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
+                </span>
+            </h5>
+            <h5 style="width: 370px;" >Structure:
+                <span ng-controller="RatingDemoCtrl" style="float: right;">
+                    <span class="label" ng-class="{'label-danger': percent <= 10, 'label-warning': percent > 10 && percent<50, 'label-info': percent>=50 && percent<80, 'label-success': percent>=80}" ng-show="overStar && !isReadonly">{{percent}}%</span>
+                    <rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
+                </span>
+            </h5>
+            <h5 style="width: 370px;" >Content:
+                <span ng-controller="RatingDemoCtrl" style="float: right;">
+                    <span class="label" ng-class="{'label-danger': percent <= 10, 'label-warning': percent > 10 && percent<50, 'label-info': percent>=50 && percent<80, 'label-success': percent>=80}" ng-show="overStar && !isReadonly">{{percent}}%</span>
+                    <rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
+                </span>
+            </h5>
+        </div>
+        <br/>
+        <h5>Suggestions: </h5>
+        <textarea class="form-control" rows="3" placeholder="type a suggestion..."></textarea>
+        <input type="submit" value="Submit" class="btn btn-success" >
+        <input type="button" value="Clear" class="btn btn-default reset" >
+        <script>
+            $('.reset').click(function() {
+                $(this).closest('form').find('input[type=text], textarea').val('');}
+            );
+        </script>
+    </form>
 </div>
