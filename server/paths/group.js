@@ -38,37 +38,36 @@ module.exports.createGroup = function (request, response, callback) {
             }
         })
     }
-    ;
+};
 
-    module.exports.getGroup = function (request, response, callback) {
-        var url = require('url');
-        var url_parts = url.parse(request.url, true);
-        var query = url_parts.query;
+module.exports.getGroup = function (request, response, callback) {
+    var url = require('url');
+    var url_parts = url.parse(request.url, true);
+    var query = url_parts.query;
 
-        if (query.hasOwnProperty('name')) {
-            var groupName = query.name;
-            Group.findOne({'name': groupName}, function (err, group) {
-                if (err) {
-                    callback(err, null);
-                }
-                if (group) {
-                    callback(null, group);
-                }
-                else {
-                    callback('No group was found', null);
-                }
-            })
-        }
-        else {
-            Group.find().exec(function (err, arr) {
-                if (err) {
-                    callback(err, null);
-                }
-                else {
-                    callback(null, arr);
-                }
-            })
-        }
+    if (query.hasOwnProperty('name')) {
+        var groupName = query.name;
+        Group.findOne({'name': groupName}, function (err, group) {
+            if (err) {
+                callback(err, null);
+            }
+            if (group) {
+                callback(null, group);
+            }
+            else {
+                callback('No group was found', null);
+            }
+        })
+    }
+    else {
+        Group.find().exec(function (err, arr) {
+            if (err) {
+                callback(err, null);
+            }
+            else {
+                callback(null, arr);
+            }
+        })
     }
 };
 
