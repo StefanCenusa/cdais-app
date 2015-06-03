@@ -1,5 +1,5 @@
 angular.module('DashboardLearn',['ui.bootstrap'])
-    .controller('DashboardLearnCtrl', function ($scope, $state, $location) {
+    .controller('DashboardLearnCtrl', function ($scope, $state, $location, $http) {
         if ($state.current.name == "dashboard.learn")
             $state.go("dashboard.learn.knowledge");
         switch($state.current.name){

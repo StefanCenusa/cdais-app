@@ -8,7 +8,8 @@
                 <div id="login-button" class="pull-right">
                     <button ng-hide="loggedIn" type="button" class="btn btn-default navbar-btn btn-sm"
                             ng-click="toggleLoginModal()"> Login <i class="fa fa-sign-in"></i></button>
-                    <span ng-hide="loggedIn" class="navbar-text"> <a href="#" ng-click="toggleSignUpModal()"> Sign Up</a> </span>
+                    <span ng-hide="loggedIn" class="navbar-text"> <a href="#" ng-click="toggleSignUpModal()"> Sign
+                        Up</a> </span>
                     <span ng-show="loggedIn" class="navbar-text"> Hello {{loggedInUser}} </span>
                     <span ng-show="loggedIn" class="navbar-text" ng-click="doLogout()"><a href="#">Logout</a></span>
                 </div>
@@ -59,13 +60,16 @@
     <form role="form">
         <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" class="form-control" ng-model= "user.username" id="username" placeholder="Enter username"/>
+            <input type="text" class="form-control" ng-model="user.username" id="username"
+                   placeholder="Enter username"/>
         </div>
         <div class="form-group">
             <label for="password">Password</label>
             <input type="password" class="form-control" id="password" ng-model="user.pass" placeholder="Password"/>
         </div>
-        <button id="loginBtn" type="submit" ng-click="doLogin('regular')" data-dismiss="modal" class="btn btn-default">Submit</button>
+        <button id="loginBtn" type="submit" ng-click="doLogin('regular')" data-dismiss="modal" class="btn btn-default">
+            Submit
+        </button>
     </form>
     <div class="row">
         <div class="col-md-8 col-sm-8">
@@ -84,11 +88,13 @@
     <form role="form">
         <div class="form-group">
             <label for="signupUsername">Username</label>
-            <input type="text" class="form-control" ng-model="signup.username" id="signupUsername" placeholder="Enter username"/>
+            <input type="text" class="form-control" ng-model="signup.username" id="signupUsername"
+                   placeholder="Enter username"/>
         </div>
         <div class="form-group">
             <label for="signupPassword">Password</label>
-            <input type="password" class="form-control" id="signupPassword" ng-model="signup.pass" placeholder="Password"/>
+            <input type="password" class="form-control" id="signupPassword" ng-model="signup.pass"
+                   placeholder="Password"/>
         </div>
         <div class="form-group">
             <label for="signupEmail">Email</label>
@@ -96,11 +102,13 @@
         </div>
         <div class="form-group">
             <label for="signuFistname">First name</label>
-            <input type="text" class="form-control" id="signuFistname" ng-model="signup.firstname" placeholder="First Name"/>
+            <input type="text" class="form-control" id="signuFistname" ng-model="signup.firstname"
+                   placeholder="First Name"/>
         </div>
         <div class="form-group">
             <label for="signupLastname">Last Name</label>
-            <input type="text" class="form-control" id="signupLastname" ng-model="signup.lastname" placeholder="Last Name"/>
+            <input type="text" class="form-control" id="signupLastname" ng-model="signup.lastname"
+                   placeholder="Last Name"/>
         </div>
         <button type="submit" ng-click="doLogin('signup')" data-dismiss="modal" class="btn btn-default">Submit</button>
     </form>

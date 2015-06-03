@@ -1,7 +1,6 @@
 var User = require('../models/user');
 var ObjectId = require('mongoose').Types.ObjectId;
 var Competitions = require('../paths/competitions');
-
 module.exports.hello = function (request, response, callback) {
     var r = {"text": "r is the result of process data"};
     var username = request.params.username;
@@ -9,14 +8,44 @@ module.exports.hello = function (request, response, callback) {
     callback(null, username);
 };
 
-var user_fields = ['lastName', 'firstName', 'email', 'username'];
+var user_fields = ['lastName', 'firstName', 'email', 'username', '_id'];
 
-var decorate_user = function(user){
+var avgArr = function (times) {
+    var sum = times.reduce(function (a, b) {
+        return a + b;
+    });
+    var avg = sum / times.length;
+    return avg;
+};
+
+var decorate_user = function (user) {
     var decorated_user = {};
-    for(var key in user){
-        if (user_fields.indexOf(key) != -1){
+    for (var key in user) {
+        if (user_fields.indexOf(key) != -1) {
             decorated_user[key] = user[key];
         }
+    }
+    if (user.hasOwnProperty('elevation')) {
+        switch (user.elevation) {
+            case 0:
+                decorated_user.role = 'Admin';
+                break;
+            case 1:
+                decorated_user.role = 'Trainer';
+                break;
+            case 2:
+                decorated_user.role = 'Debater';
+                break;
+        }
+    }
+    if (user.hasOwnProperty('debateHistory')) {
+        var debateHistory = user.debateHistory;
+        var rating = 0;
+        for (var i = 0; i < debateHistory.length; i++) {
+            var competition = debateHistory[i];
+            rating += avgArr(competition.speakerPoints);
+        }
+        decorated_user.rating = rating / debateHistory.length;
     }
     return decorated_user;
 };
@@ -85,27 +114,6 @@ module.exports.getNotifications = function (request, response, callback) {
 
 };
 
-module.exports.showUsersByFields = function (request, response, callback) {
-    /*var url = require('url');
-    var url_parts = url.parse(request.url, true);
-    var query = url_parts.query;*/
-
-    var projection = {_id: 0};
-    var fields = request.body.fields;
-    for (var i = 0 ; i < fields.length; i++)
-        projection[fields[i]] = 1;
-    User.find({}, projection).exec(function (err, user) {
-        if (err) {
-            callback(err, null);
-        }
-        if (!user) {
-            return callback("No users", null);
-        } else {
-            callback(null, user);
-        }
-    });
-};
-
 module.exports.addDebateHistory = function (request, response, callback) {
     var username = request.params.username;
     var data = request.body;
@@ -166,13 +174,6 @@ module.exports.addDebateHistory = function (request, response, callback) {
 module.exports.getDebateHistory = function (request, response, callback) {
     var dataResponse = [];
     var debateHistory = [];
-    var avgArr = function (times) {
-        var sum = times.reduce(function (a, b) {
-            return a + b;
-        });
-        var avg = sum / times.length;
-        return avg;
-    };
 
     var addCompetitionData = function (competionObj) {
         for (var k = 0; k < dataResponse.length; k++) {
@@ -221,20 +222,13 @@ module.exports.getDebateHistory = function (request, response, callback) {
 module.exports.getDetailedDebateHistory = function (request, response, callback) {
     var dataResponse = [];
     var debateHistory = [];
-    var avgArr = function (times) {
-        var sum = times.reduce(function (a, b) {
-            return a + b;
-        });
-        var avg = sum / times.length;
-        return avg;
-    };
 
     var arrToString = function (arr) {
         var res = "";
-        for (var k = 0; k < arr.length-1; k++) {
+        for (var k = 0; k < arr.length - 1; k++) {
             res += arr[k] + ', ';
         }
-        res+= arr[k];
+        res += arr[k];
         return res;
     };
 
@@ -271,4 +265,21 @@ module.exports.getDetailedDebateHistory = function (request, response, callback)
             })
         }
     })
+};
+
+module.exports.showUsersFields = function (request, response, callback) {
+    var projection = {_id: 0};
+    var fields = request.body.fields;
+    for (var i = 0 ; i < fields.length; i++)
+        projection[fields[i]] = 1;
+    User.find({}, projection).exec(function (err, user) {
+        if (err) {
+            callback(err, null);
+        }
+        if (!user) {
+            return callback("No users", null);
+        } else {
+            callback(null, user);
+        }
+    });
 };
