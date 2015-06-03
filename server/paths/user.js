@@ -114,6 +114,58 @@ module.exports.getNotifications = function (request, response, callback) {
 
 };
 
+/*
+ module.exports.getUsersList = function (request, response, callback) {
+ var url = require('url');
+ var url_parts = url.parse(request.url, true);
+ var query = url_parts.query;
+
+ var username = request.params.username;
+ User.findOne({'username': username}, function (err, user) {
+ if (err) {
+ callback(err, null);
+ }
+ if (!user) {
+ return callback("Wrong user", null);
+ }
+ else {
+ var not = user.notifications;
+ if (query.hasOwnProperty('unread') && query.unread == 'true') {
+ //the method will return the unread notifications only
+ var unreadNot = [];
+ for (var i = not.length - 1; i >= 0; i--) {
+ var item = not[i];
+ if (!item.read) {
+ unreadNot.push(item);
+ }
+ }
+ callback(null, unreadNot);
+ }
+ else {
+ if (query.hasOwnProperty('readall') && query.readall == 'true'){
+ for (var i = user.notifications.length - 1; i >= 0; i--) {
+ var item = user.notifications[i];
+ if (!item.read) {
+ user.notifications[i].read = true;
+ }
+ }
+ user.save(function (err) {
+ if (err) {
+ return callback(err, null);
+ }
+ return callback(null, user.notifications);
+ });
+ }
+ else{
+ callback(null, user.notifications);
+ }
+ }
+ }
+ });
+
+ };
+ */
+
 module.exports.addDebateHistory = function (request, response, callback) {
     var username = request.params.username;
     var data = request.body;
@@ -267,19 +319,8 @@ module.exports.getDetailedDebateHistory = function (request, response, callback)
     })
 };
 
-module.exports.showUsersFields = function (request, response, callback) {
-    var projection = {_id: 0};
-    var fields = request.body.fields;
-    for (var i = 0 ; i < fields.length; i++)
-        projection[fields[i]] = 1;
-    User.find({}, projection).exec(function (err, user) {
-        if (err) {
-            callback(err, null);
-        }
-        if (!user) {
-            return callback("No users", null);
-        } else {
-            callback(null, user);
-        }
-    });
-};
+/*
+module.exports.getLesson = function(request, response, callback){
+    var file = require('./data/test.json');
+    callback(null, file);
+};*/

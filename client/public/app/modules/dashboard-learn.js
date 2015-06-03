@@ -100,7 +100,13 @@ angular.module('DashboardLearn',['ui.bootstrap'])
             }
         ];
 
-        $scope.items = [];
+/*
+        $http.get('lesson.json').success(function(err, data){
+            if(!err){
+                $scope.items = data.result;
+            }
+        });
+*/
 
         $scope.addItem = function() {
             var newItemNo = $scope.items.length + 1;
