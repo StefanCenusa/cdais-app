@@ -5,38 +5,39 @@ module.exports.createGroup = function (request, response, callback) {
     if (!request.body.hasOwnProperty('name') || typeof request.body.name != 'string') {
         callback('Invalid or insufficient params', null);
     }
-
-    Group.findOne({'name': request.body.name}, function (err, group) {
-        if (err) {
-            callback(err, null);
-        }
-        if (group) {
-            callback('Group already exists!', null);
-        }
-        else {
-            var newGroup = new Group();
-            if (request.body.hasOwnProperty('name') && typeof request.body.name === 'string') {
-                newGroup.name = request.body.name;
+    else {
+        Group.findOne({'name': request.body.name}, function (err, group) {
+            if (err) {
+                callback(err, null);
             }
-            if (request.body.hasOwnProperty('members') && Array.isArray(request.body.members)) {
-                newGroup.members = request.body.members;
+            if (group) {
+                callback('Group already exists!', null);
             }
-            if (request.body.hasOwnProperty('trainers') && Array.isArray(request.body.trainers)) {
-                newGroup.trainers = request.body.trainers;
-            }
-            if (request.body.hasOwnProperty('filepath') && typeof request.body.filepath === 'string') {
-                newGroup.filepath = request.body.filepath;
-            }
-            newGroup.save(function (err) {
-                if (err) {
-                    console.log('Group in saving blogpost: ' + err);
-                    return callback(err, null);
+            else {
+                var newGroup = new Group();
+                if (request.body.hasOwnProperty('name') && typeof request.body.name === 'string') {
+                    newGroup.name = request.body.name;
                 }
-                console.log('Group saved succesfully');
-                return callback(null, newGroup);
-            });
-        }
-    })
+                if (request.body.hasOwnProperty('members') && Array.isArray(request.body.members)) {
+                    newGroup.members = request.body.members;
+                }
+                if (request.body.hasOwnProperty('trainers') && Array.isArray(request.body.trainers)) {
+                    newGroup.trainers = request.body.trainers;
+                }
+                if (request.body.hasOwnProperty('filepath') && typeof request.body.filepath === 'string') {
+                    newGroup.filepath = request.body.filepath;
+                }
+                newGroup.save(function (err) {
+                    if (err) {
+                        console.log('Group in saving blogpost: ' + err);
+                        return callback(err, null);
+                    }
+                    console.log('Group saved succesfully');
+                    return callback(null, newGroup);
+                });
+            }
+        })
+    }
 };
 
 module.exports.getGroup = function (request, response, callback) {
@@ -50,7 +51,7 @@ module.exports.getGroup = function (request, response, callback) {
             if (err) {
                 callback(err, null);
             }
-            if (group){
+            if (group) {
                 callback(null, group);
             }
             else {
@@ -70,49 +71,52 @@ module.exports.getGroup = function (request, response, callback) {
     }
 };
 
-module.exports.updateGroup = function(request, response, callback){
+module.exports.updateGroup = function (request, response, callback) {
     if (!request.body.hasOwnProperty('_id') || typeof request.body._id != 'string') {
         callback('Invalid or insufficient params', null);
     }
+    else {
 
-    Group.findOne({'_id': request.body._id}, function (err, group) {
-        if (err) {
-            callback(err, null);
-        }
-        if (group) {
-            if (request.body.hasOwnProperty('name') && typeof request.body.name === 'string') {
-                group.name = request.body.name;
+        Group.findOne({'_id': request.body._id}, function (err, group) {
+            if (err) {
+                callback(err, null);
             }
-            if (request.body.hasOwnProperty('members') && Array.isArray(request.body.members)) {
-                group.members = request.body.members;
-            }
-            if (request.body.hasOwnProperty('trainers') && Array.isArray(request.body.trainers)) {
-                group.trainers = request.body.trainers;
-            }
-            if (request.body.hasOwnProperty('filepath') && typeof request.body.filepath === 'string') {
-                group.filepath = request.body.filepath;
-            }
-            group.save(function (err) {
-                if (err) {
-                    console.log('Group in saving blogpost: ' + err);
-                    return callback(err, null);
+            if (group) {
+                if (request.body.hasOwnProperty('name') && typeof request.body.name === 'string') {
+                    group.name = request.body.name;
                 }
-                console.log('Group saved succesfully');
-                return callback(null, group);
-            });
-        }
-        else{
-            callback('No group was found', null);
-        }
-    });
+                if (request.body.hasOwnProperty('members') && Array.isArray(request.body.members)) {
+                    group.members = request.body.members;
+                }
+                if (request.body.hasOwnProperty('trainers') && Array.isArray(request.body.trainers)) {
+                    group.trainers = request.body.trainers;
+                }
+                if (request.body.hasOwnProperty('filepath') && typeof request.body.filepath === 'string') {
+                    group.filepath = request.body.filepath;
+                }
+                group.save(function (err) {
+                    if (err) {
+                        console.log('Group in saving blogpost: ' + err);
+                        return callback(err, null);
+                    }
+                    console.log('Group saved succesfully');
+                    return callback(null, group);
+                });
+            }
+            else {
+                callback('No group was found', null);
+            }
+        });
+    }
 };
 
-module.exports.deleteGroup = function(request, response, callback){
+module.exports.deleteGroup = function (request, response, callback) {
     if (!request.body.hasOwnProperty('_id') || typeof request.body._id != 'string') {
         callback('Invalid or insufficient params', null);
     }
-
-    Group.findOneAndRemove({'_id': request.body._id}, function (err) {
-        callback(err, null);
-    });
+    else {
+        Group.findOneAndRemove({'_id': request.body._id}, function (err) {
+            callback(err, null);
+        });
+    }
 };
