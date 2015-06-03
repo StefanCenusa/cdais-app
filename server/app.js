@@ -19,8 +19,9 @@ var httpMethodMap = {
         '/user': require('./paths/user').getUser,
         '/group': require('./paths/group').getGroup,
         '/user/debateHistory': require('./paths/user').getDebateHistory,
-        //'/user/list': require('./paths/user').getUsersList
-        '/user/detailedDebateHistory': require('./paths/user').getDetailedDebateHistory
+        //'/user/list': require('./paths/user').getUsersList,
+        '/user/detailedDebateHistory': require('./paths/user').getDetailedDebateHistory,
+        '/public': require('./paths/public-profile').getPublicProfile
     },
     'POST': {
         '/user': require('./paths/user').hello,
@@ -135,7 +136,7 @@ var initExpress = function (app) {
     app.delete('/group', checkAuth);
     app.post('/notification', checkAuth);
     app.post('/competitions', checkAuth);
-
+    app.get('/public', checkAuth)
 };
 
 var initHttp = function (callback) {
