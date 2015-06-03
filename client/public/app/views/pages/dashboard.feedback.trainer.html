@@ -15,7 +15,7 @@
                     <tr ng-repeat="role in roles">
                         <th>{{role}}</th>
                         <td>
-                            <input type="text" ng-model="selected" typeahead="debater.name for debater in debaters | filter:$viewValue | limitTo:10" class="form-control" placeholder="..." required>
+                            <input type="text" ng-model="selected" typeahead="debater.firstName for debater in debaters | filter:$viewValue | limitTo:10" class="form-control" placeholder="..." required>
                         </td>
                         <td>
                             <input type="text" placeholder="..." required >

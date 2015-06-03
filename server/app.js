@@ -19,11 +19,11 @@ var httpMethodMap = {
         '/user': require('./paths/user').getUser,
         '/group': require('./paths/group').getGroup,
         '/user/debateHistory': require('./paths/user').getDebateHistory,
-        //'/user/list': require('./paths/user').getUsersList
         '/user/detailedDebateHistory': require('./paths/user').getDetailedDebateHistory
     },
     'POST': {
         '/user': require('./paths/user').hello,
+        '/user/list': require('./paths/user').showUsersByFields,
         '/blogpost': require('./paths/blogpost').saveBlogpost,
         '/group': require('./paths/group').createGroup,
         '/notification': require('./paths/notification').sendNotification,
