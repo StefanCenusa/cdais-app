@@ -18,10 +18,15 @@ angular.module('DashboardFeedback', ['ui.bootstrap'])
 
         var token = AuthToken.getToken();
 
-        $http.post(CONFIG.userList + '?token=' + token, { fields: ["firstName", "lastName"]})
+        $http.post(CONFIG.userList + '?token=' + token, { fields: ["firstName", "lastName", "username"]})
             .success(function(data){
                 if (!data.err){
-                    $scope.debaters = data.result;
+                    $scope.debatersData = data.result;
+
+                    $scope.debaters = [];
+                    for(var i = 0; i < $scope.debatersData.length; i++){
+                        $scope.debaters.push($scope.debatersData[i].firstName + ' ' + $scope.debatersData[i].lastName);
+                    }
                 }
             });
     }])
@@ -114,6 +119,3 @@ angular.module('DashboardFeedback', ['ui.bootstrap'])
             {stateOff: 'glyphicon-off'}
         ];
     });
-
-
-
