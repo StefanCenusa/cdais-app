@@ -13,64 +13,22 @@ angular.module('DashboardFeedback', ['ui.bootstrap'])
         }
     })
 
-    .controller('DashboardFeedbackTrainerCtrl', ['$scope', function ($scope) {
+    .controller('DashboardFeedbackTrainerCtrl', ['$scope', '$http', 'AuthToken', function ($scope, $http, AuthToken) {
         $scope.roles = ["G1", "O1", "G2", "O2", "G3", "O3", "OR", "GR"];
-        $scope.debaters = [
-            {
-                name: "Ana"
-            },
-            {
-                name: "Mihai"
-            },
-            {
-                name: "Georgiana"
-            },
-            {
-                name: "Ilinca"
-            },
-            {
-                name: "Vlad"
-            },
-            {
-                name: "Irina"
-            },
-            {
-                name: "Ruxandra"
-            },
-            {
-                name: "Marghioala"
-            }]
-        /*$scope.directive('punctajWS', function() {
-            return {
-                // require NgModelController, i.e. require a controller of ngModel directive
-                require: 'ngModel',
 
-                // create linking function and pass in our NgModelController as a 4th argument
-                link: function(scope, element, attr, ctrl) {
-                    // please note you can name your function & argument anything you like
-                    function punctajWS(ngModelValue) {
+        var token = AuthToken.getToken();
 
-                        // check if the value of 2*input is between 120 and 160
-                        // if it is, set custom `rightValue` to valid/true
-                        // othwise set it to non-valid/false
-                        if (ngModelValue >= 120 && ngModelValue <= 160) {
-                            ngModelValue = ngModelValue/1;
-                            ctrl.$setValidity('rightValue', true);
-                        } else {
-                            ctrl.$setValidity('rightValue', false);
-                        }
+        $http.post(CONFIG.userList + '?token=' + token, { fields: ["firstName", "lastName", "username"]})
+            .success(function(data){
+                if (!data.err){
+                    $scope.debatersData = data.result;
 
-                        // we need to return our ngModelValue, to be displayed to the user(value of the input)
-                        return ngModelValue;
+                    $scope.debaters = [];
+                    for(var i = 0; i < $scope.debatersData.length; i++){
+                        $scope.debaters.push($scope.debatersData[i].firstName + ' ' + $scope.debatersData[i].lastName);
                     }
-
-                    // we need to add our customValidator function to an array of other(build-in or custom) functions
-                    // I have not notice any performance issues, but it would be worth investigating how much
-                    // effect does this have on the performance of the app
-                    ctrl.$parsers.push(punctajWS);
                 }
-            };
-        })*/
+            });
     }])
 
     .controller('FormCtrl', function ($scope, $http) {
@@ -161,6 +119,3 @@ angular.module('DashboardFeedback', ['ui.bootstrap'])
             {stateOff: 'glyphicon-off'}
         ];
     });
-
-
-

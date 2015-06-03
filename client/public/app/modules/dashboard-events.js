@@ -182,7 +182,7 @@ angular.module('DashboardEvents', ['ui.calendar', 'ui.bootstrap'])
         $scope.uiConfig = {
             calendar:{
                 height: 450,
-                editable: false,
+                editable: true,
                 header:{
                     left: 'name',
                     center: '',

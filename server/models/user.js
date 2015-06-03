@@ -33,14 +33,8 @@ var userSchema = new mongoose.Schema({
         type: {type: mongoose.Schema.Types.ObjectId, ref: 'FeedbackFromTrainer'},
         read: {type: Boolean, default: false}
     }],
-    //events: [{
-    //    type: {type: mongoose.Schema.Types.ObjectID, ref: 'Event'},
-    //    subscribe: {type: Boolean, default: false},
-    //    notifications: {type: Boolean, default: false}
-    //}],
     debateHistory: [{
         competitionID: {type: mongoose.Schema.Types.ObjectId, ref: 'Competition'},
-        //name: String, //probabil doar de asta o sa avem nevoie in mod recurent
         phase: {type: Number, default: 10, min: 0, max: 10}, //0 finala, 1 sferturi, 2 patrimi, 3 optimi, 4 saisprezecimi, 10 preliminarii
         speakerPoints:  [Number],
         teamPoints:  [Number]

@@ -10,6 +10,7 @@ angular.module('DashboardHome', ['ui.bootstrap'])
                 }
             });
     })
+
     .controller('PostsController', function ($scope, $http) {
 
         $scope.itemsOnPage = 3;
