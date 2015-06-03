@@ -10,7 +10,7 @@
                             ng-click="toggleLoginModal()"> Login <i class="fa fa-sign-in"></i></button>
                     <span ng-hide="loggedIn" class="navbar-text"> <a href="#" ng-click="toggleSignUpModal()"> Sign
                         Up</a> </span>
-                    <span ng-show="loggedIn" class="navbar-text"> Hello {{loggedInUser}} </span>
+                    <a href="http://localhost:3030/dashboard"><span ng-show="loggedIn" class="navbar-text"> Hello {{loggedInUser}} </span></a>
                     <span ng-show="loggedIn" class="navbar-text" ng-click="doLogout()"><a href="#">Logout</a></span>
                 </div>
                 <div id="sb-search" class="sb-search">
