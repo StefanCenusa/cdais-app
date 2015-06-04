@@ -1,0 +1,363 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>CDAIS-App API</title><link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"><link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,700|Inconsolata|Raleway:200"><style>/* Highlight.js Theme Tomorrow */
+.hljs-comment,.hljs-title{color:#8e908c}.hljs-variable,.hljs-attribute,.hljs-tag,.hljs-regexp,.ruby .hljs-constant,.xml .hljs-tag .hljs-title,.xml .hljs-pi,.xml .hljs-doctype,.html .hljs-doctype,.css .hljs-id,.css .hljs-class,.css .hljs-pseudo{color:#c82829}.hljs-number,.hljs-preprocessor,.hljs-pragma,.hljs-built_in,.hljs-literal,.hljs-params,.hljs-constant{color:#f5871f}.ruby .hljs-class .hljs-title,.css .hljs-rules .hljs-attribute{color:#eab700}.hljs-string,.hljs-value,.hljs-inheritance,.hljs-header,.ruby .hljs-symbol,.xml .hljs-cdata{color:#718c00}.css .hljs-hexcolor{color:#3e999f}.hljs-function,.python .hljs-decorator,.python .hljs-title,.ruby .hljs-function .hljs-title,.ruby .hljs-title .hljs-keyword,.perl .hljs-sub,.javascript .hljs-title,.coffeescript .hljs-title{color:#4271ae}.hljs-keyword,.javascript .hljs-function{color:#8959a8}.hljs{display:block;background:white;color:#4d4d4c;padding:.5em}.coffeescript .javascript,.javascript .xml,.tex .hljs-formula,.xml .javascript,.xml .vbscript,.xml .css,.xml .hljs-cdata{opacity:.5}</style><style>body,
+h4,
+h5 {
+  font-family: 'Roboto' sans-serif !important;
+}
+h1,
+h2,
+h3,
+.aglio {
+  font-family: 'Raleway' sans-serif !important;
+}
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a {
+  display: none;
+}
+h1:hover a,
+h2:hover a,
+h3:hover a,
+h4:hover a,
+h5:hover a {
+  display: inline;
+}
+code {
+  color: #444;
+  background-color: #ddd;
+  font-family: 'Inconsolata' monospace !important;
+}
+a[data-target] {
+  cursor: pointer;
+}
+h4 {
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.back-to-top {
+  position: fixed;
+  z-index: 1;
+  bottom: 0px;
+  right: 24px;
+  padding: 4px 8px;
+  background-color: #eee;
+  text-decoration: none !important;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  border-left: 1px solid rgba(0,0,0,0.1);
+  border-right: 1px solid rgba(0,0,0,0.1);
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+.panel {
+  overflow: hidden;
+}
+.panel-heading code {
+  margin-left: 3px;
+  color: #c7254e;
+  background-color: rgba(255,255,255,0.7);
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+.panel-heading h3 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+a.list-group-item:hover {
+  background-color: #f8f8f8;
+  border-left: 2px solid #555;
+  padding-left: 15px;
+}
+.indent {
+  display: block;
+  text-indent: 16px;
+}
+.list-group-item {
+  padding-left: 16px;
+}
+.list-group-item .toggle .open {
+  display: block;
+}
+.list-group-item .toggle .closed {
+  display: none;
+}
+.list-group-item.collapsed .toggle .open {
+  display: none;
+}
+.list-group-item.collapsed .toggle .closed {
+  display: block;
+}
+a.list-group-item {
+  font-size: 13px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+a.list-group-item.heading {
+  font-size: 15px;
+  background-color: #f5f5f5;
+}
+a.list-group-item.heading:hover {
+  background-color: #f8f8f8;
+}
+.list-group-item.collapse {
+  display: none;
+}
+.list-group-item.collapse.in {
+  display: block;
+}
+.list-group-item a span.closed {
+  display: none;
+}
+.list-group-item a span.open {
+  display: block;
+}
+.list-group-item a.collapsed span.closed {
+  display: block;
+}
+.list-group-item a.collapsed span.open {
+  display: none;
+}
+#nav {
+  width: inherit;
+  margin-top: 38px;
+  max-width: 255px;
+  top: 0;
+  bottom: 0;
+  padding-right: 12px;
+  padding-bottom: 12px;
+  overflow-y: auto;
+}
+@media (max-width: 1199px) {
+  #nav {
+    max-width: 212px;
+  }
+}
+</style></head><body><a href="#top" class="text-muted back-to-top"><i class="fa fa-toggle-up"></i>&nbsp;Back to top</a><div class="container"><div class="row"><div class="col-md-3"><nav id="nav" class="hidden-sm hidden-xs affix nav"><div class="list-group"><a data-toggle="" data-target="#authenticate-menu" href="#authenticate" class="list-group-item heading collapsed">Authenticate</a><div id="authenticate-menu"><a href="#authenticate-login" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-success"><i class="fa fa-plus"></i></span>Login</a><a href="#authenticate-signup" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item">Signup</a></div></div><div class="list-group"><a data-toggle="" data-target="#user-menu" href="#user" class="list-group-item heading collapsed">User</a><div id="user-menu"><a href="#user-user-details" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>User Details</a></div></div><div class="list-group"><a data-toggle="" data-target="#notifications-menu" href="#notifications" class="list-group-item heading collapsed">Notifications</a><div id="notifications-menu"><a href="#notifications-notifications" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Notifications</a><a href="#notifications-create-notification" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-success"><i class="fa fa-plus"></i></span>Create notification</a></div></div><div class="list-group"><a data-toggle="" data-target="#groups-menu" href="#groups" class="list-group-item heading collapsed">Groups</a><div id="groups-menu"><a href="#groups-groups-crud" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item">Groups CRUD</a><a href="#groups-groups-crud-post" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-success"><i class="fa fa-plus"></i></span><span class="indent">Create</span></a><a href="#groups-groups-crud-delete" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-danger"><i class="fa fa-times"></i></span><span class="indent">Remove</span></a><a href="#groups-groups-crud-put" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-warning"><i class="fa fa-pencil"></i></span><span class="indent">Update</span></a><a href="#groups-groups-crud-get" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span><span class="indent">Display</span></a></div></div><div class="list-group"><a data-toggle="" data-target="#blogposts-menu" href="#blogposts" class="list-group-item heading collapsed">Blogposts</a><div id="blogposts-menu"><a href="#blogposts-blogposts" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item">Blogposts</a><a href="#blogposts-blogposts-get" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span><span class="indent">Get Blogposts</span></a><a href="#blogposts-blogposts-post" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-success"><i class="fa fa-plus"></i></span><span class="indent">Create Blogpost</span></a></div></div><p style="text-align: center; word-wrap: break-word;"><a href="http://polls.apiblueprint.org/">http://polls.apiblueprint.org/</a></p></nav></div><div class="col-md-8"><div><header><div class="page-header"><h1 id="top">CDAIS-App API</h1></div></header><div class="description"><p>Cdais App is a debate club manager that should help you manage your members, track their progress and help them improve their debating skills.</p>
+</div></div><div><div class="panel panel-default"><div class="panel-heading"><h3 id="authenticate">Authenticate&nbsp;<a href="#authenticate"><i class="fa fa-link"></i></a></h3></div><div class="panel-body"><h4 id="authenticate-login">Login&nbsp;<a href="#authenticate-login"><i class="fa fa-link"></i></a></h4><section id="authenticate-login-post" class="panel panel-success"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Login</span></div><div style="float:left"><a href="#authenticate-login-post" class="btn btn-xs btn-success">POST</a></div><div style="overflow:hidden"><code>/auth/login</code></div></div><ul class="list-group"><li class="list-group-item"><strong>Request</strong><a data-toggle="collapse" data-target="#82d909aca1bea15de316734b2aeaf25e" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="82d909aca1bea15de316734b2aeaf25e" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre><h5>Body</h5><pre><code>{
+    "<span class="hljs-attribute">username</span>": <span class="hljs-value"><span class="hljs-string">"admin"</span></span>,
+    "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"qwerty"</span>
+</span>}
+</code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#bc775411b5a8a05d3de567813e27cb49" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="bc775411b5a8a05d3de567813e27cb49" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre><h5>Body</h5><pre><code>{
+    "<span class="hljs-attribute">success</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+    "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"Enjoy your token!"</span></span>,
+    "<span class="hljs-attribute">token</span>": <span class="hljs-value"><span class="hljs-string">"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNDMzMjgzODExLCJleHAiOjE0MzMzNzAyMTF9.tlxAxHK0Ely_XR590NaA8SEyPT8YhJjsd2YB190rKrQ"</span>
+</span>}
+</code></pre></li></ul></section><h4 id="authenticate-signup">Signup&nbsp;<a href="#authenticate-signup"><i class="fa fa-link"></i></a></h4><h3>Signup</h3>
+<ul>
+<li><p>Request (application/json)</p>
+<pre><code>  {
+      &quot;username&quot;: &quot;stefan&quot;,
+      &quot;password&quot;: &quot;qwerty&quot;,
+      &quot;email&quot;: &quot;scenusa@gmail.com&quot;,
+      &quot;firstName&quot;: &quot;Stefan&quot;,
+      &quot;lastName&quot;: &quot;cenusa&quot;
+  }
+</code></pre></li>
+<li><p>Response 200 (application/json)</p>
+<pre><code>  {
+      &quot;success&quot;: true,
+      &quot;message&quot;: &quot;User created&quot;
+  }
+</code></pre></li>
+</ul>
+</div></div></div><div><div class="panel panel-default"><div class="panel-heading"><h3 id="user">User&nbsp;<a href="#user"><i class="fa fa-link"></i></a></h3></div><div class="panel-body"><h4 id="user-user-details">User Details&nbsp;<a href="#user-user-details"><i class="fa fa-link"></i></a></h4><section id="user-user-details-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Get User</span></div><div style="float:left"><a href="#user-user-details-get" class="btn btn-xs btn-primary">GET</a></div><div style="overflow:hidden"><code>/user{?token}</code></div></div><ul class="list-group"><li class="list-group-item bg-default"><strong>Parameters</strong></li><li class="list-group-item"><dl class="dl-horizontal"><dt>token</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNDMzMjQ0OTQ5LCJleHAiOjE0MzMzMzEzNDl9.WoICqJy2POSkt-NhwOjcdbI4hYMw4lR6g5HjiogzhHE</span></span><p>This login token is generated by login. It is required for any action performed by an user.</p>
+</dd></dl></li></ul><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#4a70d7c5efd5e174585a55f7c3e9b0c0" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="4a70d7c5efd5e174585a55f7c3e9b0c0" class="list-group-item panel-collapse collapse"><h5>Body</h5><pre><code>{
+    "<span class="hljs-attribute">error</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+    "<span class="hljs-attribute">result</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">username</span>": <span class="hljs-value"><span class="hljs-string">"admin"</span></span>,
+        "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"office@cdais.ro"</span></span>,
+        "<span class="hljs-attribute">firstName</span>": <span class="hljs-value"><span class="hljs-string">"cdais"</span></span>,
+        "<span class="hljs-attribute">lastName</span>": <span class="hljs-value"><span class="hljs-string">"official"</span></span>,
+        "<span class="hljs-attribute">_id</span>": <span class="hljs-value"><span class="hljs-string">"556b034af8bc13a5ab0c1e10"</span></span>,
+        "<span class="hljs-attribute">role</span>": <span class="hljs-value"><span class="hljs-string">"Debater"</span></span>,
+        "<span class="hljs-attribute">rating</span>": <span class="hljs-value"><span class="hljs-number">69.571875</span>
+    </span>}
+</span>}
+</code></pre></li></ul></section></div></div></div><div><div class="panel panel-default"><div class="panel-heading"><h3 id="notifications">Notifications&nbsp;<a href="#notifications"><i class="fa fa-link"></i></a></h3></div><div class="panel-body"><p>Notifications are messages sent by the system or triggered by other users which bring important information to the user.</p>
+<h4 id="notifications-notifications">Notifications&nbsp;<a href="#notifications-notifications"><i class="fa fa-link"></i></a></h4><section id="notifications-notifications-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Get Notifications for User</span></div><div style="float:left"><a href="#notifications-notifications-get" class="btn btn-xs btn-primary">GET</a></div><div style="overflow:hidden"><code>/user/notifications{?token,unread,readall}</code></div></div><ul class="list-group"><li class="list-group-item bg-default"><strong>Parameters</strong></li><li class="list-group-item"><dl class="dl-horizontal"><dt>token</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNDMzMjQ0OTQ5LCJleHAiOjE0MzMzMzEzNDl9.WoICqJy2POSkt-NhwOjcdbI4hYMw4lR6g5HjiogzhHE</span></span><p>This login token is generated by login. It is required for any action performed by an user.</p>
+</dd><dt>unread</dt><dd><code>boolean</code>&nbsp;<span>(optional)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>true</span></span><p>used to bring only the unread notifications.</p>
+</dd><dt>readall</dt><dd><code>boolean</code>&nbsp;<span>(optional)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>false</span></span><p>used to bring all notifications.</p>
+</dd></dl></li></ul><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#414092f2663e619590e475cffc64dc3d" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="414092f2663e619590e475cffc64dc3d" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre><h5>Body</h5><pre><code>{
+    "<span class="hljs-attribute">error</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+    "<span class="hljs-attribute">result</span>": <span class="hljs-value">[{
+        "<span class="hljs-attribute">text</span>": <span class="hljs-value"><span class="hljs-string">"New file was uploaded!"</span></span>,
+        "<span class="hljs-attribute">_id</span>": <span class="hljs-value"><span class="hljs-string">"556e1ad8b0fa4d0c3257823a"</span></span>,
+        "<span class="hljs-attribute">read</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+        "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2015-06-02T21:06:32.641Z"</span></span>,
+        "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-number">0</span>
+    </span>},
+    {
+        "<span class="hljs-attribute">text</span>": <span class="hljs-value"><span class="hljs-string">"maine e sedintaaa!"</span></span>,
+        "<span class="hljs-attribute">_id</span>": <span class="hljs-value"><span class="hljs-string">"556cced350462a5c11a714fa"</span></span>,
+        "<span class="hljs-attribute">read</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+        "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2015-06-01T21:29:55.493Z"</span></span>,
+        "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-number">0</span>
+    </span>}]
+</span>}
+</code></pre></li></ul></section><h4 id="notifications-create-notification">Create notification&nbsp;<a href="#notifications-create-notification"><i class="fa fa-link"></i></a></h4><section id="notifications-create-notification-post" class="panel panel-success"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Send Notification</span></div><div style="float:left"><a href="#notifications-create-notification-post" class="btn btn-xs btn-success">POST</a></div><div style="overflow:hidden"><code>/notification{?token}</code></div></div><ul class="list-group"><li class="list-group-item bg-default"><strong>Parameters</strong></li><li class="list-group-item"><dl class="dl-horizontal"><dt>token</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNDMzMjQ0OTQ5LCJleHAiOjE0MzMzMzEzNDl9.WoICqJy2POSkt-NhwOjcdbI4hYMw4lR6g5HjiogzhHE</span></span><p>This login token is generated by login. It is required for any action performed by an user.</p>
+</dd></dl></li></ul><ul class="list-group"><li class="list-group-item"><strong>Request</strong><a data-toggle="collapse" data-target="#fb5dce51cffe645a65200749a856c32c" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="fb5dce51cffe645a65200749a856c32c" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre><h5>Body</h5><pre><code>{
+    "<span class="hljs-attribute">group</span>": <span class="hljs-value"><span class="hljs-string">"556d965e2b7440cc1feca6dc"</span></span>,
+    "<span class="hljs-attribute">notification</span>":<span class="hljs-value">{
+        "<span class="hljs-attribute">text</span>": <span class="hljs-value"><span class="hljs-string">"Test notification!"</span>
+    </span>}
+</span>}
+</code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#9a7190acea9cbee98d659eefaeeeda7d" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="9a7190acea9cbee98d659eefaeeeda7d" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre><h5>Body</h5><pre><code>{
+    "<span class="hljs-attribute">result</span>": <span class="hljs-value"><span class="hljs-literal">null</span>
+</span>}
+</code></pre></li></ul></section></div></div></div><div><div class="panel panel-default"><div class="panel-heading"><h3 id="groups">Groups&nbsp;<a href="#groups"><i class="fa fa-link"></i></a></h3></div><div class="panel-body"><h4 id="groups-groups-crud">Groups CRUD&nbsp;<a href="#groups-groups-crud"><i class="fa fa-link"></i></a></h4><p>Groups are groups of users which are usually created with association to debate events - people that attend an event are members of a group. Therefore, they can receive notifications and other materials releated to that group.
+However, we do not enforce the rule that groups should be associated with events. If you need to, you can use the differently.</p>
+<section id="groups-groups-crud-post" class="panel panel-success"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Create</span></div><div style="float:left"><a href="#groups-groups-crud-post" class="btn btn-xs btn-success">POST</a></div><div style="overflow:hidden"><code>/group{?token}</code></div></div><ul class="list-group"><li class="list-group-item bg-default"><strong>Parameters</strong></li><li class="list-group-item"><dl class="dl-horizontal"><dt>token</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNDMzMjQ0OTQ5LCJleHAiOjE0MzMzMzEzNDl9.WoICqJy2POSkt-NhwOjcdbI4hYMw4lR6g5HjiogzhHE</span></span><p>This login token is generated by login. It is required for any action performed by an user.</p>
+</dd></dl></li></ul><ul class="list-group"><li class="list-group-item"><strong>Request</strong><a data-toggle="collapse" data-target="#6002d0b06e5c951d8212078cf628a21c" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="6002d0b06e5c951d8212078cf628a21c" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre><h5>Body</h5><pre><code>{
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"FNDA 2016"</span></span>,
+    "<span class="hljs-attribute">trainers</span>": <span class="hljs-value">[<span class="hljs-string">"556b034af8bc13a5ab0c1e10"</span>]</span>,
+    "<span class="hljs-attribute">members</span>": <span class="hljs-value">[<span class="hljs-string">"556b034af8bc13a5ab0c1e10"</span>]
+</span>}
+</code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#4634f43cd8cd2f7fba93b86b4521f4b9" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="4634f43cd8cd2f7fba93b86b4521f4b9" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">error</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+  "<span class="hljs-attribute">result</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">__v</span>": <span class="hljs-value"><span class="hljs-number">0</span></span>,
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"FNDA 2016"</span></span>,
+    "<span class="hljs-attribute">_id</span>": <span class="hljs-value"><span class="hljs-string">"556e38bd482fc9482f408458"</span></span>,
+    "<span class="hljs-attribute">trainers</span>": <span class="hljs-value">[
+      <span class="hljs-string">"556b034af8bc13a5ab0c1e10"</span>
+    ]</span>,
+    "<span class="hljs-attribute">members</span>": <span class="hljs-value">[
+      <span class="hljs-string">"556b034af8bc13a5ab0c1e10"</span>
+    ]
+  </span>}
+</span>}
+</code></pre></li></ul></section><section id="groups-groups-crud-delete" class="panel panel-danger"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Remove</span></div><div style="float:left"><a href="#groups-groups-crud-delete" class="btn btn-xs btn-danger">DELETE</a></div><div style="overflow:hidden"><code>/group{?token}</code></div></div><ul class="list-group"><li class="list-group-item bg-default"><strong>Parameters</strong></li><li class="list-group-item"><dl class="dl-horizontal"><dt>token</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNDMzMjQ0OTQ5LCJleHAiOjE0MzMzMzEzNDl9.WoICqJy2POSkt-NhwOjcdbI4hYMw4lR6g5HjiogzhHE</span></span><p>This login token is generated by login. It is required for any action performed by an user.</p>
+</dd></dl></li></ul><ul class="list-group"><li class="list-group-item"><strong>Request</strong><a data-toggle="collapse" data-target="#e995b493985ad5e61e28c499915e2f54" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="e995b493985ad5e61e28c499915e2f54" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre><h5>Body</h5><pre><code>{
+    "<span class="hljs-attribute">_id</span>": <span class="hljs-value"><span class="hljs-string">"556cbad445beaa241fcd7e21"</span>
+</span>}
+</code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#e7600f5e992f13765e2141369a937582" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="e7600f5e992f13765e2141369a937582" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre><h5>Body</h5><pre><code>{
+    "<span class="hljs-attribute">error</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+    "<span class="hljs-attribute">result</span>": <span class="hljs-value"><span class="hljs-literal">null</span>
+</span>}
+</code></pre></li></ul></section><section id="groups-groups-crud-put" class="panel panel-warning"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Update</span></div><div style="float:left"><a href="#groups-groups-crud-put" class="btn btn-xs btn-warning">PUT</a></div><div style="overflow:hidden"><code>/group{?token}</code></div></div><ul class="list-group"><li class="list-group-item bg-default"><strong>Parameters</strong></li><li class="list-group-item"><dl class="dl-horizontal"><dt>token</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNDMzMjQ0OTQ5LCJleHAiOjE0MzMzMzEzNDl9.WoICqJy2POSkt-NhwOjcdbI4hYMw4lR6g5HjiogzhHE</span></span><p>This login token is generated by login. It is required for any action performed by an user.</p>
+</dd></dl></li></ul><ul class="list-group"><li class="list-group-item"><strong>Request</strong><a data-toggle="collapse" data-target="#52fa3a9ba0c1f006900e93ab1446a3de" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="52fa3a9ba0c1f006900e93ab1446a3de" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre><h5>Body</h5><pre><code>{
+    "<span class="hljs-attribute">_id</span>": <span class="hljs-value"><span class="hljs-string">"556d965e2b7440cc1feca6dc"</span></span>,
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Racovita Open"</span>
+</span>}
+</code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#89c3d3e43ca2e098f3274407017ff126" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="89c3d3e43ca2e098f3274407017ff126" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">error</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+  "<span class="hljs-attribute">result</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">_id</span>": <span class="hljs-value"><span class="hljs-string">"556d965e2b7440cc1feca6dc"</span></span>,
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Racovita Open"</span></span>,
+    "<span class="hljs-attribute">__v</span>": <span class="hljs-value"><span class="hljs-number">0</span></span>,
+    "<span class="hljs-attribute">trainers</span>": <span class="hljs-value">[
+      <span class="hljs-string">"556b034af8bc13a5ab0c1e10"</span>
+    ]</span>,
+    "<span class="hljs-attribute">members</span>": <span class="hljs-value">[]
+  </span>}
+</span>}
+</code></pre></li></ul></section><section id="groups-groups-crud-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Display</span></div><div style="float:left"><a href="#groups-groups-crud-get" class="btn btn-xs btn-primary">GET</a></div><div style="overflow:hidden"><code>/group{?token}</code></div></div><ul class="list-group"><li class="list-group-item bg-default"><strong>Parameters</strong></li><li class="list-group-item"><dl class="dl-horizontal"><dt>token</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNDMzMjQ0OTQ5LCJleHAiOjE0MzMzMzEzNDl9.WoICqJy2POSkt-NhwOjcdbI4hYMw4lR6g5HjiogzhHE</span></span><p>This login token is generated by login. It is required for any action performed by an user.</p>
+</dd></dl></li></ul><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#815d462a162cdcad3a626c237f43eee7" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="815d462a162cdcad3a626c237f43eee7" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">error</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+  "<span class="hljs-attribute">result</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">_id</span>": <span class="hljs-value"><span class="hljs-string">"556d965e2b7440cc1feca6dc"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Racovita Open"</span></span>,
+      "<span class="hljs-attribute">__v</span>": <span class="hljs-value"><span class="hljs-number">0</span></span>,
+      "<span class="hljs-attribute">trainers</span>": <span class="hljs-value">[
+        <span class="hljs-string">"556b034af8bc13a5ab0c1e10"</span>
+      ]</span>,
+      "<span class="hljs-attribute">members</span>": <span class="hljs-value">[]
+    </span>},
+    {
+      "<span class="hljs-attribute">_id</span>": <span class="hljs-value"><span class="hljs-string">"556e3883482fc9482f408457"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"FNDA 2015"</span></span>,
+      "<span class="hljs-attribute">__v</span>": <span class="hljs-value"><span class="hljs-number">0</span></span>,
+      "<span class="hljs-attribute">trainers</span>": <span class="hljs-value">[
+        <span class="hljs-string">"556b034af8bc13a5ab0c1e10"</span>
+      ]</span>,
+      "<span class="hljs-attribute">members</span>": <span class="hljs-value">[]
+    </span>},
+    {
+      "<span class="hljs-attribute">_id</span>": <span class="hljs-value"><span class="hljs-string">"556e38bd482fc9482f408458"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"FNDA 2016"</span></span>,
+      "<span class="hljs-attribute">__v</span>": <span class="hljs-value"><span class="hljs-number">0</span></span>,
+      "<span class="hljs-attribute">trainers</span>": <span class="hljs-value">[
+        <span class="hljs-string">"556b034af8bc13a5ab0c1e10"</span>
+      ]</span>,
+      "<span class="hljs-attribute">members</span>": <span class="hljs-value">[
+        <span class="hljs-string">"556b034af8bc13a5ab0c1e10"</span>
+      ]
+    </span>}
+  ]
+</span>}
+</code></pre></li></ul></section></div></div></div><div><div class="panel panel-default"><div class="panel-heading"><h3 id="blogposts">Blogposts&nbsp;<a href="#blogposts"><i class="fa fa-link"></i></a></h3></div><div class="panel-body"><p>Blogposts are used in order to keep our users up to date with the latest news about the club’s activities.</p>
+<h4 id="blogposts-blogposts">Blogposts&nbsp;<a href="#blogposts-blogposts"><i class="fa fa-link"></i></a></h4><section id="blogposts-blogposts-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Get Blogposts</span></div><div style="float:left"><a href="#blogposts-blogposts-get" class="btn btn-xs btn-primary">GET</a></div><div style="overflow:hidden"><code>/blogpost{token,page}</code></div></div><ul class="list-group"><li class="list-group-item bg-default"><strong>Parameters</strong></li><li class="list-group-item"><dl class="dl-horizontal"><dt>token</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNDMzMjQ0OTQ5LCJleHAiOjE0MzMzMzEzNDl9.WoICqJy2POSkt-NhwOjcdbI4hYMw4lR6g5HjiogzhHE</span></span><p>This login token is generated by login. It is required for any action performed by an user.</p>
+</dd><dt>page</dt><dd><code>number</code>&nbsp;<span>(optional)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>2</span></span></dd></dl></li></ul><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#4e4b197ae2da11ddeaaf5965d0ac43c4" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="4e4b197ae2da11ddeaaf5965d0ac43c4" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">error</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+  "<span class="hljs-attribute">result</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">lg</span>": <span class="hljs-value"><span class="hljs-number">6</span></span>,
+    "<span class="hljs-attribute">arr</span>": <span class="hljs-value">[
+      {
+        "<span class="hljs-attribute">author</span>": <span class="hljs-value"><span class="hljs-string">"cdais official"</span></span>,
+        "<span class="hljs-attribute">_id</span>": <span class="hljs-value"><span class="hljs-string">"556e0cd1322193382e9e6d4b"</span></span>,
+        "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"Competitie"</span></span>,
+        "<span class="hljs-attribute">created_byID</span>": <span class="hljs-value"><span class="hljs-string">"556b034af8bc13a5ab0c1e10"</span></span>,
+        "<span class="hljs-attribute">content</span>": <span class="hljs-value"><span class="hljs-string">"&lt;p&gt;Desigur, delegația CDAIS nu a lipsit de la această competiție. Astfel, după aproape patru săptămâni de  pregătiri, dezbateri și traininguri, șase echipe și cinci arbitri ai CDAIS au plecat cu avânt și entuziasm spre Sfântu Gheorghe, invăluiți în optimism și curiozitate. Dacă acum un an delegația ieșeană abia ocupa 12 locuri, acum am avut nevoie de un autocar întreg pentru a ajunge cu toții în Sfantu Gheorghe, fapt ce nu a putut decât să ne încânte și să alimenteze starea de bucurie și ardoare a debaterilor și arbitrilor noștri. Cele șase ore petrecute pe drum au trecut uimitor de repede, astfel că, în jurul orei 19 am ajuns la destinație, ne-am înregistrat, am evidențiat sosirea delegației CDAIS printr-o semnătură pe banner-ul ”Saint George City of Debate 8”,  am ponrit spre cămin, fugăriți de zgomotul roller-elor și am intrat in camerele noaste, unde urma să avem ultimele discuții și, eventual, să facem ultimele șlefuiri ale ideilor pentru rundele de a doua zi.&lt;/p&gt;"</span></span>,
+        "<span class="hljs-attribute">__v</span>": <span class="hljs-value"><span class="hljs-number">0</span></span>,
+        "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2015-06-02T20:06:41.370Z"</span>
+      </span>},
+      {
+        "<span class="hljs-attribute">author</span>": <span class="hljs-value"><span class="hljs-string">"cdais official"</span></span>,
+        "<span class="hljs-attribute">_id</span>": <span class="hljs-value"><span class="hljs-string">"556c54669819b2441bfadd7b"</span></span>,
+        "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"test"</span></span>,
+        "<span class="hljs-attribute">photo</span>": <span class="hljs-value"><span class="hljs-string">"http://placekitten.com/g/150/150"</span></span>,
+        "<span class="hljs-attribute">created_byID</span>": <span class="hljs-value"><span class="hljs-string">"556b034af8bc13a5ab0c1e10"</span></span>,
+        "<span class="hljs-attribute">content</span>": <span class="hljs-value"><span class="hljs-string">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. Aliquam in felis sit amet augue."</span></span>,
+        "<span class="hljs-attribute">__v</span>": <span class="hljs-value"><span class="hljs-number">0</span></span>,
+        "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2015-04-05T21:00:00.000Z"</span>
+      </span>},
+      {
+        "<span class="hljs-attribute">author</span>": <span class="hljs-value"><span class="hljs-string">"cdais official"</span></span>,
+        "<span class="hljs-attribute">_id</span>": <span class="hljs-value"><span class="hljs-string">"556b0a16f8bc13a5ab0c1e17"</span></span>,
+        "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"Nimic special 5"</span></span>,
+        "<span class="hljs-attribute">photo</span>": <span class="hljs-value"><span class="hljs-string">"http://placekitten.com/g/150/150"</span></span>,
+        "<span class="hljs-attribute">content</span>": <span class="hljs-value"><span class="hljs-string">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. Aliquam in felis sit amet augue."</span></span>,
+        "<span class="hljs-attribute">created_byID</span>": <span class="hljs-value"><span class="hljs-string">"556b034af8bc13a5ab0c1e10"</span></span>,
+        "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2015-04-05T21:00:00.000Z"</span>
+      </span>}
+    ]
+  </span>}
+</span>}
+</code></pre></li></ul></section><section id="blogposts-blogposts-post" class="panel panel-success"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Create Blogpost</span></div><div style="float:left"><a href="#blogposts-blogposts-post" class="btn btn-xs btn-success">POST</a></div><div style="overflow:hidden"><code>/blogpost{token,page}</code></div></div><ul class="list-group"><li class="list-group-item bg-default"><strong>Parameters</strong></li><li class="list-group-item"><dl class="dl-horizontal"><dt>token</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNDMzMjQ0OTQ5LCJleHAiOjE0MzMzMzEzNDl9.WoICqJy2POSkt-NhwOjcdbI4hYMw4lR6g5HjiogzhHE</span></span><p>This login token is generated by login. It is required for any action performed by an user.</p>
+</dd><dt>page</dt><dd><code>number</code>&nbsp;<span>(optional)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>2</span></span></dd></dl></li></ul><ul class="list-group"><li class="list-group-item"><strong>Request</strong><a data-toggle="collapse" data-target="#e9b7c547b18343cecf9414b6366bf009" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="e9b7c547b18343cecf9414b6366bf009" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre><h5>Body</h5><pre><code>{
+    "<span class="hljs-built_in">title</span>" : "Lectia de latina",
+    "content" : "Lo<span class="hljs-comment">rem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. Aliquam in felis sit amet augue.",</span>
+    "created_byID" : "<span class="hljs-number">556</span>b034af8bc13a5ab0c1e10"
+}
+</code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#d938afd4e45f014eef498f98d114683f" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="d938afd4e45f014eef498f98d114683f" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre><h5>Body</h5><pre><code>{
+    "<span class="hljs-attribute">error</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+    "<span class="hljs-attribute">result</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">__v</span>": <span class="hljs-value"><span class="hljs-number">0</span></span>,
+        "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"Lectia de latina"</span></span>,
+        "<span class="hljs-attribute">photo</span>": <span class="hljs-value"><span class="hljs-string">"http://placekitten.com/g/150/150"</span></span>,
+        "<span class="hljs-attribute">created_byID</span>": <span class="hljs-value"><span class="hljs-string">"556b034af8bc13a5ab0c1e10"</span></span>,
+        "<span class="hljs-attribute">content</span>": <span class="hljs-value"><span class="hljs-string">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. Aliquam in felis sit amet augue."</span></span>,
+        "<span class="hljs-attribute">_id</span>": <span class="hljs-value"><span class="hljs-string">"556e3de9482fc9482f408459"</span></span>,
+        "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2015-04-05T21:00:00.000Z"</span>
+    </span>}
+</span>}
+</code></pre></li></ul></section></div></div></div></div></div></div><p style="text-align: center;" class="text-muted">Generated by&nbsp;<a href="https://github.com/danielgtaylor/aglio" class="aglio">aglio</a>&nbsp;on 04 Jun 2015</p><div id="localFile" style="display: none; position: absolute; top: 0; left: 0; width: 100%; color: white; background: red; font-size: 150%; text-align: center; padding: 1em;">This page may not display correctly when opened as a local file. Instead, view it from a web server.
+
+</div></body><script src="//code.jquery.com/jquery-1.11.0.min.js"></script><script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script><script>(function() {
+  if (location.protocol === 'file:') {
+    document.getElementById('localFile').style.display = 'block';
+  }
+
+}).call(this);
+</script><script>(function() {
+  $('table').addClass('table');
+
+}).call(this);
+</script></html>
