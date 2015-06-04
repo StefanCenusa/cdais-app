@@ -29,3 +29,6 @@ node_modules
 .idea
 bower_components
 project-structure.json
+
+# Older version
+OLD
